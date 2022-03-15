@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Test">
       <UniqueIdentifier>{a25da28d-8fe3-4ae1-ad43-dd7240872b26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Main">
+      <UniqueIdentifier>{b0112425-6765-444b-8110-8951f29ec77b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="multi_triangle.cpp">
@@ -23,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="glad.c">
       <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Source Files\Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
