@@ -18,6 +18,27 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\5.1.transform.fs" />
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\5.1.transform.vs" />
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.fs" />
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\flyaround.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\multi_triangle.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\shader.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\start.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\stb_image.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\textures.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\transformation.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\triangle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.vs.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,10 +159,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Source1.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

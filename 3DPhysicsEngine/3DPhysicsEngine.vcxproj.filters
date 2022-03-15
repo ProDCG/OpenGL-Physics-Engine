@@ -13,13 +13,62 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Main">
+      <UniqueIdentifier>{8de6783c-85b1-411c-b6f3-bb88d95e922e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{469deed9-c9fd-4f8f-a672-d2ff42c5e5f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\5.1.transform.fs">
+      <Filter>Source Files\Test</Filter>
+    </None>
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\5.1.transform.vs">
+      <Filter>Source Files\Test</Filter>
+    </None>
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.fs">
+      <Filter>Source Files\Test</Filter>
+    </None>
+    <None Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.vs">
+      <Filter>Source Files\Test</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\flyaround.cpp">
+      <Filter>Source Files\Test</Filter>
     </ClCompile>
-    <ClCompile Include="Source1.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\multi_triangle.cpp">
+      <Filter>Source Files\Test</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\shader.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\start.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\stb_image.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\textures.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\transformation.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\triangle.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\..\..\..\..\Downloads\SourceFiles\rotate_normal.vs.txt">
+      <Filter>Source Files\Test</Filter>
+    </Text>
   </ItemGroup>
 </Project>
