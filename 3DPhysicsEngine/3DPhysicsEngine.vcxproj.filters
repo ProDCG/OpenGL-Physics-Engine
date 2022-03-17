@@ -31,4 +31,12 @@
       <Filter>Source Files\Main</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="camera.vs">
+      <Filter>Source Files\Main</Filter>
+    </None>
+    <None Include="camera.fs">
+      <Filter>Source Files\Main</Filter>
+    </None>
+  </ItemGroup>
 </Project>

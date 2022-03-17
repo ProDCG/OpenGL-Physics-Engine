@@ -23,6 +23,10 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="multi_triangle.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="camera.fs" />
+    <None Include="camera.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
