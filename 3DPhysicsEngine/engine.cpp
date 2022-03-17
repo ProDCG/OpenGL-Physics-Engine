@@ -1,7 +1,7 @@
+#include <shader_impl.cpp>
 #include <glad.h>
 #include <glfw3.h>
 #include <stb_image.h>
-#include <shader_impl.cpp>
 
 #include <GLM/glm/glm.hpp>
 #include <GLM/glm/gtc/matrix_transform.hpp>
