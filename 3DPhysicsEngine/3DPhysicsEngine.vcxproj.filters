@@ -21,13 +21,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="multi_triangle.cpp">
-      <Filter>Source Files\Test</Filter>
+    <ClCompile Include="engine.cpp">
+      <Filter>Source Files\Main</Filter>
     </ClCompile>
     <ClCompile Include="glad.c">
-      <Filter>Source Files\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="engine.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
   </ItemGroup>
