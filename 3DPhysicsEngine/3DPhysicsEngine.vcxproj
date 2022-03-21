@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="engine.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="multi_triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="camera.fs" />
@@ -86,13 +86,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Libs</LibraryPath>
+    <IncludePath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Libs</LibraryPath>
+    <IncludePath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -127,7 +127,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -144,7 +144,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
