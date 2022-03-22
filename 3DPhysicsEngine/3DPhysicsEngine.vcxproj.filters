@@ -24,8 +24,11 @@
     <ClCompile Include="glad.c">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="multi_triangle.cpp">
-      <Filter>Source Files\Test</Filter>
+    <ClCompile Include="stb_imp.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Source Files\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

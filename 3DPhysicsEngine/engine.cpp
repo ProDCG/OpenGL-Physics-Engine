@@ -1,7 +1,6 @@
 #include <shader_impl.cpp>
 #include <glad.h>
 #include <glfw3.h>
-#include <stb_image.h>
 
 #include <GLM/glm/glm.hpp>
 #include <GLM/glm/gtc/matrix_transform.hpp>
@@ -11,6 +10,7 @@
 #include <shader_m.h>
 
 #include <iostream>
+#include "stb_image.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
