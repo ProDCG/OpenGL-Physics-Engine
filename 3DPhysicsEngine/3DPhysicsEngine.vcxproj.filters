@@ -39,13 +39,13 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\EBO.cpp">
+    <ClCompile Include="EBO.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\VAO.cpp">
+    <ClCompile Include="VAO.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\VBO.cpp">
+    <ClCompile Include="VBO.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,5 +61,16 @@
     <Image Include="..\..\..\..\..\..\..\..\..\Downloads\popcat.jpg">
       <Filter>Source Files\Resources</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EBO.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="VAO.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

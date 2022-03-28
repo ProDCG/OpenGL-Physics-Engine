@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\EBO.cpp" />
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\VAO.cpp" />
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\VBO.cpp" />
+    <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="stb_imp.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="VAO.cpp" />
+    <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="camera.fs" />
@@ -34,6 +34,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\..\..\..\Downloads\popcat.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EBO.h" />
+    <ClInclude Include="VAO.h" />
+    <ClInclude Include="VBO.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
