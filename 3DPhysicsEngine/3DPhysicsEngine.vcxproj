@@ -19,13 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\EBO.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\VAO.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Downloads\stuff\VBO.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="stb.cpp" />
     <ClCompile Include="stb_imp.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="camera.fs" />
     <None Include="camera.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\..\..\Downloads\popcat.jpg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -87,13 +95,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\mason\OneDrive\School\High School\2021-2022\Adv Progamming Topics\SemesterProject\ProjectBuildFiles\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
