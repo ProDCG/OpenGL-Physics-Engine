@@ -54,4 +54,6 @@ int main() {
 	gladLoadGL();
 
 	glViewport(0, 0, width, height);
+
+
 }
