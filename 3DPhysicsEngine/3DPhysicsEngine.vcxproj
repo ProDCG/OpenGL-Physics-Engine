@@ -22,6 +22,7 @@
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="shaderClass.cpp" />
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="stb_imp.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -31,12 +32,16 @@
   <ItemGroup>
     <None Include="camera.fs" />
     <None Include="camera.vs" />
+    <None Include="main.frag" />
+    <None Include="main.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\..\..\..\Downloads\popcat.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EBO.h" />
+    <ClInclude Include="shaderClass.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
   </ItemGroup>

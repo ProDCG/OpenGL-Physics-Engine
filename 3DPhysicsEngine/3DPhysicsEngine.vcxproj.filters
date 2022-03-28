@@ -48,6 +48,9 @@
     <ClCompile Include="VBO.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
+    <ClCompile Include="shaderClass.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="camera.fs">
@@ -55,6 +58,12 @@
     </None>
     <None Include="camera.vs">
       <Filter>Source Files\Test</Filter>
+    </None>
+    <None Include="main.vert">
+      <Filter>Source Files\Main</Filter>
+    </None>
+    <None Include="main.frag">
+      <Filter>Source Files\Main</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +79,12 @@
       <Filter>Source Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="VBO.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderClass.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
   </ItemGroup>
