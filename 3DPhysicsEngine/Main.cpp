@@ -20,14 +20,14 @@ void process_input(GLFWwindow* window);
 const unsigned int width = 800;
 const unsigned int height = 800;
 
-float multiplier;
+const unsigned int rotational_multiplier = 17;
 
 GLfloat vertices[] = {
 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
 	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
 	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+	 0.0f, 1.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
 GLuint indices[] =
@@ -103,12 +103,16 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shaderProgram.Activate();
 
+		// rotational multiplier approach
 		double crntTime = glfwGetTime();
-		/*if (crntTime - prevTime >= 1 / 60) {
-			rotation += 0.05f;
-			prevTime = crntTime;
-		}*/
-		rotation = (static_cast<float>(crntTime)) * multiplier;
+		rotation = (static_cast<float>(crntTime)) * rotational_multiplier;
+
+		// incrementative approach
+		//double crntTime = glfwGetTime();
+		//if (crntTime - prevTime >= 1 / 60) {
+		//	rotation += 0.05f;
+		//	prevTime = crntTime;
+		//}
 
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = glm::mat4(1.0f);
@@ -153,13 +157,5 @@ void process_input(GLFWwindow* window) {
 	}
 	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-		multiplier += 0.05f;
-		std::cout << "Multiplier Increased: " << multiplier << std::endl;
-	}
-	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-		multiplier -= 0.05f;
-		std::cout << "Multiplier Decreased: " << multiplier << std::endl;
 	}
 }
