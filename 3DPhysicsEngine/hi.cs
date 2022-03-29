@@ -1,2 +1,0 @@
-// yes
-Console.WriteLine("lol");
