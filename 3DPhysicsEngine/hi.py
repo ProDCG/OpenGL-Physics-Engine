@@ -1,2 +1,0 @@
-# yes
-print("hello world")
