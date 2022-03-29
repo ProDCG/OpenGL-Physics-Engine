@@ -13,20 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Test">
-      <UniqueIdentifier>{a25da28d-8fe3-4ae1-ad43-dd7240872b26}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Main">
       <UniqueIdentifier>{b0112425-6765-444b-8110-8951f29ec77b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Resources">
-      <UniqueIdentifier>{23d38efb-c73c-4139-83cd-5d59a43b87cf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stb_imp.cpp">
-      <Filter>Source Files\Test</Filter>
-    </ClCompile>
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -53,23 +44,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="camera.fs">
-      <Filter>Source Files\Test</Filter>
-    </None>
-    <None Include="camera.vs">
-      <Filter>Source Files\Test</Filter>
-    </None>
     <None Include="main.vert">
       <Filter>Source Files\Main</Filter>
     </None>
     <None Include="main.frag">
       <Filter>Source Files\Main</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\..\..\..\..\..\Downloads\popcat.jpg">
-      <Filter>Source Files\Resources</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EBO.h">

@@ -24,19 +24,13 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="shaderClass.cpp" />
     <ClCompile Include="stb.cpp" />
-    <ClCompile Include="stb_imp.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="camera.fs" />
-    <None Include="camera.vs" />
     <None Include="main.frag" />
     <None Include="main.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\..\..\..\..\..\Downloads\popcat.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EBO.h" />

@@ -1,6 +1,26 @@
 #include "shaderClass.h"
 
 std::string get_file_contents(const char* filename) {
+	
+	/*if (in) {
+		
+	}
+	throw (errno);*/
+
+	/*try {
+		std::ifstream in(filename, std::ios::binary);
+		std::string contents;
+		in.seekg(0, std::ios::end);
+		contents.resize(in.tellg());
+		in.seekg(0, std::ios::beg);
+		in.read(&contents[0], contents.size());
+		in.close();
+		return (contents);
+	}
+	catch (const std::runtime_error& e) {
+		std::cout << "Runtime Error at " << e.what() << std::endl;
+	}*/
+
 	std::ifstream in(filename, std::ios::binary);
 	if (in) {
 		std::string contents;
@@ -9,7 +29,7 @@ std::string get_file_contents(const char* filename) {
 		in.seekg(0, std::ios::beg);
 		in.read(&contents[0], contents.size());
 		in.close();
-		return (contents);
+		return(contents);
 	}
 	throw (errno);
 }

@@ -58,8 +58,10 @@ int main() {
 	gladLoadGL();
 
 	glViewport(0, 0, width, height);
-
-	Shader shaderProgram("main.vert", "main.frag");
+	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
+	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
+	/*Shader shaderProgram("main.vert", "main.frag");*/
+	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
 	VAO VAO1;
 	VAO1.Bind();
@@ -90,13 +92,14 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(window)) {
-		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		//glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shaderProgram.Activate();
 
 		double crntTime = glfwGetTime();
 		if (crntTime - prevTime >= 1 / 60) {
-			rotation += 0.5f;
+			rotation += 0.1f;
 			prevTime = crntTime;
 		}
 
