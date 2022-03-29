@@ -29,11 +29,6 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hi.cs" />
-    <None Include="hi.css" />
-    <None Include="hi.html" />
-    <None Include="hi.js" />
-    <None Include="hi.py" />
     <None Include="main.frag" />
     <None Include="main.vert" />
   </ItemGroup>
@@ -43,9 +38,6 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="hi.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
