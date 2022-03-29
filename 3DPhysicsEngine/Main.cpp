@@ -15,8 +15,12 @@ namespace fs = std::filesystem;
 #include "VBO.h"
 #include "EBO.h"
 
+void process_input(GLFWwindow* window);
+
 const unsigned int width = 800;
 const unsigned int height = 800;
+
+float multiplier;
 
 GLfloat vertices[] = {
 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
@@ -81,9 +85,10 @@ int main() {
 	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string catPath = "popcat.jpg";
-
-	Texture catTex((parentDir + catPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	std::string catPath = "\popcat.jpg";
+	std::string catPath2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
+	std::cout << (catPath2) << std::endl;
+	Texture catTex((catPath2).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	catTex.texUnit(shaderProgram, "tex0", 0);
 
 	float rotation = 0.0f;
@@ -92,16 +97,18 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(window)) {
+		process_input(window);
 		//glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shaderProgram.Activate();
 
 		double crntTime = glfwGetTime();
-		if (crntTime - prevTime >= 1 / 60) {
-			rotation += 0.1f;
+		/*if (crntTime - prevTime >= 1 / 60) {
+			rotation += 0.05f;
 			prevTime = crntTime;
-		}
+		}*/
+		rotation = (static_cast<float>(crntTime)) * multiplier;
 
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = glm::mat4(1.0f);
@@ -135,4 +142,24 @@ int main() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
+}
+
+void process_input(GLFWwindow* window) {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
+	else if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+		multiplier += 0.05f;
+		std::cout << "Multiplier Increased: " << multiplier << std::endl;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+		multiplier -= 0.05f;
+		std::cout << "Multiplier Decreased: " << multiplier << std::endl;
+	}
 }
