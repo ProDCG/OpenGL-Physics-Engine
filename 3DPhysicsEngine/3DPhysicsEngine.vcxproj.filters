@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Main">
       <UniqueIdentifier>{b0112425-6765-444b-8110-8951f29ec77b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Memes">
+      <UniqueIdentifier>{d05ec23f-744f-43cb-aa0d-546cb531d6bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -50,6 +53,21 @@
     <None Include="main.frag">
       <Filter>Source Files\Main</Filter>
     </None>
+    <None Include="hi.py">
+      <Filter>Source Files\Memes</Filter>
+    </None>
+    <None Include="hi.html">
+      <Filter>Source Files\Memes</Filter>
+    </None>
+    <None Include="hi.js">
+      <Filter>Source Files\Memes</Filter>
+    </None>
+    <None Include="hi.cs">
+      <Filter>Source Files\Memes</Filter>
+    </None>
+    <None Include="hi.css">
+      <Filter>Source Files\Memes</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EBO.h">
@@ -67,5 +85,10 @@
     <ClInclude Include="Texture.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="hi.xml">
+      <Filter>Source Files\Memes</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
