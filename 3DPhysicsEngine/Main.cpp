@@ -20,7 +20,7 @@ void process_input(GLFWwindow* window);
 const unsigned int width = 800;
 const unsigned int height = 800;
 
-float rotational_multiplier = 17;
+const unsigned int rotational_multiplier = 17;
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -93,7 +93,7 @@ int main() {
 
 	std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 	std::string catPath = "\popcat.jpg";
-	std::string catPath2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\popcat.jpg";
+	std::string catPath2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
 	std::cout << (catPath2) << std::endl;
 	Texture catTex((catPath2).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	catTex.texUnit(shaderProgram, "tex0", 0);
@@ -164,11 +164,5 @@ void process_input(GLFWwindow* window) {
 	}
 	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-		rotational_multiplier += 0.05f;
-	}
-	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-		rotational_multiplier -= 0.05f;
 	}
 }
