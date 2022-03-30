@@ -20,7 +20,7 @@ void process_input(GLFWwindow* window);
 const unsigned int width = 800;
 const unsigned int height = 800;
 
-float rotational_multiplier = 17;
+const unsigned int rotational_multiplier = 15;
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
