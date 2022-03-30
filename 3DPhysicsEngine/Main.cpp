@@ -15,7 +15,8 @@ namespace fs = std::filesystem;
 #include "VBO.h"
 #include "EBO.h"
 
-void process_input(GLFWwindow* window);
+void input_processor(GLFWwindow* window);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 const unsigned int width = 800;
 const unsigned int height = 800;
@@ -68,7 +69,6 @@ int main() {
 
 	gladLoadGL();
 
-	glViewport(0, 0, width, height);
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
 	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
 	/*Shader shaderProgram("main.vert", "main.frag");*/
@@ -104,7 +104,8 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(window)) {
-		process_input(window);
+		input_processor(window);
+		framebuffer_size_callback(window, width, height);
 		//glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -126,7 +127,7 @@ int main() {
 		glm::mat4 proj = glm::mat4(1.0f);
 
 		model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
-		view = glm::translate(view, glm::vec3(0.0f, -0.5f, -2.0f));
+		view = glm::translate(view, glm::vec3(-2.0f, -0.5f, -10.0f));
 		proj = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
 
 		int modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
@@ -155,7 +156,7 @@ int main() {
 	return 0;
 }
 
-void process_input(GLFWwindow* window) {
+void input_processor(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
@@ -171,4 +172,8 @@ void process_input(GLFWwindow* window) {
 	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
 		rotational_multiplier -= 0.05f;
 	}
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+	glViewport(0, 0, width, height);
 }
