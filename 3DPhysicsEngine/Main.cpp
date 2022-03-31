@@ -18,8 +18,8 @@ namespace fs = std::filesystem;
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
-const unsigned int width = 800;
-const unsigned int height = 800;
+const unsigned int width = 1920;
+const unsigned int height = 1080;
 
 float rotational_multiplier = 15.0f;
 
@@ -55,7 +55,7 @@ GLuint indices[] =
 glm::vec3 coords[3] = {
 	glm::vec3(-2.0f, -0.5f, -10.0f),
 	glm::vec3(2.0f,  -0.5f, -10.0f),
-	glm::vec3(0.0f, -2.0f, -5.0f)
+	glm::vec3(0.0f, -2.0f, -10.0f)
 };
 
 int main() {
@@ -131,7 +131,8 @@ int main() {
 		//	rotation += 0.05f;
 		//	prevTime = crntTime;
 		//}
-
+		catTex.Bind();
+		VAO1.Bind();
 		for (int i = 0; i < sizeof(coords); i++) {
 			glm::mat4 model = glm::mat4(1.0f);
 			glm::mat4 view = glm::mat4(1.0f);
@@ -151,10 +152,9 @@ int main() {
 			glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		}
 		
-
+		
 		glUniform1f(uniID, 0.5f);
-		catTex.Bind();
-		VAO1.Bind();
+		
 
 		
 		glfwSwapBuffers(window);
