@@ -11,7 +11,8 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glm::mat4 projection = glm::mat4(1.0f);
 
 	// lookAt is being used to create a vector pointing at the correct position
-	view = glm::lookAt(position, position + orientation, up);
+	/*view = glm::lookAt(position, position + orientation, up);*/
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, 0.0f));
 
 	// perspective
 	projection = glm::perspective(glm::radians(FOVdeg), (float)width / height, nearPlane, farPlane);

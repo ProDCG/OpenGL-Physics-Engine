@@ -58,10 +58,8 @@ GLuint indices[] =
 	3, 0, 4
 };
 
-glm::vec3 coords[3] = {
-	glm::vec3(-2.0f, -0.5f, -10.0f),
-	glm::vec3(2.0f,  -0.5f, -10.0f),
-	glm::vec3(0.0f, -2.0f, -10.0f)
+glm::vec3 coords[] = {
+	glm::vec3(0.0f, 0.0f, 0.0f)
 };
 
 int main() {
@@ -128,12 +126,15 @@ int main() {
 		//input_processor(window);
 		//framebuffer_size_callback(window, width, height);
 		//glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-		glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		catTex.Bind();
 		shaderProgram.Activate();
+		VAO1.Bind();
 
 		camera.Inputs(window);
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
+
 
 		// rotational multiplier approach
 		/*double crntTime = glfwGetTime();
@@ -171,11 +172,11 @@ int main() {
 		//}
 		
 		//glUniform1f(uniID, 0.5f);
-		catTex.Bind();
+		/*catTex.Bind();
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		glfwSwapBuffers(window);
-		glfwPollEvents();
+		glfwPollEvents();*/
 	}
 
 	VAO1.Delete();
