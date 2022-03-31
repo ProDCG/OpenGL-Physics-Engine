@@ -131,8 +131,8 @@ int main() {
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 proj = glm::mat4(1.0f);
-		std::cout << sizeof(cords) << std::endl;
-		for (int i = 0; i < sizeof(cords); i++) {
+		std::cout << sizeof(coords) << std::endl;
+		for (int i = 0; i < sizeof(coords); i++) {
 			model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
 			view = glm::translate(view, glm::vec3(cords[i]));
 			proj = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
