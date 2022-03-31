@@ -14,6 +14,7 @@ namespace fs = std::filesystem;
 #include "VAO.h"
 #include "VBO.h"
 #include "EBO.h"
+#include "Camera.h"
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -23,12 +24,17 @@ const unsigned int height = 1080;
 
 float rotational_multiplier = 15.0f;
 
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
+
+GLfloat vertices[] =
+{ //     COORDINATES     /        COLORS      /   TexCoord  //
+	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+};
 
 GLfloat pyr_vertices[] = {
 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
@@ -79,6 +85,8 @@ int main() {
 
 	gladLoadGL();
 
+	glViewport(0, 0, width, height);
+
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
 	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
 	/*Shader shaderProgram("main.vert", "main.frag");*/
@@ -87,7 +95,7 @@ int main() {
 	VAO VAO1;
 	VAO1.Bind();
 
-	VBO VBO1(pyr_vertices, sizeof(pyr_vertices));
+	VBO VBO1(vertices, sizeof(vertices));
 
 	EBO EBO1(indices, sizeof(indices));
 
@@ -99,7 +107,7 @@ int main() {
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
+	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 	std::string catPath = "\popcat.jpg";
@@ -113,17 +121,23 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
+	Camera camera(width, height, glm::vec3(0.0f, 0.0f, -2.0f));
+	 
 	while (!glfwWindowShouldClose(window)) {
-		input_processor(window);
-		framebuffer_size_callback(window, width, height);
+		std::cout << camera.position.x << "," << camera.position.y << "," << camera.position.z << std::endl;
+		//input_processor(window);
+		//framebuffer_size_callback(window, width, height);
 		//glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shaderProgram.Activate();
 
+		camera.Inputs(window);
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
+
 		// rotational multiplier approach
-		double crntTime = glfwGetTime();
-		rotation = (static_cast<float>(crntTime)) * rotational_multiplier;
+		/*double crntTime = glfwGetTime();
+		rotation = (static_cast<float>(crntTime)) * rotational_multiplier;*/
 
 		// incrementative approach
 		//double crntTime = glfwGetTime();
@@ -131,32 +145,35 @@ int main() {
 		//	rotation += 0.05f;
 		//	prevTime = crntTime;
 		//}
+		
+		//catTex.Bind();
+		//VAO1.Bind();
+
+		//glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		//glm::mat4 model = glm::mat4(1.0f);
+		//glm::mat4 view = glm::mat4(1.0f);
+		//glm::mat4 proj = glm::mat4(1.0f);
+
+		//for (int i = 0; i < /*sizeof(pyr_vertices)*/3; i++) {
+		//	model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
+		//	view = glm::translate(view, /*glm::vec3(-2.0f, -0.5f, -10.0f)*/coords[i]);
+		//	proj = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
+
+		//	int modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
+		//	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		//	int viewLoc = glGetUniformLocation(shaderProgram.ID, "view");
+		//	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		//	int projLoc = glGetUniformLocation(shaderProgram.ID, "proj");
+		//	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+
+		//	glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		//}
+		
+		//glUniform1f(uniID, 0.5f);
 		catTex.Bind();
 		VAO1.Bind();
-		for (int i = 0; i < sizeof(coords); i++) {
-			glm::mat4 model = glm::mat4(1.0f);
-			glm::mat4 view = glm::mat4(1.0f);
-			glm::mat4 proj = glm::mat4(1.0f);
-
-			model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
-			view = glm::translate(view, /*glm::vec3(-2.0f, -0.5f, -10.0f)*/coords[i]);
-			proj = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
-
-			int modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			int viewLoc = glGetUniformLocation(shaderProgram.ID, "view");
-			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-			int projLoc = glGetUniformLocation(shaderProgram.ID, "proj");
-			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-
-			glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-		}
-		
-		
-		glUniform1f(uniID, 0.5f);
-		
-
-		
+		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -175,7 +192,7 @@ void input_processor(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
-	else if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
+	/*else if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 	else if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
@@ -186,7 +203,7 @@ void input_processor(GLFWwindow* window) {
 	}
 	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
 		rotational_multiplier -= 0.05f;
-	}
+	}*/
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
