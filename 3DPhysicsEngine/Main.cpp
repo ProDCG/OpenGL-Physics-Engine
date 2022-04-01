@@ -33,19 +33,7 @@ GLfloat vertices[] =
 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
 	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
 	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
-};
-
-GLfloat pyr_vertices[] = {
-	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.0f, 0.5f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
-};
-
-GLfloat cub_vertices[] = {
-	0.5f
+	 0.0f, 2.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
 GLuint indices[] =
@@ -109,7 +97,7 @@ int main() {
 
 	std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 	std::string catPath = "\popcat.jpg";
-	std::string catPath2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
+	std::string catPath2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
 	std::cout << (catPath2) << std::endl;
 	Texture catTex((catPath2).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	catTex.texUnit(shaderProgram, "tex0", 0);
@@ -119,29 +107,37 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	Camera camera(width, height, glm::vec3(0.0f, 0.0f, -2.0f));
+	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 	 
 	while (!glfwWindowShouldClose(window)) {
-		//std::cout << camera.position.x << "," << camera.position.y << "," << camera.position.z << std::endl;
-		//input_processor(window);
-		//framebuffer_size_callback(window, width, height);
-		//glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		// Clean the back buffer and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		catTex.Bind();
+		// Tell OpenGL which Shader Program we want to use
 		shaderProgram.Activate();
-		VAO1.Bind();
 
+		// Handles camera inputs
 		camera.Inputs(window);
+		// Updates and exports the camera matrix to the Vertex Shader
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
 
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, coords[0]);
-		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1.0f, 0.3f, 0.5f));
+		// Binds texture so that is appears in rendering
+		catTex.Bind();
+		// Bind the VAO so OpenGL knows to use it
+		VAO1.Bind();
+		// Draw primitives, number of indices, datatype of indices, index of indices
+		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		// Swap the back buffer with the front buffer
+		glfwSwapBuffers(window);
+		// Take care of all GLFW events
+		glfwPollEvents();
+		//glm::mat4 model = glm::mat4(1.0f);
+		//model = glm::translate(model, coords[0]);
+		//model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1.0f, 0.3f, 0.5f));
 
-		// rotational multiplier approach
-		double crntTime = glfwGetTime();
-		rotation = (static_cast<float>(crntTime)) * rotational_multiplier;
+		//// rotational multiplier approach
+		//double crntTime = glfwGetTime();
+		//rotation = (static_cast<float>(crntTime)) * rotational_multiplier;
 
 		// incrementative approach
 		//double crntTime = glfwGetTime();
@@ -178,8 +174,6 @@ int main() {
 		/*catTex.Bind();
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
-		glfwSwapBuffers(window);
-		glfwPollEvents();
 	}
 
 	VAO1.Delete();

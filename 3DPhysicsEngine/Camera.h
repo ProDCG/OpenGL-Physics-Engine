@@ -23,14 +23,14 @@ public:
 	bool firstClick = true;
 	//int renderFill = 1;
 	//bool renderFill = true;
-	GLenum renderMode = GL_FILL;
+	// GLenum renderMode = GL_FILL;
 
 	// width and height of the window (for optical math)
 	int width;
 	int height;
 
 	// speed of the camera + sensitivity
-	float speed = 0.1f;
+	float speed = 0.005f;
 	float sensitivity = 100.0f;
 
 	// camera constructor

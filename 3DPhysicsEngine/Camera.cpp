@@ -11,8 +11,9 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glm::mat4 projection = glm::mat4(1.0f);
 
 	// lookAt is being used to create a vector pointing at the correct position
-	/*view = glm::lookAt(position, position + orientation, up);*/
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, 0.0f));
+	view = glm::lookAt(position, position + orientation, up);
+	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, 0.0f));
+	
 
 	// perspective
 	projection = glm::perspective(glm::radians(FOVdeg), (float)width / height, nearPlane, farPlane);
@@ -43,11 +44,41 @@ void Camera::Inputs(GLFWwindow* window) {
 	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
+
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
+		if (firstClick) {
+			glfwSetCursorPos(window, width / 2, height / 2);
+			firstClick = false;
+		}
+
+		double mouseX, mouseY;
+
+		glfwGetCursorPos(window, &mouseX, &mouseY);
+
+		float rotX = sensitivity * (float)(mouseY - (height / 2)) / height;
+		float rotY = sensitivity * (float)(mouseX - (width / 2)) / width;
+
+		glm::vec3 newOrientation = glm::rotate(orientation, glm::radians(-rotX), glm::normalize(glm::cross(orientation, up)));
+
+		if (abs(glm::angle(orientation, up) - glm::radians(90.0f)) <= glm::radians(85.0f)) {
+			orientation = newOrientation;
+		}
+
+		orientation = glm::rotate(orientation, glm::radians(-rotY), up);
+
+		glfwSetCursorPos(window, width / 2, height / 2);
+	}
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		firstClick = true;
+	}
 }
 
 // toggleable rendering mode, logic does not work
-void Camera::SwitchRenderingMode() {
-	renderMode = (renderMode == GL_FILL) ? GL_LINE : GL_FILL;
-	glPolygonMode(GL_FRONT_AND_BACK, renderMode);
-	std::cout << "Current Rendering Mode: " << renderMode << std::endl;
-}
+//void Camera::SwitchRenderingMode() {
+//	renderMode = (renderMode == GL_FILL) ? GL_LINE : GL_FILL;
+//	glPolygonMode(GL_FRONT_AND_BACK, renderMode);
+//	std::cout << "Current Rendering Mode: " << renderMode << std::endl;
+//}
