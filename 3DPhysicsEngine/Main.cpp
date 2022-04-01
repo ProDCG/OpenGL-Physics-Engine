@@ -122,7 +122,7 @@ int main() {
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, -2.0f));
 	 
 	while (!glfwWindowShouldClose(window)) {
-		std::cout << camera.position.x << "," << camera.position.y << "," << camera.position.z << std::endl;
+		//std::cout << camera.position.x << "," << camera.position.y << "," << camera.position.z << std::endl;
 		//input_processor(window);
 		//framebuffer_size_callback(window, width, height);
 		//glClearColor(0.07f, 0.13f, 0.17f, 1.0f);

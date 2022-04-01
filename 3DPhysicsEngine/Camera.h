@@ -21,7 +21,8 @@ public:
 
 	// input prevention
 	bool firstClick = true;
-	int renderFill = 1;
+	//int renderFill = 1;
+	//bool renderFill = true;
 	GLenum renderMode = GL_FILL;
 
 	// width and height of the window (for optical math)

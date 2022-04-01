@@ -34,12 +34,20 @@ void Camera::Inputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		Camera::position += Camera::speed * glm::normalize(glm::cross(Camera::orientation, Camera::up));
 	}
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_RELEASE) {
+	/*if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		SwitchRenderingMode();
+	}*/
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 }
 
+// toggleable rendering mode, logic does not work
 void Camera::SwitchRenderingMode() {
 	renderMode = (renderMode == GL_FILL) ? GL_LINE : GL_FILL;
 	glPolygonMode(GL_FRONT_AND_BACK, renderMode);
+	std::cout << "Current Rendering Mode: " << renderMode << std::endl;
 }
