@@ -34,7 +34,7 @@ void Camera::Inputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		Camera::position += Camera::speed * glm::normalize(glm::cross(Camera::orientation, Camera::up));
 	}
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_RELEASE) {
 		SwitchRenderingMode();
 	}
 }

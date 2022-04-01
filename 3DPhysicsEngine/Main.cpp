@@ -135,10 +135,13 @@ int main() {
 		camera.Inputs(window);
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
 
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, coords[0]);
+		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1.0f, 0.3f, 0.5f));
 
 		// rotational multiplier approach
-		/*double crntTime = glfwGetTime();
-		rotation = (static_cast<float>(crntTime)) * rotational_multiplier;*/
+		double crntTime = glfwGetTime();
+		rotation = (static_cast<float>(crntTime)) * rotational_multiplier;
 
 		// incrementative approach
 		//double crntTime = glfwGetTime();
@@ -174,9 +177,9 @@ int main() {
 		//glUniform1f(uniID, 0.5f);
 		/*catTex.Bind();
 		VAO1.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 		glfwSwapBuffers(window);
-		glfwPollEvents();*/
+		glfwPollEvents();
 	}
 
 	VAO1.Delete();
