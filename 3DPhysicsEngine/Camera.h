@@ -21,9 +21,6 @@ public:
 
 	// input prevention
 	bool firstClick = true;
-	//int renderFill = 1;
-	//bool renderFill = true;
-	// GLenum renderMode = GL_FILL;
 
 	// width and height of the window (for optical math)
 	int width;
@@ -41,9 +38,6 @@ public:
 
 	// camera inputs
 	void Inputs(GLFWwindow* window);
-
-	// switch rendering mode
-	void SwitchRenderingMode();
 };
 
 #endif

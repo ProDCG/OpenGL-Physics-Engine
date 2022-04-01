@@ -12,8 +12,6 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 
 	// lookAt is being used to create a vector pointing at the correct position
 	view = glm::lookAt(position, position + orientation, up);
-	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, 0.0f));
-	
 
 	// perspective
 	projection = glm::perspective(glm::radians(FOVdeg), (float)width / height, nearPlane, farPlane);
@@ -38,9 +36,6 @@ void Camera::Inputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		Camera::position += Camera::speed * glm::normalize(glm::cross(Camera::orientation, Camera::up));
 	}
-	/*if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-		SwitchRenderingMode();
-	}*/
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
@@ -78,10 +73,3 @@ void Camera::Inputs(GLFWwindow* window) {
 		firstClick = true;
 	}
 }
-
-// toggleable rendering mode, logic does not work
-//void Camera::SwitchRenderingMode() {
-//	renderMode = (renderMode == GL_FILL) ? GL_LINE : GL_FILL;
-//	glPolygonMode(GL_FRONT_AND_BACK, renderMode);
-//	std::cout << "Current Rendering Mode: " << renderMode << std::endl;
-//}
