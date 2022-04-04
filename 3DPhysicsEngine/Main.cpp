@@ -139,7 +139,7 @@ int main() {
 
 	VBO VBO1(vertices, sizeof(vertices));
 
-	EBO EBO1(indices, sizeof(indices));
+	//EBO EBO1(indices, sizeof(indices));
 
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -147,7 +147,7 @@ int main() {
 
 	VAO1.Unbind();
 	VBO1.Unbind();
-	EBO1.Unbind();
+	//EBO1.Unbind();
 
 	VAO VAO2;
 	VAO2.Bind();
@@ -239,7 +239,7 @@ int main() {
 
 	VAO1.Delete();
 	VBO1.Delete();
-	EBO1.Delete();
+	//EBO1.Delete();
 	catTex.Delete();
 	shaderProgram.Delete();
 	glfwDestroyWindow(window);
