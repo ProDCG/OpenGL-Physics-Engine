@@ -102,10 +102,6 @@ GLuint indices[] =
 	3, 0, 4
 };
 
-glm::vec3 coords[] = {
-	glm::vec3(0.0f, 0.0f, 0.0f)
-};
-
 int main() {
 	glfwInit();
 
@@ -156,11 +152,10 @@ int main() {
 
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
-	std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string catPath = "\popcat.jpg";
-	std::string catPath2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\whatthefuck.png";
-	std::cout << (catPath2) << std::endl;
-	Texture catTex((catPath2).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
+	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
+	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
+	Texture catTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	catTex.texUnit(shaderProgram, "tex0", 0);
 
 	float rotation = 0.0f;
