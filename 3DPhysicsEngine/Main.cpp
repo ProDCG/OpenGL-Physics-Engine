@@ -36,6 +36,14 @@ GLfloat vertices[] =
 	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
+GLfloat vertices3[] = {
+	-3.0f, -3.0f,  0.5f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
+	-3.0f, -3.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 3.0f, -3.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	 3.0f, -3.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+};
+
 GLfloat vertices2[] =
 {
 	-0.5f,  0.0f,  0.5f,    
@@ -133,9 +141,9 @@ int main() {
 	VAO VAO1;
 	VAO1.Bind();
 
-	VBO VBO1(vertices, sizeof(vertices));
+	VBO VBO1(vertices3, sizeof(vertices3));
 
-	//EBO EBO1(indices, sizeof(indices));
+	EBO EBO1(indices, sizeof(indices));
 
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -143,7 +151,7 @@ int main() {
 
 	VAO1.Unbind();
 	VBO1.Unbind();
-	//EBO1.Unbind();
+	EBO1.Unbind();
 
 	VAO VAO2;
 	VAO2.Bind();
@@ -234,7 +242,7 @@ int main() {
 
 	VAO1.Delete();
 	VBO1.Delete();
-	//EBO1.Delete();
+	EBO1.Delete();
 	catTex.Delete();
 	shaderProgram.Delete();
 	glfwDestroyWindow(window);
