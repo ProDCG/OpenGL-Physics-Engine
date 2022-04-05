@@ -37,67 +37,49 @@ GLfloat vertices[] =
 };
 
 GLfloat vertices3[] = {
-	-3.0f, -3.0f,  0.5f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
-	-3.0f, -3.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 3.0f, -3.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	 3.0f, -3.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	-3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
+	-3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	 3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
 	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
 GLfloat vertices2[] =
 {
-	-0.5f,  0.0f,  0.5f,    
-	-0.5f,  0.0f, -0.5f,
-	 0.5f,  0.0f, -0.5f,
-	 0.5f,  0.0f,  0.5f,
-	-0.5f,  1.0f,  0.5f,
-	-0.5f,  1.0f, -0.5f,
-	 0.5f,  1.0f, -0.5f,
-	 0.5f,  1.0f,  0.5f,
+	// face one (0)
+	-0.5f,  0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	-0.5f,  1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 5.0f,
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 5.0f,
+
+	// face two (4)
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 5.0f,
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 0.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 5.0f,
+
+	// face three (8)
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 5.0f,
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 5.0f
+
+	// face four (12)
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 5.0f,
+	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 0.0f
+	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 5.0f, 5.0f
 };
 
-GLfloat cube_vertices[] = {
-		-0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
-		 0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
+GLuint indices2[] = {
+	0, 2, 3,
+	0, 1, 3,
 
-		-0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
+	4, 6, 7,
+	4, 5, 7,
 
-		-0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-
-		 0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-
-		-0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-
-		-0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.83f, 0.7f, 0.44f, 0.0f, 1.0f
+	8, 10, 11,
+	8, 9, 11
 };
 
 GLuint indices[] =
@@ -109,6 +91,11 @@ GLuint indices[] =
 	2, 3, 4,
 	3, 0, 4
 };
+
+//GLuint indices2[] = {
+//	0, 1, 3
+//	0, 2, 3
+//};
 
 int main() {
 	glfwInit();
@@ -141,9 +128,9 @@ int main() {
 	VAO VAO1;
 	VAO1.Bind();
 
-	VBO VBO1(vertices3, sizeof(vertices3));
+	VBO VBO1(vertices2, sizeof(vertices2));
 
-	EBO EBO1(indices, sizeof(indices));
+	EBO EBO1(indices2, sizeof(indices2));
 
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -153,17 +140,17 @@ int main() {
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-	VAO VAO2;
+	/*VAO VAO2;
 	VAO2.Bind();
 
-	VBO VBO2(cube_vertices, sizeof(cube_vertices));
+	VBO VBO2(vertices3, sizeof(vertices3));*/
 
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
-	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
-	Texture catTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\checkerboard.png";
+	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\john.png";
+	Texture catTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	catTex.texUnit(shaderProgram, "tex0", 0);
 
 	float rotation = 0.0f;
