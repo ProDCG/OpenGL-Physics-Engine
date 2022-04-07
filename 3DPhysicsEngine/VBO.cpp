@@ -17,3 +17,7 @@ void VBO::Unbind() {
 void VBO::Delete() {
 	glDeleteBuffers(1, &ID);
 }
+
+void VBO::ChangePosition(GLfloat* vertices, GLsizeiptr size, glm::vec3 newPos) {
+	glBufferData(GL_ARRAY_BUFFER, size, vertices , GL_STATIC_DRAW);
+}

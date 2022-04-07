@@ -103,6 +103,12 @@ GLuint indices2[] = {
 	20, 21, 23
 };
 
+glm::vec3 coords[] = {
+	glm::vec3(0.0f, 0.0f, 0.0f),
+	glm::vec3(5.0f, 5.0f, 5.0f),
+	glm::vec3(-5.0f, -5.0f, -5.0f)
+};
+
 GLuint indices3[] = {
 	0, 1, 7
 };
@@ -168,7 +174,7 @@ int main() {
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\checkerboard.png";
+	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\jackson.png";
 	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\john.png";
 	Texture catTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	catTex.texUnit(shaderProgram, "tex0", 0);
@@ -179,7 +185,7 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
-	 
+	  
 	while (!glfwWindowShouldClose(window)) {
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		// Clean the back buffer and depth buffer
@@ -191,11 +197,12 @@ int main() {
 		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
-
+		//VBO1.ChangePosition(vertices, sizeof(vertices), coords[2]);
 		// Binds texture so that is appears in rendering
 		catTex.Bind();
 		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
+		
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
 		// Swap the back buffer with the front buffer
