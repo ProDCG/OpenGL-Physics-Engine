@@ -216,7 +216,7 @@ int main() {
 		
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		for (int i = 0; i < 3; i++) {
-			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", positions[i]);
+			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", positions[i], positions[i]);
 			glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
 		}
 		

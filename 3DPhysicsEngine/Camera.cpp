@@ -6,12 +6,12 @@ Camera::Camera(int width, int height, glm::vec3 position) {
 	Camera::position = position;
 }
 
-void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, glm::vec3 pos) {
+void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, glm::vec3 pos, glm::vec3 rot) {
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, pos);
-	model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(-1.0f, -1.0f, -1.0f));
+	model = glm::rotate(model, (float)glfwGetTime(), rot);
 
 	// lookAt is being used to create a vector pointing at the correct position
 	view = glm::lookAt(position, position + orientation, up);
