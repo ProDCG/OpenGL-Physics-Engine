@@ -165,7 +165,7 @@ int main() {
 	VAO1.Unbind();
 	VBO1.Unbind();
 	EBO1.Unbind();
-
+	 
 	/*VAO VAO2;
 	VAO2.Bind();
 
@@ -174,7 +174,7 @@ int main() {
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\jackson.png";
+	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
 	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\john.png";
 	Texture catTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	catTex.texUnit(shaderProgram, "tex0", 0);
