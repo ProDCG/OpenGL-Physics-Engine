@@ -15,8 +15,6 @@ public:
 	void Unbind();
 
 	void Delete();
-
-	void ChangePosition(GLfloat* vertices, GLsizeiptr size, glm::vec3 newPos);
 };
 
 #endif
