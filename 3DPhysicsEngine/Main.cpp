@@ -196,7 +196,8 @@ int main() {
 		// Handles camera inputs
 		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
-		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", glm::vec3(1.0f, 0.0f, 0.0f));
+		glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
 		//VBO1.ChangePosition(vertices, sizeof(vertices), coords[2]);
 		// Binds texture so that is appears in rendering
 		catTex.Bind();
@@ -204,7 +205,8 @@ int main() {
 		VAO1.Bind();
 		
 		// Draw primitives, number of indices, datatype of indices, index of indices
-		glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
+		//glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
+		
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
