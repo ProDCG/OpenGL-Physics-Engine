@@ -15,6 +15,7 @@ namespace fs = std::filesystem;
 #include "VBO.h"
 #include "EBO.h"
 #include "Camera.h"
+#include "Object.h"
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -33,7 +34,7 @@ GLfloat vertices[] =
 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
 	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
 	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+	 0.0f, 1.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
 GLfloat vertices3[] = {
@@ -108,6 +109,12 @@ GLuint indices2[] = {
 -1x is down, 1x is up
 -1x is forward, 1x is backward
 */
+
+Object objList[] = {
+	Object(glm::vec3(0.0f, 0.0f, 0.0f), 2.0f),
+	Object(glm::vec3(-4.0f, 0.0f, 0.0f), 1.0f, glm::vec3(1.0f, 0.0f, 0.0f)),
+};
+
 glm::vec3 positions[] = {
 	glm::vec3(0.0f, 0.0f, 0.0f),
 	glm::vec3(1.0f, 1.0f, 1.0f),
@@ -159,9 +166,9 @@ int main() {
 	VAO VAO1;
 	VAO1.Bind();
 
-	VBO VBO1(vertices2, sizeof(vertices2));
+	VBO VBO1(vertices, sizeof(vertices));
 
-	EBO EBO1(indices2, sizeof(indices2));
+	EBO EBO1(indices, sizeof(indices));
 
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -201,26 +208,16 @@ int main() {
 		// Handles camera inputs
 		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
-		/*for (int i = 0; i < sizeof(coords) / 1; i++) {
-			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", coords[i]);
-			glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
-		}*/
-		
-		/*camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", glm::vec3(-1.0f, 0.0f, -1.0f));
-		glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);*/
-		//VBO1.ChangePosition(vertices, sizeof(vertices), coords[2]);
-		// Binds texture so that is appears in rendering
+
 		catTex.Bind();
-		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
 		
 		// Draw primitives, number of indices, datatype of indices, index of indices
-		for (int i = 0; i < 3; i++) {
-			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", positions[i], positions[i]);
+		for (int i = 0; i < 2; i++) {
+			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[i]);
 			glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
 		}
-		
-		
+
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
