@@ -10,11 +10,12 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 model = glm::mat4(1.0f);
-	float time1 = cos((float)glfwGetTime());
-	float time2 = sin((float)glfwGetTime());
-	model = glm::translate(model, obj.position * glm::vec3(time1 * 1.0f, time2 * 1.0f, 0.0f));
+	model = glm::translate(model, obj.position);
 	model = glm::scale(model, glm::vec3(1.0f) * obj.radius);
 	if (obj.doesRotate) {
+		float time1 = cos((float)glfwGetTime());
+		float time2 = sin((float)glfwGetTime());
+		model = glm::translate(model, obj.position + glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, (float)glfwGetTime(), obj.rotate);
 	}
 
