@@ -116,12 +116,6 @@ Object objList[] = {
 	Object(glm::vec3(4.0f, 0.0f, 0.0f), 1.0f, glm::vec3(0.0f, 0.0f, 0.0f)),
 };
 
-glm::vec3 positions[] = {
-	glm::vec3(0.0f, 0.0f, 0.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, -1.0f)
-};
-
 GLuint indices3[] = {
 	0, 1, 7
 };

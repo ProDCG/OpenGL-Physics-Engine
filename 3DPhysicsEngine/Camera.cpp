@@ -15,7 +15,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	if (obj.doesRotate) {
 		float time1 = cos((float)glfwGetTime());
 		float time2 = sin((float)glfwGetTime());
-		model = glm::translate(model, obj.position + glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, obj.position + glm::vec3(10.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, (float)glfwGetTime(), obj.rotate);
 	}
 
