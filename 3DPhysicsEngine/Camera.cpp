@@ -10,14 +10,22 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, obj.position);
+	
 	model = glm::scale(model, glm::vec3(1.0f) * obj.radius);
-	if (obj.doesRotate) {
-		float time1 = cos((float)glfwGetTime());
-		float time2 = sin((float)glfwGetTime());
-		model = glm::translate(model, obj.position + glm::vec3(10.0f, 0.0f, 0.0f));
+	model = glm::translate(model, obj.position);
+	//if (obj.doesRotate) {
+	//	float time1 = cos((float)glfwGetTime());
+	//	float time2 = sin((float)glfwGetTime());
+	//	model = glm::translate(model, obj.position * glm::vec3(time1, time2, 0.0f));
+	//	//model = glm::rotate(model, (float)glfwGetTime(), obj.rotate);
+	//}
+
+	/*if (obj.doesRotate) {
+		model = glm::translate(model, glm::vec3(sin((float)glfwGetTime()) * obj.rotate.x , cos((float)glfwGetTime()) * obj.rotate.y, sin((float)glfwGetTime()) * obj.rotate.z) * obj.rotationalMultiplier);
 		model = glm::rotate(model, (float)glfwGetTime(), obj.rotate);
-	}
+	} else {
+		model = glm::translate(model, obj.position);
+	}*/
 
 	// lookAt is being used to create a vector pointing at the correct position
 	view = glm::lookAt(position, position + orientation, up);

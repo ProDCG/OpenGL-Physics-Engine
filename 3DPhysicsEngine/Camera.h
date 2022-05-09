@@ -22,6 +22,7 @@ public:
 
 	// input prevention
 	bool firstClick = true;
+	bool fillMode = true;
 
 	// width and height of the window (for optical math)
 	int width;

@@ -19,6 +19,8 @@ namespace fs = std::filesystem;
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+int map_vals(int initialVal, int oldMin, int oldMax, int newMin, int newMax);
+int randomVal(int min, int max);
 
 const unsigned int width = 1920;
 const unsigned int height = 1080;
@@ -103,6 +105,7 @@ GLuint indices2[] = {
 	20, 22, 23,
 	20, 21, 23
 };
+
 /*
 (Relative to camera pos)
 -1x is left, 1x is right
@@ -111,9 +114,8 @@ GLuint indices2[] = {
 */
 
 Object objList[] = {
-	Object(glm::vec3(0.0f, 0.0f, 0.0f), 2.0f),
-	Object(glm::vec3(-4.0f, 0.0f, 0.0f), 1.0f),
-	Object(glm::vec3(4.0f, 0.0f, 0.0f), 1.0f, glm::vec3(0.0f, 0.0f, 0.0f)),
+	Object(glm::vec3(0.0f, 0.0f, 0.0f), 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 2),
+	Object(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f),
 };
 
 GLuint indices3[] = {
@@ -172,6 +174,21 @@ int main() {
 	VAO1.Unbind();
 	VBO1.Unbind();
 	EBO1.Unbind();
+
+	VAO VAO2;
+	VAO2.Bind();
+
+	VBO VBO2(vertices2, sizeof(vertices2));
+
+	EBO EBO2(indices2, sizeof(indices2));
+
+	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	VAO2.LinkAttrib(VBO2, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO2.LinkAttrib(VBO2, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+	VAO2.Unbind();
+	VBO2.Unbind();
+	EBO2.Unbind();
 	 
 	/*VAO VAO2;
 	VAO2.Bind();
@@ -181,10 +198,13 @@ int main() {
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
-	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\john.png";
-	Texture catTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	catTex.texUnit(shaderProgram, "tex0", 0);
+	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
+	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
+
+	Texture faceTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	faceTex.texUnit(shaderProgram, "tex0", 0);
+	Texture brickTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
+	brickTex.texUnit(shaderProgram, "tex1", 1);
 
 	float rotation = 0.0f;
 	double prevTime = glfwGetTime();
@@ -194,6 +214,7 @@ int main() {
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 	  
 	while (!glfwWindowShouldClose(window)) {
+
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		// Clean the back buffer and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -204,14 +225,23 @@ int main() {
 		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
 
-		catTex.Bind();
+		faceTex.Bind();
 		VAO1.Bind();
 		
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
+		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		/*brickTex.Bind();
+		VAO2.Bind();
+
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[1]);
+		glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);*/
+
 		// Draw primitives, number of indices, datatype of indices, index of indices
-		for (int i = 0; i < 2; i++) {
+		/*for (int i = 0; i < 9; i++) {
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[i]);
 			glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
-		}
+		}*/
 
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
@@ -265,7 +295,11 @@ int main() {
 	VAO1.Delete();
 	VBO1.Delete();
 	EBO1.Delete();
-	catTex.Delete();
+	VAO2.Delete();
+	VBO2.Delete();
+	EBO2.Delete();
+	faceTex.Delete();
+	brickTex.Delete();
 	shaderProgram.Delete();
 	glfwDestroyWindow(window);
 	glfwTerminate();
@@ -292,4 +326,12 @@ void input_processor(GLFWwindow* window) {
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
+}
+
+int map_vals(int initialVal, int oldMin, int oldMax, int newMin, int newMax) {
+	return (initialVal - oldMin) * (newMax + 1 - newMin) / (oldMax - oldMin) + newMin;
+}
+
+int randomVal(int min, int max) {
+	return map_vals(std::rand(), 0, RAND_MAX, min, max);
 }
