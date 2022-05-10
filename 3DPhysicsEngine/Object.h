@@ -21,10 +21,13 @@ public:
 	float rotationalMultiplier;
 
 	bool doesRotate;
+	bool isStatic;
 
 	Object(glm::vec3 position, float radius);
 
 	Object(glm::vec3 position, float radius, glm::vec3 rotate, float rotationalMultiplier);
+
+	void updatePhysics(float dt);
 };
 
 #endif

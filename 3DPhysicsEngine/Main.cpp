@@ -16,6 +16,7 @@ namespace fs = std::filesystem;
 #include "EBO.h"
 #include "Camera.h"
 #include "Object.h"
+#include "Data.h"
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -30,7 +31,7 @@ float rotational_multiplier = 15.0f;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-GLfloat vertices[] =
+GLfloat tri_prism_vertices[] =
 { //     COORDINATES     /        COLORS      /   TexCoord  //
 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
@@ -47,7 +48,7 @@ GLfloat vertices3[] = {
 	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
-GLfloat vertices2[] =
+GLfloat cube_vertices[] =
 {
 	// face one (0)
 	-0.5f,  0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
@@ -86,7 +87,22 @@ GLfloat vertices2[] =
 	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
 };
 
-GLuint indices2[] = {
+/*
+(Relative to camera pos)
+-1x is left, 1x is right
+-1x is down, 1x is up
+-1x is forward, 1x is backward
+*/
+
+Object objList[] = {
+	Object(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f),
+};
+
+GLuint indices3[] = {
+	0, 1, 7
+};
+
+GLuint cube_indices[] = {
 	0, 2, 3,
 	0, 1, 3,
 
@@ -106,23 +122,7 @@ GLuint indices2[] = {
 	20, 21, 23
 };
 
-/*
-(Relative to camera pos)
--1x is left, 1x is right
--1x is down, 1x is up
--1x is forward, 1x is backward
-*/
-
-Object objList[] = {
-	Object(glm::vec3(0.0f, 0.0f, 0.0f), 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 2),
-	Object(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f),
-};
-
-GLuint indices3[] = {
-	0, 1, 7
-};
-
-GLuint indices[] =
+GLuint tri_prism_indices[] =
 {
 	0, 1, 2,
 	0, 2, 3,
@@ -163,9 +163,9 @@ int main() {
 	VAO VAO1;
 	VAO1.Bind();
 
-	VBO VBO1(vertices, sizeof(vertices));
+	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
 
-	EBO EBO1(indices, sizeof(indices));
+	EBO EBO1(tri_prism_indices, sizeof(tri_prism_indices));
 
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -178,9 +178,9 @@ int main() {
 	VAO VAO2;
 	VAO2.Bind();
 
-	VBO VBO2(vertices2, sizeof(vertices2));
+	VBO VBO2(cube_vertices, sizeof(cube_vertices));
 
-	EBO EBO2(indices2, sizeof(indices2));
+	EBO EBO2(cube_indices, sizeof(cube_indices));
 
 	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO2.LinkAttrib(VBO2, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -203,8 +203,8 @@ int main() {
 
 	Texture faceTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	faceTex.texUnit(shaderProgram, "tex0", 0);
-	Texture brickTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE1, GL_RGBA, GL_UNSIGNED_BYTE);
-	brickTex.texUnit(shaderProgram, "tex1", 1);
+	Texture brickTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	brickTex.texUnit(shaderProgram, "tex0", 0);
 
 	float rotation = 0.0f;
 	double prevTime = glfwGetTime();
@@ -212,8 +212,17 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+	Data DATA;
 	  
+	GLfloat deltaTime = 0.0f;
+	GLfloat lastFrame = 0.0f;
+
 	while (!glfwWindowShouldClose(window)) {
+
+		GLfloat currentFrame = glfwGetTime();
+		DATA.deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+		
 
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		// Clean the back buffer and depth buffer
@@ -225,17 +234,11 @@ int main() {
 		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
 
-		faceTex.Bind();
-		VAO1.Bind();
-		
-		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
-		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
-		/*brickTex.Bind();
+		brickTex.Bind();
 		VAO2.Bind();
 
-		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[1]);
-		glDrawElements(GL_TRIANGLES, sizeof(indices2) / sizeof(int), GL_UNSIGNED_INT, 0);*/
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
+		glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		/*for (int i = 0; i < 9; i++) {
@@ -299,7 +302,7 @@ int main() {
 	VBO2.Delete();
 	EBO2.Delete();
 	faceTex.Delete();
-	brickTex.Delete();
+	//brickTex.Delete();
 	shaderProgram.Delete();
 	glfwDestroyWindow(window);
 	glfwTerminate();
