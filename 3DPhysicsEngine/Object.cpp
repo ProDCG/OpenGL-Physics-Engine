@@ -1,4 +1,6 @@
 #include "Object.h"
+#include "Data.h"
+
 
 Object::Object(glm::vec3 position, float radius)
 {
@@ -27,4 +29,5 @@ Object::Object(glm::vec3 position, float radius, glm::vec3 rotate, float rotatio
 
 void Object::updatePhysics(float dt) {
 	Object::velocity = Object::velocity + Object::gravity * dt;
+	Object::position.y = Object::position.y + Object::velocity * dt;
 }

@@ -13,8 +13,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	
 	model = glm::scale(model, glm::vec3(1.0f) * obj.radius);
 	model = glm::translate(model, obj.position);
-
-	obj.updatePhysics();
+	//obj.updatePhysics(Camera::dt);
 	//if (obj.doesRotate) {
 	//	float time1 = cos((float)glfwGetTime());
 	//	float time2 = sin((float)glfwGetTime());

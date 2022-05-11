@@ -14,9 +14,9 @@ public:
 	glm::vec3 position;
 	glm::vec3 rotate;
 
-	const float gravity = 9.81f;
+	const float gravity = -9.81f;
 	float radius;
-	float velocity;
+	float velocity = 20.0f;
 	float mass;
 	float rotationalMultiplier;
 

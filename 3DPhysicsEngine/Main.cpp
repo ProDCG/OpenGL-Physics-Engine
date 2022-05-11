@@ -23,6 +23,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 int map_vals(int initialVal, int oldMin, int oldMax, int newMin, int newMax);
 int randomVal(int min, int max);
 
+Data DATA;
+
 const unsigned int width = 1920;
 const unsigned int height = 1080;
 
@@ -212,17 +214,12 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
-	Data DATA;
-	  
-	GLfloat deltaTime = 0.0f;
-	GLfloat lastFrame = 0.0f;
 
 	while (!glfwWindowShouldClose(window)) {
-
-		GLfloat currentFrame = glfwGetTime();
-		DATA.deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
+		DATA.updateTime();
+		camera.dt = DATA.deltaTime;
 		
+		//std::cout << "DT: " << DATA.deltaTime << std::endl;
 
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		// Clean the back buffer and depth buffer
@@ -239,6 +236,8 @@ int main() {
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
 		glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		objList[0].updatePhysics(DATA.deltaTime);
+		std::cout << "OBJ-V: " << objList[0].position.y << std::endl;
 
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		/*for (int i = 0; i < 9; i++) {

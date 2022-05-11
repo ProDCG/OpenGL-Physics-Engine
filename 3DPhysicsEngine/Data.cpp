@@ -2,8 +2,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-void Data::updateTime(float dt) {
+void Data::updateTime() {
 	GLfloat currentFrame = glfwGetTime();
-	Data::deltaTime = currentFrame - Data::lastFrame;
-	Data::lastFrame = currentFrame;
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
 }
