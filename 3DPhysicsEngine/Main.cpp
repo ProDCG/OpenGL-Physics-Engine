@@ -17,6 +17,8 @@ namespace fs = std::filesystem;
 #include "Camera.h"
 #include "Object.h"
 #include "Data.h"
+#include "Engine.h"
+#include "DeleteWrapper.h"
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -135,6 +137,8 @@ GLuint tri_prism_indices[] =
 };
 
 int main() {
+	Engine ENGINE;
+
 	glfwInit();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -162,10 +166,12 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-	VAO VAO1;
+	DeleteWrapper<VAO> VAO1_Wrapper;
+	VAO& VAO1 = VAO1_Wrapper.object;
 	VAO1.Bind();
 
-	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
+	DeleteWrapper<VBO> VBO1_Wrapper(tri_prism_vertices, sizeof(tri_prism_vertices));
+	VBO& VBO1 = VBO1_Wrapper.object;
 
 	EBO EBO1(tri_prism_indices, sizeof(tri_prism_indices));
 
@@ -294,8 +300,6 @@ int main() {
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 	}
 
-	VAO1.Delete();
-	VBO1.Delete();
 	EBO1.Delete();
 	VAO2.Delete();
 	VBO2.Delete();

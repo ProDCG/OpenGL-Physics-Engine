@@ -37,8 +37,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DeleteWrapper.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="shaderClass.h" />
     <ClInclude Include="Texture.h" />

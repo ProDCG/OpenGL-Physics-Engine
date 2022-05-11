@@ -12,9 +12,8 @@
 class Object {
 public:
 	glm::vec3 position;
-	glm::vec3 rotate;
 
-	const float gravity = -9.81f;
+	const float gravity = -4.81f;
 	float radius;
 	float velocity = 20.0f;
 	float mass;
@@ -24,8 +23,6 @@ public:
 	bool isStatic;
 
 	Object(glm::vec3 position, float radius);
-
-	Object(glm::vec3 position, float radius, glm::vec3 rotate, float rotationalMultiplier);
 
 	void updatePhysics(float dt);
 };

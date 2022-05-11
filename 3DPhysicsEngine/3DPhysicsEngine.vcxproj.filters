@@ -85,5 +85,11 @@
     <ClInclude Include="Data.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteWrapper.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 model = glm::mat4(1.0f);
 	
-	model = glm::scale(model, glm::vec3(1.0f) * obj.radius);
+	model = glm::scale(model, glm::vec3(1.0f) * obj.radius * 0.1f);
 	model = glm::translate(model, obj.position);
 	//obj.updatePhysics(Camera::dt);
 	//if (obj.doesRotate) {
