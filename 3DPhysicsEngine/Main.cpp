@@ -8,6 +8,7 @@ namespace fs = std::filesystem;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <stdint.h>
 
 #include "Texture.h"
 #include "shaderClass.h"
@@ -21,9 +22,9 @@ namespace fs = std::filesystem;
 #include "DeleteWrapper.h"
 
 void input_processor(GLFWwindow* window);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-int map_vals(int initialVal, int oldMin, int oldMax, int newMin, int newMax);
-int randomVal(int min, int max);
+void framebuffer_size_callback(GLFWwindow* window, __int32 width, __int32 height);
+__int32 map_vals(__int32 initialVal, __int32 oldMin, __int32 oldMax, __int32 newMin, __int32 newMax);
+__int32 randomVal(__int32 min, __int32 max);
 
 Data DATA;
 
@@ -334,14 +335,14 @@ void input_processor(GLFWwindow* window) {
 	}*/
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+void framebuffer_size_callback(GLFWwindow* window, __int32 width, __int32 height) {
 	glViewport(0, 0, width, height);
 }
 
-int map_vals(int initialVal, int oldMin, int oldMax, int newMin, int newMax) {
+__int32 map_vals(__int32 initialVal, __int32 oldMin, __int32 oldMax, __int32 newMin, __int32 newMax) {
 	return (initialVal - oldMin) * (newMax + 1 - newMin) / (oldMax - oldMin) + newMin;
 }
 
-int randomVal(int min, int max) {
+__int32 randomVal(__int32 min, __int32 max) {
 	return map_vals(std::rand(), 0, RAND_MAX, min, max);
 }
