@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Engine.h"
 
 Camera::Camera(int width, int height, glm::vec3 position) {
 	Camera::width = width;
@@ -38,7 +39,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
 }
 
-void Camera::Inputs(GLFWwindow* window) {
+void Camera::Inputs(GLFWwindow* window, Object objList[]) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
@@ -65,6 +66,10 @@ void Camera::Inputs(GLFWwindow* window) {
 	}
 	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
+		objList[0].gravity = objList[0].gravity * -1;
+		std::cout << "Test" << std::endl;
 	}
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {

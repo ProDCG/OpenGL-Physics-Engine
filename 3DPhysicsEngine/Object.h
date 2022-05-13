@@ -12,8 +12,8 @@
 class Object {
 public:
 	glm::vec3 position;
-
-	const float gravity = -4.81f;
+	 
+	float gravity = -4.905f;
 	float radius;
 	float velocity = 20.0f;
 	float mass;

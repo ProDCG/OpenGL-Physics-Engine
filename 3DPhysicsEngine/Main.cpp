@@ -160,6 +160,7 @@ int main() {
 	gladLoadGL();
 
 	glViewport(0, 0, width, height);
+	glfwSwapInterval(1);
 
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
 	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
@@ -222,6 +223,7 @@ int main() {
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
 	while (!glfwWindowShouldClose(window)) {
+
 		DATA.updateTime();
 		camera.dt = DATA.deltaTime;
 		
@@ -234,7 +236,7 @@ int main() {
 		shaderProgram.Activate();
 
 		// Handles camera inputs
-		camera.Inputs(window);
+		camera.Inputs(window, objList);
 		// Updates and exports the camera matrix to the Vertex Shader
 
 		brickTex.Bind();
@@ -243,7 +245,7 @@ int main() {
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
 		glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		objList[0].updatePhysics(DATA.deltaTime);
-		std::cout << "OBJ-V: " << objList[0].position.y << std::endl;
+		//std::cout << "g: " << objList[0].gravity << std::endl;
 
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		/*for (int i = 0; i < 9; i++) {
@@ -313,9 +315,10 @@ int main() {
 }
 
 void input_processor(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true);
-	}
+	/*if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
+		objList[0].gravity * -1;
+		
+	};*/
 	/*else if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}

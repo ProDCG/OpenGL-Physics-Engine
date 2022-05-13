@@ -41,7 +41,7 @@ public:
 	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Object obj);
 
 	// camera inputs
-	void Inputs(GLFWwindow* window);
+	void Inputs(GLFWwindow* window, Object objList[]);
 };
 
 #endif
