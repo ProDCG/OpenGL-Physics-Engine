@@ -27,6 +27,7 @@ int randomVal(int min, int max);
 
 Data DATA;
 
+__int32 iteration = 15;
 const unsigned int width = 1920;
 const unsigned int height = 1080;
 
