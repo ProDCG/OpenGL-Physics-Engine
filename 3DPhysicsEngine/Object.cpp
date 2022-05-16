@@ -1,7 +1,6 @@
 #include "Object.h"
 #include "Data.h"
 
-
 Object::Object(glm::vec3 position, float radius)
 {
 	//Object::position = glm::vec3(position.x, position.y - (radius / 2), position.z);

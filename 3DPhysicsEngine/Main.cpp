@@ -22,13 +22,13 @@ namespace fs = std::filesystem;
 #include "DeleteWrapper.h"
 
 void input_processor(GLFWwindow* window);
-void framebuffer_size_callback(GLFWwindow* window, __int32 width, __int32 height);
-__int32 map_vals(__int32 initialVal, __int32 oldMin, __int32 oldMax, __int32 newMin, __int32 newMax);
-__int32 randomVal(__int32 min, __int32 max);
+void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
+int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t newMin, int32_t newMax);
+int32_t randomVal(int32_t min, int32_t max);
 
 Data DATA;
 
-__int32 iteration = 15;
+int32_t iteration = 15;
 const unsigned int width = 1920;
 const unsigned int height = 1080;
 
@@ -335,14 +335,14 @@ void input_processor(GLFWwindow* window) {
 	}*/
 }
 
-void framebuffer_size_callback(GLFWwindow* window, __int32 width, __int32 height) {
+void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height) {
 	glViewport(0, 0, width, height);
 }
 
-__int32 map_vals(__int32 initialVal, __int32 oldMin, __int32 oldMax, __int32 newMin, __int32 newMax) {
+int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t newMin, int32_t newMax) {
 	return (initialVal - oldMin) * (newMax + 1 - newMin) / (oldMax - oldMin) + newMin;
 }
 
-__int32 randomVal(__int32 min, __int32 max) {
+int32_t randomVal(int32_t min, int32_t max) {
 	return map_vals(std::rand(), 0, RAND_MAX, min, max);
 }
