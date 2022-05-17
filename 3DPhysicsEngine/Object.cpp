@@ -26,7 +26,7 @@ Object::Object(glm::vec3 position, float radius) {
 
 void Object::updatePhysics(float dt) {
 	// x component
-	Object::velocity.x = Object::velocity.x + Object::coeffKinetic * dt;
+	Object::velocity.x = Object::velocity.x - Object::coeffKinetic * dt;
 	Object::position.x = Object::position.x + Object::velocity.x * dt;
 
 	// y component
@@ -36,7 +36,7 @@ void Object::updatePhysics(float dt) {
 	if (Object::position.y < -5) {
 		Object::velocity.y = abs(Object::velocity.y) * 0.5f;
 	}
-
+	
 	// z component
 	Object::velocity.z = Object::velocity.z + Object::coeffKinetic * dt;
 	Object::position.z = Object::position.z + Object::velocity.z * dt;
