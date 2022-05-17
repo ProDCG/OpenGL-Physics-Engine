@@ -45,6 +45,13 @@ GLfloat tri_prism_vertices[] =
 	 0.0f, 1.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
+GLfloat plane_vertices[] = {
+	0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+	1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+	0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+};
+
 GLfloat vertices3[] = {
 	-3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
 	-3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
@@ -100,7 +107,8 @@ GLfloat cube_vertices[] =
 */
 
 Object objList[] = {
-	Object(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f),
+	Object(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(2.1f, 2.1f, 10.0f), 1.0f),
+	Object(glm::vec3(0.0f, -10.0f, 0.0f), 10.0f)
 };
 
 GLuint indices3[] = {
@@ -137,6 +145,11 @@ GLuint tri_prism_indices[] =
 	3, 0, 4
 };
 
+GLuint plane_indices[] = {
+	0, 1, 2,
+	1, 2, 3
+};
+
 int main() {
 	Engine ENGINE;
 
@@ -168,13 +181,11 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-	DeleteWrapper<VAO> VAO1_Wrapper;
-	VAO& VAO1 = VAO1_Wrapper.object;
+	VAO VAO1;
 	VAO1.Bind();
 
-	DeleteWrapper<VBO> VBO1_Wrapper(tri_prism_vertices, sizeof(tri_prism_vertices));
-	VBO& VBO1 = VBO1_Wrapper.object;
-
+	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
+	
 	EBO EBO1(tri_prism_indices, sizeof(tri_prism_indices));
 
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
@@ -199,7 +210,22 @@ int main() {
 	VAO2.Unbind();
 	VBO2.Unbind();
 	EBO2.Unbind();
-	 
+
+	VAO VAO3;
+	VAO3.Bind();
+
+	VBO VBO3(plane_vertices, sizeof(plane_vertices));
+
+	EBO EBO3(plane_indices, sizeof(plane_indices));
+
+	VAO3.LinkAttrib(VBO3, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	VAO3.LinkAttrib(VBO3, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO3.LinkAttrib(VBO3, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+	VAO3.Unbind();
+	VBO3.Unbind();
+	EBO3.Unbind();
+
 	/*VAO VAO2;
 	VAO2.Bind();
 
@@ -210,11 +236,14 @@ int main() {
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
 	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
+	std::string batmanPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\batman.png";
 
 	Texture faceTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	faceTex.texUnit(shaderProgram, "tex0", 0);
 	Texture brickTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	brickTex.texUnit(shaderProgram, "tex0", 0);
+	Texture batmanTex((batmanPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	batmanTex.texUnit(shaderProgram, "tex0", 0);
 
 	float rotation = 0.0f;
 	double prevTime = glfwGetTime();
@@ -240,12 +269,18 @@ int main() {
 		camera.Inputs(window, objList);
 		// Updates and exports the camera matrix to the Vertex Shader
 
-		brickTex.Bind();
+		faceTex.Bind();
 		VAO2.Bind();
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
 		glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		objList[0].updatePhysics(DATA.deltaTime);
+
+		brickTex.Bind();
+		VAO3.Bind();
+
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[1]);
+		glDrawElements(GL_TRIANGLES, sizeof(plane_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		//std::cout << "g: " << objList[0].gravity << std::endl;
 
 		// Draw primitives, number of indices, datatype of indices, index of indices

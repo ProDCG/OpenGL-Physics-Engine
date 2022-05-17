@@ -12,15 +12,18 @@
 class Object {
 public:
 	glm::vec3 position;
+	glm::vec3 velocity;
 	 
-	float gravity = -4.905f;
+	float gravity = -9.81 / 2;
 	float radius;
-	float velocity = 20.0f;
 	float mass;
 	float rotationalMultiplier;
+	float coeffKinetic = 0.3;
 
 	bool doesRotate;
 	bool isStatic;
+
+	Object(glm::vec3 position, glm::vec3 velocity, float radius);
 
 	Object(glm::vec3 position, float radius);
 
