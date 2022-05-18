@@ -15,8 +15,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	if (!obj.isStatic) {
 		model = glm::scale(model, glm::vec3(1.0f) * obj.radius * 0.1f);
 		model = glm::translate(model, obj.position);
-	}
-	else {
+	} else {
 		//model = glm::scale(model, glm::vec3(1.0f * obj.radius, 0.01f, 1.0f * obj.radius));
 		model = glm::translate(model, obj.position);
 		model = glm::scale(model, glm::vec3(1.0f * obj.radius, 0.1f, 1.0f * obj.radius));
@@ -75,10 +74,6 @@ void Camera::Inputs(GLFWwindow* window, Object objList[]) {
 	}
 	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
-		objList[0].gravity = objList[0].gravity * -1;
-		std::cout << "Test" << std::endl;
 	}
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
