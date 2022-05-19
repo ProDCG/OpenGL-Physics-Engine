@@ -91,5 +91,8 @@
     <ClInclude Include="DeleteWrapper.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
