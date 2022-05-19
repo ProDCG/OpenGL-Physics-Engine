@@ -2,6 +2,16 @@
 #include "Data.h"
 #include <iostream>
 
+Object::Object(glm::vec3 position, glm::vec3 velocity, float radius, float mass) {
+	Object::position = position;
+	Object::velocity = velocity;
+	Object::radius = radius;
+	Object::mass = mass;
+	Object::rotationalMultiplier = 0.0f;
+	Object::doesRotate = false;
+	Object::isStatic = false;
+}
+
 Object::Object(glm::vec3 position, glm::vec3 velocity, float radius)
 {
 	//Object::position = glm::vec3(position.x, position.y - (radius / 2), position.z);

@@ -23,6 +23,8 @@ public:
 	bool doesRotate;
 	bool isStatic;
 
+	Object(glm::vec3 position, glm::vec3 velocity, float radius, float mass);
+
 	Object(glm::vec3 position, glm::vec3 velocity, float radius);
 
 	Object(glm::vec3 position, float radius);

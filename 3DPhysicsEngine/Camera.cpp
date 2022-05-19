@@ -49,7 +49,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 
 void Camera::Inputs(GLFWwindow* window, Object objList[]) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true);
+		glfwSetWindowShouldClose(window, true n);
 	}
 	if (glfwGetKey(window, GLFW_KEY_SPACE)) {
 		Camera::position += Camera::speed * up;
