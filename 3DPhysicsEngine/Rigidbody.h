@@ -23,6 +23,12 @@ public:
 
 	void addForce(float x, float y, float z);
 
+	void addForce(glm::vec3 force);
+
+	void setForce(float x, float y, float z);
+
+	void setForce(glm::vec3 force);
+
 	void addForceX(float magnitude);
 
 	void addForceY(float magnitude);

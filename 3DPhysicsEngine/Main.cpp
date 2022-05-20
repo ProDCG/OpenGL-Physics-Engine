@@ -20,6 +20,7 @@ namespace fs = std::filesystem;
 #include "Data.h"
 #include "Engine.h"
 #include "DeleteWrapper.h"
+#include "Rigidbody.h"
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
@@ -106,9 +107,13 @@ GLfloat cube_vertices[] =
 -1x is forward, 1x is backward
 */
 
-Object objList[] = {
-	Object(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(2.1f, 2.1f, 10.0f), 1.0f),
-	Object(glm::vec3(0.0f, -10.0f, 0.0f), 10.0f)
+//Object objList[] = {
+//	Object(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(2.1f, 2.1f, 10.0f), 1.0f),
+//	Object(glm::vec3(0.0f, -10.0f, 0.0f), 10.0f)
+//};
+
+Rigidbody objList2[] = {
+	Rigidbody(1.0f)
 };
 
 GLuint indices3[] = {
@@ -266,10 +271,18 @@ int main() {
 		shaderProgram.Activate();
 
 		// Handles camera inputs
-		camera.Inputs(window, objList);
+		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
 
-		faceTex.Bind();
+		brickTex.Bind();
+		VAO2.Bind();
+
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList2[0]);
+		glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		objList2[0].setForce(glm::vec3(1.0f, 0.0f, 0.0f));
+		objList2[0].update(DATA.deltaTime);
+
+		/*faceTex.Bind();
 		VAO2.Bind();
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
@@ -280,7 +293,7 @@ int main() {
 		VAO3.Bind();
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[1]);
-		glDrawElements(GL_TRIANGLES, sizeof(plane_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, sizeof(plane_indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 		//std::cout << "g: " << objList[0].gravity << std::endl;
 
 		// Draw primitives, number of indices, datatype of indices, index of indices

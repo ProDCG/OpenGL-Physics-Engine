@@ -10,6 +10,18 @@ void Rigidbody::addForce(float x, float y, float z) {
 	Rigidbody::netForce += glm::vec3(x, y, z);
 }
 
+void Rigidbody::addForce(glm::vec3 force) {
+	Rigidbody::netForce += force;
+}
+
+void Rigidbody::setForce(float x, float y, float z) {
+	Rigidbody::netForce = glm::vec3(x, y, z);
+}
+
+void Rigidbody::setForce(glm::vec3 force) {
+	Rigidbody::netForce = force;
+}
+
 void Rigidbody::addForceX(float magnitude) {
 	Rigidbody::netForce += glm::vec3(magnitude, 0.0f, 0.0f);
 }
