@@ -279,7 +279,7 @@ int main() {
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList2[0]);
 		glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-		objList2[0].setForce(glm::vec3(1.0f, 0.0f, 0.0f));
+		objList2[0].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 		objList2[0].update(DATA.deltaTime);
 
 		/*faceTex.Bind();
