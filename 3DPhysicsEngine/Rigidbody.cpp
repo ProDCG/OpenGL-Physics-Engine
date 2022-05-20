@@ -1,4 +1,5 @@
 #include "Rigidbody.h"
+#include <cmath>
 
 Rigidbody::Rigidbody(float mass)
 {
@@ -22,13 +23,19 @@ void Rigidbody::addForceZ(float magnitude) {
 }
 
 void Rigidbody::update(float deltaTime) {
-	Rigidbody::acceleration = Rigidbody::netForce / Rigidbody::mass;
+	/*Rigidbody::acceleration = Rigidbody::netForce / Rigidbody::mass;
 	Rigidbody::linearVelocity = Rigidbody::linearVelocity + acceleration * deltaTime;
-	Rigidbody::position = Rigidbody::position + Rigidbody::linearVelocity * deltaTime + 0.5f * Rigidbody::acceleration * exp2(deltaTime);
+	Rigidbody::position = Rigidbody::position + Rigidbody::linearVelocity * deltaTime + 0.5f * Rigidbody::acceleration * exp2(deltaTime);*/
 
 	Rigidbody::acceleration.x = Rigidbody::netForce.x / Rigidbody::mass;
 	Rigidbody::linearVelocity.x = Rigidbody::linearVelocity.x + Rigidbody::acceleration.x * deltaTime;
-	Rigidbody::position.x = Rigidbody::position.x + (Rigidbody::linearVelocity.x * deltaTime) + (0.5f * Rigidbody::acceleration.x * exp2(deltaTime));
+	Rigidbody::position.x = Rigidbody::position.x + (Rigidbody::linearVelocity.x * deltaTime) + (0.5f * Rigidbody::acceleration.x * pow(deltaTime, 2));
 
-	
+	Rigidbody::acceleration.y = Rigidbody::netForce.y / Rigidbody::mass;
+	Rigidbody::linearVelocity.y = Rigidbody::linearVelocity.y + Rigidbody::acceleration.y * deltaTime;
+	Rigidbody::position.y = Rigidbody::position.y + (Rigidbody::linearVelocity.y * deltaTime) + (0.5f * Rigidbody::acceleration.y * pow(deltaTime, 2));
+
+	Rigidbody::acceleration.z = Rigidbody::netForce.z / Rigidbody::mass;
+	Rigidbody::linearVelocity.z = Rigidbody::linearVelocity.z + Rigidbody::acceleration.z * deltaTime;
+	Rigidbody::position.z = Rigidbody::position.z + (Rigidbody::linearVelocity.z * deltaTime) + (0.5f * Rigidbody::acceleration.z * pow(deltaTime, 2));
 }
