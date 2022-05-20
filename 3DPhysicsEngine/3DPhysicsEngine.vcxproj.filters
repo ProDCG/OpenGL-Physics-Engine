@@ -54,6 +54,9 @@
     <ClCompile Include="Data.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files\Main\Object Properties and Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="main.vert">
@@ -95,7 +98,7 @@
       <Filter>Source Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="Rigidbody.h">
-      <Filter>Source Files\Main</Filter>
+      <Filter>Source Files\Main\Object Properties and Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

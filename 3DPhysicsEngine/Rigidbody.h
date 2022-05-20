@@ -9,19 +9,27 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
-
 class Rigidbody {
 public:
-	glm::vec3 position;
-	glm::vec3 velocity;
-	glm::vec3 angularVelocity;
-	
-	float mass;
-	float momentOfInertia;
+	glm::vec3 position = glm::vec3(0.0f);
+	glm::vec3 linearVelocity = glm::vec3(0.0f);
+	glm::vec3 angularVelocity = glm::vec3(0.0f);
+	glm::vec3 netForce = glm::vec3(0.0f);
+	glm::vec3 acceleration = glm::vec3(0.0f);
 
-	void calculateInertia() {
-		momentOfInertia = 
-	}
+	float mass;
+
+	Rigidbody(float mass);
+
+	void addForce(float x, float y, float z);
+
+	void addForceX(float magnitude);
+
+	void addForceY(float magnitude);
+
+	void addForceZ(float magnitude);
+
+	void update(float deltaTime);
 };
 
 #endif

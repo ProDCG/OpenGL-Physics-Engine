@@ -21,7 +21,6 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 		model = glm::scale(model, glm::vec3(1.0f * obj.radius, 0.1f, 1.0f * obj.radius));
 		model = glm::rotate(model, 90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 	}
-	
 	//obj.updatePhysics(Camera::dt);
 	//if (obj.doesRotate) {
 	//	float time1 = cos((float)glfwGetTime());
@@ -49,7 +48,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 
 void Camera::Inputs(GLFWwindow* window, Object objList[]) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true n);
+		glfwSetWindowShouldClose(window, true);
 	}
 	if (glfwGetKey(window, GLFW_KEY_SPACE)) {
 		Camera::position += Camera::speed * up;
