@@ -2,6 +2,8 @@
 namespace fs = std::filesystem;
 
 #include <iostream>
+#include <vector>
+#include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb/stb_image.h>
@@ -113,8 +115,12 @@ GLfloat cube_vertices[] =
 //};
 
 Rigidbody objList2[] = {
-	Rigidbody(1.0f)
+	Rigidbody(1.0f, "cube"),
+	Rigidbody(2.0f, "prism"),
+	Rigidbody(1.5f, "cube")
 };
+
+std::vector<Rigidbody> objVec{ Rigidbody(1.5f), Rigidbody(3.0f) };
 
 GLuint indices3[] = {
 	0, 1, 7
@@ -273,6 +279,10 @@ int main() {
 		// Handles camera inputs
 		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
+
+		/*for (Rigidbody rb : objVec) {
+			switch()
+		}*/
 
 		brickTex.Bind();
 		VAO2.Bind();

@@ -18,8 +18,9 @@ public:
 	glm::vec3 acceleration = glm::vec3(0.0f);
 
 	float mass;
+	char objType[];
 
-	Rigidbody(float mass);
+	Rigidbody(float mass, char objType[]);
 
 	void addForce(float x, float y, float z);
 
