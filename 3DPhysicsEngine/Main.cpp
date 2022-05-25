@@ -114,14 +114,6 @@ GLfloat cube_vertices[] =
 //	Object(glm::vec3(0.0f, -10.0f, 0.0f), 10.0f)
 //};
 
-Rigidbody objList2[] = {
-	Rigidbody(1.0f, "cube"),
-	Rigidbody(2.0f, "prism"),
-	Rigidbody(1.5f, "cube")
-};
-
-std::vector<Rigidbody> objVec{ Rigidbody(1.5f), Rigidbody(3.0f) };
-
 GLuint indices3[] = {
 	0, 1, 7
 };
