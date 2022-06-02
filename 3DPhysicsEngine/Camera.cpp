@@ -98,6 +98,9 @@ void Camera::Inputs(GLFWwindow* window) {
 		if (abs(glm::angle(orientation, up) - glm::radians(90.0f)) <= glm::radians(85.0f)) {
 			orientation = newOrientation;
 		}
+		else {
+			orientation = glm::rotate(orientation, glm::radians(-0.01f), up);
+		}
 
 		orientation = glm::rotate(orientation, glm::radians(-rotY), up);
 

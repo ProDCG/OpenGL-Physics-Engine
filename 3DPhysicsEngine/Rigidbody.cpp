@@ -1,10 +1,10 @@
 #include "Rigidbody.h"
 #include <cmath>
 
-Rigidbody::Rigidbody(float mass, char objType[])
-{
+Rigidbody::Rigidbody(float mass, Texture textureType, VAO objectType) {
 	Rigidbody::mass = mass;
-	Rigidbody::objType = objType;
+	Rigidbody::textureType = &textureType;
+	Rigidbody::objectType = &objectType;
 }
 
 void Rigidbody::addForce(float x, float y, float z) {

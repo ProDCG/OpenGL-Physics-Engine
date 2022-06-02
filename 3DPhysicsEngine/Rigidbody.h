@@ -1,6 +1,7 @@
 #ifndef RIGIDBODY_CLASS_H
 #define RIGIDBODY_CLASS_H
 
+#include <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -8,6 +9,11 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/vector_angle.hpp>
+#include "Texture.h"
+#include "VAO.h"
+
+#include <cstring>
+#include <string>
 
 class Rigidbody {
 public:
@@ -18,9 +24,13 @@ public:
 	glm::vec3 acceleration = glm::vec3(0.0f);
 
 	float mass;
-	char objType[];
+	
+	/*std::vector<char> objType;
+	std::vector<char> textureType;*/
+	Texture *textureType;
+	VAO *objectType;
 
-	Rigidbody(float mass, char objType[]);
+	Rigidbody(float mass, Texture textureType, VAO objType);
 
 	void addForce(float x, float y, float z);
 
