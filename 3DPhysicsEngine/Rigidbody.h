@@ -30,7 +30,7 @@ public:
 	Texture *textureType;
 	VAO *objectType;
 
-	Rigidbody(float mass, Texture textureType, VAO objType);
+	Rigidbody(float mass, Texture* textureType, VAO* objType);
 
 	void addForce(float x, float y, float z);
 

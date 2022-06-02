@@ -180,7 +180,9 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-	VAO VAO1;
+
+	std::vector<GLuint> indices(std::begin(tri_prism_indices), std::end(tri_prism_indices));
+	VAO VAO1(indices);
 	VAO1.Bind();
 
 	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
@@ -195,7 +197,8 @@ int main() {
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-	VAO VAO2;
+	indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
+	VAO VAO2(indices);
 	VAO2.Bind();
 
 	VBO VBO2(cube_vertices, sizeof(cube_vertices));
@@ -210,7 +213,8 @@ int main() {
 	VBO2.Unbind();
 	EBO2.Unbind();
 
-	VAO VAO3;
+	indices = std::vector<GLuint>(std::begin(plane_indices), std::end(plane_indices));
+	VAO VAO3(indices);
 	VAO3.Bind();
 
 	VBO VBO3(plane_vertices, sizeof(plane_vertices));
@@ -245,7 +249,7 @@ int main() {
 	batmanTex.texUnit(shaderProgram, "tex0", 0);
 
 	Rigidbody rbList[] = {
-		Rigidbody(1.0f, faceTex, VAO1)
+		Rigidbody(1.0f, &faceTex, &VAO1)
 	};
 
 	float rotation = 0.0f;
@@ -281,10 +285,9 @@ int main() {
 			rbList[i].objectType->Bind();
 
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
-			glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, sizeof(rbList[i].objectType->indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 			rbList[i].update(DATA.deltaTime);
-			//glDrawArrays(GL_TRIANGLES, 0, )
 		}
 
 		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
