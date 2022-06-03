@@ -29,6 +29,7 @@ void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
 int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t newMin, int32_t newMax);
 int32_t randomVal(int32_t min, int32_t max);
+std::vector<GLuint>	arrayToVec(GLuint arr[]);
 
 Data DATA;
 
@@ -180,8 +181,7 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-
-	std::vector<GLuint> indices(std::begin(tri_prism_indices), std::end(tri_prism_indices));
+	std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
 	VAO VAO1(indices);
 	VAO1.Bind();
 
@@ -285,9 +285,12 @@ int main() {
 			rbList[i].objectType->Bind();
 
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
-			glDrawElements(GL_TRIANGLES, sizeof(rbList[i].objectType->indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 			rbList[i].update(DATA.deltaTime);
+
+			indices.data()
+				indices.size()
 		}
 
 		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
@@ -402,4 +405,12 @@ int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t new
 
 int32_t randomVal(int32_t min, int32_t max) {
 	return map_vals(std::rand(), 0, RAND_MAX, min, max);
+}
+
+std::vector<GLuint>	arrayToVec(GLuint arr[]) {
+	std::vector<GLuint> newVec;
+	for (int i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++) {
+		newVec.push_back(arr[i]);
+	}
+	return newVec;
 }

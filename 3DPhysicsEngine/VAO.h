@@ -3,13 +3,16 @@
 
 #include <glad/glad.h>
 #include <vector>
+#include <array>
 #include "VBO.h"
 
+template <size_t size>
 class VAO {
 public:
 
 	GLuint ID;
 	std::vector<GLuint> indices;
+	std::array<GLuint, size> sdkffds;
 
 	VAO(std::vector<GLuint> indices);
 
