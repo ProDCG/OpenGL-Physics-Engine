@@ -2,14 +2,19 @@
 #define VAO_CLASS_H
 
 #include <glad/glad.h>
+#include <vector>
+#include <array>
 #include "VBO.h"
 
+//template <size_t size>
 class VAO {
 public:
 
 	GLuint ID;
+	std::vector<GLuint> indices;
+	//std::array<GLuint, size> sdkffds;
 
-	VAO();
+	VAO(std::vector<GLuint> indices);
 
 	void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
 

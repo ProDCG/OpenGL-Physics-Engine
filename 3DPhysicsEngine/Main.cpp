@@ -2,6 +2,9 @@
 namespace fs = std::filesystem;
 
 #include <iostream>
+#include <vector>
+#include <cstring>
+#include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb/stb_image.h>
@@ -20,11 +23,13 @@ namespace fs = std::filesystem;
 #include "Data.h"
 #include "Engine.h"
 #include "DeleteWrapper.h"
+#include "Rigidbody.h"
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
 int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t newMin, int32_t newMax);
 int32_t randomVal(int32_t min, int32_t max);
+std::vector<GLuint>	arrayToVec(GLuint arr[]);
 
 Data DATA;
 
@@ -106,11 +111,6 @@ GLfloat cube_vertices[] =
 -1x is forward, 1x is backward
 */
 
-Object objList[] = {
-	Object(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(2.1f, 2.1f, 10.0f), 1.0f),
-	Object(glm::vec3(0.0f, -10.0f, 0.0f), 10.0f)
-};
-
 GLuint indices3[] = {
 	0, 1, 7
 };
@@ -181,7 +181,8 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-	VAO VAO1;
+	//std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
+	VAO VAO1(arrayToVec(tri_prism_indices));
 	VAO1.Bind();
 
 	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
@@ -196,7 +197,8 @@ int main() {
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-	VAO VAO2;
+	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
+	VAO VAO2(arrayToVec(cube_indices));
 	VAO2.Bind();
 
 	VBO VBO2(cube_vertices, sizeof(cube_vertices));
@@ -206,12 +208,13 @@ int main() {
 	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO2.LinkAttrib(VBO2, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	VAO2.LinkAttrib(VBO2, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-
+	
 	VAO2.Unbind();
 	VBO2.Unbind();
 	EBO2.Unbind();
 
-	VAO VAO3;
+	//indices = std::vector<GLuint>(std::begin(plane_indices), std::end(plane_indices));
+	VAO VAO3(arrayToVec(plane_indices));
 	VAO3.Bind();
 
 	VBO VBO3(plane_vertices, sizeof(plane_vertices));
@@ -245,6 +248,10 @@ int main() {
 	Texture batmanTex((batmanPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	batmanTex.texUnit(shaderProgram, "tex0", 0);
 
+	Rigidbody rbList[] = {
+		Rigidbody(1.0f, &faceTex, &VAO1)
+	};
+
 	float rotation = 0.0f;
 	double prevTime = glfwGetTime();
 
@@ -266,10 +273,27 @@ int main() {
 		shaderProgram.Activate();
 
 		// Handles camera inputs
-		camera.Inputs(window, objList);
+		camera.Inputs(window);
 		// Updates and exports the camera matrix to the Vertex Shader
 
-		faceTex.Bind();
+		/*for (Rigidbody rb : objVec) {
+			switch()
+		}*/
+
+		for (int i = 0; i < sizeof(rbList) / sizeof(rbList[0]); i++) {
+			rbList[i].textureType->Bind();
+			rbList[i].objectType->Bind();  
+			// sizeof(rbList[i].objectType->indices.data()) / sizeof(rbList[0])
+			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
+			glDrawElements(GL_TRIANGLES, sizeof(cube_indices), GL_UNSIGNED_INT, 0);
+			std::cout << sizeof(cube_indices) << std::endl;
+			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
+			rbList[i].update(DATA.deltaTime);
+		} 
+			
+		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
+
+		/*faceTex.Bind();
 		VAO2.Bind();
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
@@ -280,7 +304,7 @@ int main() {
 		VAO3.Bind();
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[1]);
-		glDrawElements(GL_TRIANGLES, sizeof(plane_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, sizeof(plane_indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 		//std::cout << "g: " << objList[0].gravity << std::endl;
 
 		// Draw primitives, number of indices, datatype of indices, index of indices
@@ -379,4 +403,12 @@ int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t new
 
 int32_t randomVal(int32_t min, int32_t max) {
 	return map_vals(std::rand(), 0, RAND_MAX, min, max);
+}
+
+std::vector<GLuint>	arrayToVec(GLuint arr[]) {
+	std::vector<GLuint> newVec;
+	for (int i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++) {
+		newVec.push_back(arr[i]);
+	}
+	return newVec;
 }

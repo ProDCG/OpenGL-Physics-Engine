@@ -10,7 +10,7 @@
 #include <glm/gtx/vector_angle.hpp>
 
 #include "shaderClass.h"
-#include "Object.h"
+#include "Rigidbody.h"
 
 class Camera
 {
@@ -38,10 +38,10 @@ public:
 	Camera(int width, int height, glm::vec3 position);
 
 	// update camera matrix to the vertex shader
-	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Object obj);
+	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Rigidbody obj);
 
 	// camera inputs
-	void Inputs(GLFWwindow* window, Object objList[]);
+	void Inputs(GLFWwindow* window);
 };
 
 #endif

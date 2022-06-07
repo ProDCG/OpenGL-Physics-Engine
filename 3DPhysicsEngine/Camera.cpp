@@ -7,21 +7,23 @@ Camera::Camera(int width, int height, glm::vec3 position) {
 	Camera::position = position;
 }
 
-void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Object obj) {
+void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Rigidbody obj) {
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 model = glm::mat4(1.0f);
+
+	model = glm::translate(model, obj.position);
+	model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 	
-	if (!obj.isStatic) {
-		model = glm::scale(model, glm::vec3(1.0f) * obj.radius * 0.1f);
-		model = glm::translate(model, obj.position);
-	} else {
-		//model = glm::scale(model, glm::vec3(1.0f * obj.radius, 0.01f, 1.0f * obj.radius));
-		model = glm::translate(model, obj.position);
-		model = glm::scale(model, glm::vec3(1.0f * obj.radius, 0.1f, 1.0f * obj.radius));
-		model = glm::rotate(model, 90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	}
-	
+	//if (!obj.isStatic) {
+	//	model = glm::scale(model, glm::vec3(1.0f) * obj.radius * 0.1f);
+	//	model = glm::translate(model, obj.position);
+	//} else {
+	//	//model = glm::scale(model, glm::vec3(1.0f * obj.radius, 0.01f, 1.0f * obj.radius));
+	//	model = glm::translate(model, obj.position);
+	//	model = glm::scale(model, glm::vec3(1.0f, 0.1f, 1.0f * obj.radius));
+	//	model = glm::rotate(model, 90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	//}
 	//obj.updatePhysics(Camera::dt);
 	//if (obj.doesRotate) {
 	//	float time1 = cos((float)glfwGetTime());
@@ -47,9 +49,9 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
 }
 
-void Camera::Inputs(GLFWwindow* window, Object objList[]) {
+void Camera::Inputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true n);
+		glfwSetWindowShouldClose(window, true);
 	}
 	if (glfwGetKey(window, GLFW_KEY_SPACE)) {
 		Camera::position += Camera::speed * up;
@@ -95,6 +97,9 @@ void Camera::Inputs(GLFWwindow* window, Object objList[]) {
 
 		if (abs(glm::angle(orientation, up) - glm::radians(90.0f)) <= glm::radians(85.0f)) {
 			orientation = newOrientation;
+		}
+		else {
+			orientation = glm::rotate(orientation, glm::radians(-0.01f), up);
 		}
 
 		orientation = glm::rotate(orientation, glm::radians(-rotY), up);
