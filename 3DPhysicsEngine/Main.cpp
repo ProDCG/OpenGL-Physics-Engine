@@ -181,8 +181,8 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-	std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
-	VAO VAO1(indices);
+	//std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
+	VAO VAO1(arrayToVec(tri_prism_indices));
 	VAO1.Bind();
 
 	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
@@ -197,8 +197,8 @@ int main() {
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-	indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
-	VAO VAO2(indices);
+	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
+	VAO VAO2(arrayToVec(cube_indices));
 	VAO2.Bind();
 
 	VBO VBO2(cube_vertices, sizeof(cube_vertices));
@@ -213,8 +213,8 @@ int main() {
 	VBO2.Unbind();
 	EBO2.Unbind();
 
-	indices = std::vector<GLuint>(std::begin(plane_indices), std::end(plane_indices));
-	VAO VAO3(indices);
+	//indices = std::vector<GLuint>(std::begin(plane_indices), std::end(plane_indices));
+	VAO VAO3(arrayToVec(plane_indices));
 	VAO3.Bind();
 
 	VBO VBO3(plane_vertices, sizeof(plane_vertices));
@@ -282,17 +282,15 @@ int main() {
 
 		for (int i = 0; i < sizeof(rbList) / sizeof(rbList[0]); i++) {
 			rbList[i].textureType->Bind();
-			rbList[i].objectType->Bind();
-
+			rbList[i].objectType->Bind();  
+			// sizeof(rbList[i].objectType->indices.data()) / sizeof(rbList[0])
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
-			glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, sizeof(cube_indices), GL_UNSIGNED_INT, 0);
+			std::cout << sizeof(cube_indices) << std::endl;
 			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 			rbList[i].update(DATA.deltaTime);
-
-			indices.data()
-				indices.size()
-		}
-
+		} 
+			
 		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
 
 		/*faceTex.Bind();

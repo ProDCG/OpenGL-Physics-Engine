@@ -6,13 +6,13 @@
 #include <array>
 #include "VBO.h"
 
-template <size_t size>
+//template <size_t size>
 class VAO {
 public:
 
 	GLuint ID;
 	std::vector<GLuint> indices;
-	std::array<GLuint, size> sdkffds;
+	//std::array<GLuint, size> sdkffds;
 
 	VAO(std::vector<GLuint> indices);
 
