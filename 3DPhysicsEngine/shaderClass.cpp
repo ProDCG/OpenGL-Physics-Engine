@@ -1,5 +1,10 @@
 #include "shaderClass.h"
 
+void Shader::setVec3(const std::string& name, const glm::vec3& value)
+{
+	glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+}
+
 std::string get_file_contents(const char* filename) {
 	
 	/*if (in) {

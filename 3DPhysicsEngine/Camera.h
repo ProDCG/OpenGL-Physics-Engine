@@ -38,7 +38,7 @@ public:
 	Camera(int width, int height, glm::vec3 position);
 
 	// update camera matrix to the vertex shader
-	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Rigidbody obj);
+	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform);
 
 	// camera inputs
 	void Inputs(GLFWwindow* window);

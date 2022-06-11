@@ -150,7 +150,7 @@ const unsigned int height = 1080;
 //	0, 1, 2,
 //	1, 2, 3
 //};
-const Cube CUBE;
+Cube CUBE;
 
 int main() {
 	Engine ENGINE;
@@ -180,16 +180,16 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader colorShader("colorShader.vert", "colorShader.frag");
+	const char* vertexFileAddress = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\colorShader.vert";
+	const char* fragmentFileAddress = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\colorShader.frag";
+	Shader colorShader(vertexFileAddress, fragmentFileAddress);
 
 	VAO cubeVAO;
-	VBO cubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
+	VBO cubeVBO(CUBE.vertices.data(), sizeof(CUBE.vertices.data()));
 	cubeVAO.Bind();
 	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	cubeVAO.Unbind();
 	cubeVBO.Unbind();
-
-
 
 	/*
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
@@ -289,8 +289,12 @@ int main() {
 
 		// Handles camera inputs
 		camera.Inputs(window);
+		colorShader.Activate();
+		colorShader.setVec3("objectColor", glm::vec3(1.0f, 0.0f, 0.0f));
 
-
+		camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix");
+		cubeVAO.Bind();
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 		// Updates and exports the camera matrix to the Vertex Shader
 
 		/*for (Rigidbody rb : objVec) {
@@ -389,6 +393,9 @@ int main() {
 	//brickTex.Delete();
 	shaderProgram.Delete();
 	*/
+	cubeVAO.Delete();
+	cubeVBO.Delete();
+
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
