@@ -14,7 +14,7 @@ public:
 	std::vector<GLuint> indices;
 	//std::array<GLuint, size> sdkffds;
 
-	VAO(std::vector<GLuint> indices);
+	VAO();
 
 	void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
 

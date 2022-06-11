@@ -65,6 +65,12 @@
     <None Include="main.frag">
       <Filter>Source Files\Main</Filter>
     </None>
+    <None Include="colorShader.vert">
+      <Filter>Source Files\Main</Filter>
+    </None>
+    <None Include="colorShader.frag">
+      <Filter>Source Files\Main</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EBO.h">
@@ -99,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="Rigidbody.h">
       <Filter>Source Files\Main\Object Properties and Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Source Files\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

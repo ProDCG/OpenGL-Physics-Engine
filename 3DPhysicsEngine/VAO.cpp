@@ -1,7 +1,6 @@
 #include "VAO.h"
 
-VAO::VAO(std::vector<GLuint> indices) {
-	VAO::indices = indices;
+VAO::VAO() {
 	glGenVertexArrays(1, &ID);
 }
 
