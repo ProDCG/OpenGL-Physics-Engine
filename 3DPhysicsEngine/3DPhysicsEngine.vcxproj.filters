@@ -109,5 +109,8 @@
     <ClInclude Include="Cube.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
+    <ClInclude Include="TriangularPrism.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

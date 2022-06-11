@@ -14,6 +14,7 @@ namespace fs = std::filesystem;
 #include <stdint.h>
 
 #include "Cube.h"
+#include "TriangularPrism.h"
 #include "Texture.h"
 #include "shaderClass.h"
 #include "VAO.h"
@@ -30,7 +31,7 @@ void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
 int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t newMin, int32_t newMax);
 int32_t randomVal(int32_t min, int32_t max);
-std::vector<GLuint>	arrayToVec(GLuint arr[]);
+//std::vector<GLuint>	arrayToVec(GLuint arr[]);
 
 Data DATA;
 
@@ -162,6 +163,7 @@ GLuint indices[] = {
 };
 
 Cube CUBE;
+TriangularPrism TRI_PRISM;
 
 int main() {
 	Engine ENGINE;
@@ -230,6 +232,8 @@ int main() {
 	cubeEBO.Unbind();
 
 	*/
+
+	// CUBE VERTEX OBJECTS
 	VAO cubeVAO;
 	cubeVAO.Bind();
 	VBO cubeVBO(CUBE.vertices4, sizeof(CUBE.vertices4));
@@ -238,6 +242,16 @@ int main() {
 	cubeVAO.Unbind();
 	cubeVBO.Unbind();
 	cubeEBO.Unbind();
+
+	// TRIANGULAR PRISM OBJECTS
+	VAO triPrismVAO;
+	triPrismVAO.Bind();
+	VBO triPrismVBO(TRI_PRISM.vertices, sizeof(TRI_PRISM.vertices));
+	EBO triPrismEBO(TRI_PRISM.indices, sizeof(TRI_PRISM.indices));
+	triPrismVAO.LinkAttrib(triPrismVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	triPrismVAO.Unbind();
+	triPrismVBO.Unbind();
+	triPrismEBO.Unbind();
 
 	/*
 
@@ -428,6 +442,10 @@ int main() {
 	*/
 	cubeVAO.Delete();
 	cubeVBO.Delete();
+	cubeEBO.Delete();
+	triPrismVAO.Delete();
+	triPrismVBO.Delete();
+	triPrismEBO.Delete();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
