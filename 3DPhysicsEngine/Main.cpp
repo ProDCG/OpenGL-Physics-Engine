@@ -150,6 +150,17 @@ const unsigned int height = 1080;
 //	0, 1, 2,
 //	1, 2, 3
 //};
+
+GLfloat vertices3[] = {
+		-0.5f, -0.5f, 0.5f,
+		0.5f, -0.5f, 0.5f,
+		0.5f, 0.5f, 0.5f,
+};
+
+GLuint indices[] = {
+	0, 1, 2
+};
+
 Cube CUBE;
 
 int main() {
@@ -178,40 +189,57 @@ int main() {
 	glViewport(0, 0, width, height);
 	glfwSwapInterval(1);
 
-	glEnable(GL_DEPTH_TEST);
-
 	const char* vertexFileAddress = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\colorShader.vert";
 	const char* fragmentFileAddress = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\colorShader.frag";
 	Shader colorShader(vertexFileAddress, fragmentFileAddress);
 
-	VAO cubeVAO;
-	VBO cubeVBO(CUBE.vertices.data(), sizeof(CUBE.vertices.data()));
+	/*VAO cubeVAO;
+	VBO cubeVBO(CUBE.vertices3, sizeof(CUBE.vertices3));
+	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
 	cubeVAO.Bind();
 	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-	cubeVAO.Unbind();
-	cubeVBO.Unbind();
+	cubeVAO.Unbind();*/
 
 	/*
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
-	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
+	const char* fhhragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
 	/*Shader shaderProgram("main.vert", "main.frag");
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
 	//std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
 	VAO VAO1(arrayToVec(tri_prism_indices));
 	VAO1.Bind();
+	VAO cubeVAO;
 
 	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
-	
+	VBO cubeVBO(CUBE.vertices3, sizeof(CUBE.vertices3));
+
 	EBO EBO1(tri_prism_indices, sizeof(tri_prism_indices));
+	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO1.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 
 	VAO1.Unbind();
 	VBO1.Unbind();
 	EBO1.Unbind();
+	cubeVAO.Unbind();
+	cubeVBO.Unbind();
+	cubeEBO.Unbind();
+
+	*/
+	VAO cubeVAO;
+	cubeVAO.Bind();
+	VBO cubeVBO(CUBE.vertices3, sizeof(CUBE.vertices3));
+	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
+	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	cubeVAO.Unbind();
+	cubeVBO.Unbind();
+	cubeEBO.Unbind();
+
+	/*
 
 	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
 	VAO VAO2(arrayToVec(cube_indices));
@@ -272,6 +300,8 @@ int main() {
 	double prevTime = glfwGetTime();
 	*/
 
+	glEnable(GL_DEPTH_TEST);
+
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
 	while (!glfwWindowShouldClose(window)) {
@@ -294,7 +324,10 @@ int main() {
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix");
 		cubeVAO.Bind();
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawElements(GL_TRIANGLES, sizeof(CUBE.indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		std::cout << (sizeof(CUBE.indices) / sizeof(int)) << '\n';
+		//glDrawElements(GL_TRIANGLES, sizeof(CUBE.indices), GL_UNSIGNED_INT, 0);
+		//glDrawArrays(GL_TRIANGLES, 0, 9);
 		// Updates and exports the camera matrix to the Vertex Shader
 
 		/*for (Rigidbody rb : objVec) {
@@ -432,10 +465,10 @@ int32_t randomVal(int32_t min, int32_t max) {
 	return map_vals(std::rand(), 0, RAND_MAX, min, max);
 }
 
-std::vector<GLuint>	arrayToVec(GLuint arr[]) {
+/*td::vector<GLuint>	arrayToVec(GLuint arr[]) {
 	std::vector<GLuint> newVec;
 	for (int i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++) {
 		newVec.push_back(arr[i]);
 	}
 	return newVec;
-}
+}*/
