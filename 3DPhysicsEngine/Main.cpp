@@ -83,7 +83,7 @@ int main() {
 	// textures
 	std::string redstoneLampPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\RedstoneLamp.png";
 	Texture redstoneLampTexture((redstoneLampPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	redstoneLampTexture.texUnit(textureShader, "tex0", 0);
+	redstoneLampTexture.texUnit(textureShader, "tex0", 1);
 
 	// opaque cube
 	VAO cubeVAO(arrayToVec(CUBE.indices));
@@ -120,8 +120,8 @@ int main() {
 	EBO textLightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
 	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
 
 	textLightCubeVAO.Unbind();
 	textLightCubeVBO.Unbind();
@@ -180,8 +180,7 @@ int main() {
 		
 		// glow cube
 		textureShader.Activate();
-		/*objList[0].bindTexture();*/
-		redstoneLampTexture.Bind();
+		objList[0].bindTexture();
 		objList[0].bindObject();
 		float curTime = glfwGetTime();
 		objList[0].position = glm::vec3(0, sin(curTime), cos(curTime));
