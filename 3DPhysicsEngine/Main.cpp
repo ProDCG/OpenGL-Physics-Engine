@@ -81,9 +81,9 @@ int main() {
 	Shader textureShader(vertexFileAddress, fragmentFileAddress);
 
 	// textures
-	std::string redstoneLampPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\RedstoneLamp.png";
+	std::string redstoneLampPath = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\RedstoneLamp.png";
 	Texture redstoneLampTexture((redstoneLampPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	redstoneLampTexture.texUnit(textureShader, "tex0", 1);
+	redstoneLampTexture.texUnit(textureShader, "tex0", 0);
 
 	// opaque cube
 	VAO cubeVAO(arrayToVec(CUBE.indices));
