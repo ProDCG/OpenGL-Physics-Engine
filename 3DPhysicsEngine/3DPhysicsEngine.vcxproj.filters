@@ -39,7 +39,7 @@
     <ClCompile Include="VBO.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="shaderClass.cpp">
+    <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
@@ -76,7 +76,7 @@
     <ClInclude Include="VBO.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
-    <ClInclude Include="shaderClass.h">
+    <ClInclude Include="Shader.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
@@ -98,6 +98,9 @@
       <Filter>Source Files\Main\Object Properties and Files</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,7 +14,7 @@ namespace fs = std::filesystem;
 #include <stdint.h>
 
 #include "Texture.h"
-#include "shaderClass.h"
+#include "Shader.h"
 #include "VAO.h"
 #include "VBO.h"
 #include "EBO.h"
@@ -148,13 +148,6 @@ int main() {
 	VAO2.Unbind();
 	VBO2.Unbind();
 	EBO2.Unbind();
-
-	/*VAO VAO2;
-	VAO2.Bind();
-
-	VBO VBO2(vertices3, sizeof(vertices3));*/
-
-	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 	/*std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
