@@ -120,8 +120,8 @@ int main() {
 	EBO textLightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
 	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 8 * sizeof(float), (void*)(8 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
 	textLightCubeVAO.Unbind();
 	textLightCubeVBO.Unbind();
@@ -129,7 +129,7 @@ int main() {
 
 	// object array
 	Object objList[] = {
-		Object(1.0f, &cubeVAO, &textureShader, &redstoneLampTexture, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.2f, 0.2f, 0.2f)),
+		Object(1.0f, &cubeVAO, &textureShader, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.2f, 0.2f, 0.2f)),
 		Object(1.0f, &lightCubeVAO, &opaqueShader, glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
 	};
 
@@ -181,7 +181,6 @@ int main() {
 		// glow cube
 		objList[0].bindObject();
 		objList[0].bindTexture();
-		objList[0].bindShader();
 		float curTime = glfwGetTime();
 		objList[0].position = glm::vec3(0, sin(curTime), cos(curTime));
 		objList[0].update(DATA.deltaTime);
