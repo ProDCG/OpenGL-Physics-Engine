@@ -13,7 +13,6 @@ namespace fs = std::filesystem;
 #include <glm/gtc/type_ptr.hpp>
 #include <stdint.h>
 
-#include "Cube.h"
 #include "Texture.h"
 #include "shaderClass.h"
 #include "VAO.h"
@@ -37,120 +36,119 @@ Data DATA;
 const unsigned int width = 1920;
 const unsigned int height = 1080;
 
-//float rotational_multiplier = 15.0f;
-//
-//float deltaTime = 0.0f;
-//float lastFrame = 0.0f;
-//
-//GLfloat tri_prism_vertices[] =
-//{ //     COORDINATES     /        COLORS      /   TexCoord  //
-//	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
-//	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-//	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-//	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-//	 0.0f, 1.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
-//};
-//
-//GLfloat plane_vertices[] = {
-//	0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-//	1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-//	0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-//	1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-//};
-//
-//GLfloat vertices3[] = {
-//	-3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
-//	-3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-//	 3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-//	 3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-//	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
-//};
-//
-//GLfloat cube_vertices[] =
-//{
-//	// face one (0)
-//	-0.5f,  0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	-0.5f,  1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face two (4)
-//	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face three (8)
-//	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face four (12) top
-//	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face five (16) bottom
-//	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face six (20)
-//	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//};
-//
-///*
-//(Relative to camera pos)
-//-1x is left, 1x is right
-//-1x is down, 1x is up
-//-1x is forward, 1x is backward
-//*/
-//
-//GLuint indices3[] = {
-//	0, 1, 7
-//};
-//
-//GLuint cube_indices[] = {
-//	0, 2, 3,
-//	0, 1, 3,
-//
-//	4, 6, 7,
-//	4, 5, 7,
-//
-//	8, 10, 11,
-//	8, 9, 11,
-//
-//	12, 13, 14,
-//	13, 14, 15,
-//
-//	16, 17, 18,
-//	17, 18, 19,
-//
-//	20, 22, 23,
-//	20, 21, 23
-//};
-//
-//GLuint tri_prism_indices[] =
-//{
-//	0, 1, 2,
-//	0, 2, 3,
-//	0, 1, 4,
-//	1, 2, 4,
-//	2, 3, 4,
-//	3, 0, 4
-//};
-//
-//GLuint plane_indices[] = {
-//	0, 1, 2,
-//	1, 2, 3
-//};
-const Cube CUBE;
+float rotational_multiplier = 15.0f;
+
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
+GLfloat tri_prism_vertices[] =
+{ //     COORDINATES     /        COLORS      /   TexCoord  //
+	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
+	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 0.0f, 1.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+};
+
+GLfloat plane_vertices[] = {
+	0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+	1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+	0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+};
+
+GLfloat vertices3[] = {
+	-3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
+	-3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	 3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+};
+
+GLfloat cube_vertices[] =
+{
+	// face one (0)
+	-0.5f,  0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	-0.5f,  1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face two (4)
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face three (8)
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face four (12) top
+	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face five (16) bottom
+	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face six (20)
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+};
+
+/*
+(Relative to camera pos)
+-1x is left, 1x is right
+-1x is down, 1x is up
+-1x is forward, 1x is backward
+*/
+
+GLuint indices3[] = {
+	0, 1, 7
+};
+
+GLuint cube_indices[] = {
+	0, 2, 3,
+	0, 1, 3,
+
+	4, 6, 7,
+	4, 5, 7,
+
+	8, 10, 11,
+	8, 9, 11,
+
+	12, 13, 14,
+	13, 14, 15,
+
+	16, 17, 18,
+	17, 18, 19,
+
+	20, 22, 23,
+	20, 21, 23
+};
+
+GLuint tri_prism_indices[] =
+{
+	0, 1, 2,
+	0, 2, 3,
+	0, 1, 4,
+	1, 2, 4,
+	2, 3, 4,
+	3, 0, 4
+};
+
+GLuint plane_indices[] = {
+	0, 1, 2,
+	1, 2, 3
+};
 
 int main() {
 	Engine ENGINE;
@@ -178,23 +176,9 @@ int main() {
 	glViewport(0, 0, width, height);
 	glfwSwapInterval(1);
 
-	glEnable(GL_DEPTH_TEST);
-
-	Shader colorShader("colorShader.vert", "colorShader.frag");
-
-	VAO cubeVAO;
-	VBO cubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
-	cubeVAO.Bind();
-	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-	cubeVAO.Unbind();
-	cubeVBO.Unbind();
-
-
-
-	/*
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
 	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
-	/*Shader shaderProgram("main.vert", "main.frag");
+	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
 	//std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
@@ -245,10 +229,10 @@ int main() {
 	VBO3.Unbind();
 	EBO3.Unbind();
 
-	VAO VAO2;
+	/*VAO VAO2;
 	VAO2.Bind();
 
-	VBO VBO2(vertices3, sizeof(vertices3));
+	VBO VBO2(vertices3, sizeof(vertices3));*/
 
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
@@ -270,7 +254,8 @@ int main() {
 
 	float rotation = 0.0f;
 	double prevTime = glfwGetTime();
-	*/
+
+	glEnable(GL_DEPTH_TEST);
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
@@ -285,19 +270,16 @@ int main() {
 		// Clean the back buffer and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
-		//shaderProgram.Activate();
+		shaderProgram.Activate();
 
 		// Handles camera inputs
 		camera.Inputs(window);
-
-
 		// Updates and exports the camera matrix to the Vertex Shader
 
 		/*for (Rigidbody rb : objVec) {
 			switch()
 		}*/
 
-		/*
 		for (int i = 0; i < sizeof(rbList) / sizeof(rbList[0]); i++) {
 			rbList[i].textureType->Bind();
 			rbList[i].objectType->Bind();  
@@ -307,7 +289,7 @@ int main() {
 			std::cout << sizeof(cube_indices) << std::endl;
 			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 			rbList[i].update(DATA.deltaTime);
-		} */
+		} 
 			
 		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
 
@@ -380,7 +362,6 @@ int main() {
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 	}
 
-	/*
 	EBO1.Delete();
 	VAO2.Delete();
 	VBO2.Delete();
@@ -388,7 +369,6 @@ int main() {
 	faceTex.Delete();
 	//brickTex.Delete();
 	shaderProgram.Delete();
-	*/
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;

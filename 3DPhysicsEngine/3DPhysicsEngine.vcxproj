@@ -33,14 +33,11 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="colorShader.frag" />
-    <None Include="colorShader.vert" />
     <None Include="main.frag" />
     <None Include="main.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Cube.h" />
     <ClInclude Include="DeleteWrapper.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="Data.h" />
