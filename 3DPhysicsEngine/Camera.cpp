@@ -32,7 +32,9 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	}
 	else if (shader.vertexName.find("textObj.vert") != std::string::npos) {
 		glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
+		std::cout << "span";
 	} else {
+		
 		// exports camera matrix to vertex shader
 		glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
 		//obj.shader->setMat4(uniform, glm::value_ptr(projection * view * model));
