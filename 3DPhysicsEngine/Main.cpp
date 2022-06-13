@@ -68,26 +68,44 @@ int main() {
 	glfwSwapInterval(1);
 
 	// get addresses of vertex and fragment files
-	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
-	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
-	Shader colorShader(vertexFileAddress, fragmentFileAddress);
+	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\opaqObj.vert";
+	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\opaqObj.frag";
+	Shader opaqueShader(vertexFileAddress, fragmentFileAddress);
 
-	// cube object initializations
+	vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\projObj.vert";
+	fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\projObj.frag";
+	Shader projectionShader(vertexFileAddress, fragmentFileAddress);
+
+	// opaque cube
 	VAO cubeVAO(arrayToVec(CUBE.indices));
 	cubeVAO.Bind();
 
 	VBO cubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
 	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
-	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
 
 	cubeVAO.Unbind();
 	cubeVBO.Unbind();
 	cubeEBO.Unbind();
 
+	// light cube
+	VAO lightCubeVAO(arrayToVec(CUBE.indices));
+	lightCubeVAO.Bind();
+
+	VBO lightCubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
+	EBO lightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
+
+	lightCubeVAO.LinkAttrib(lightCubeVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+	lightCubeVAO.LinkAttrib(lightCubeVBO, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+	lightCubeVAO.Unbind();
+	lightCubeVBO.Unbind();
+	lightCubeEBO.Unbind();
+
 	// object array
 	Object objList[] = {
-		Object(1.0f, &cubeVAO, &colorShader, glm::vec3(1.0f, 0.0f, 0.0f)),
+		Object(1.0f, &cubeVAO, &opaqueShader, glm::vec3(1.0f, 0.0f, 0.0f)),
 	};
 
 	// camera initialization
@@ -105,24 +123,30 @@ int main() {
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-
 		// handle camera inputs
 		camera.Inputs(window);
 
-		for (int i = 0; i < sizeof(objList) / sizeof(objList[0]); i++) {
-			// bind the current object type and shader, and then set the color. create a camera matrix based on the object
-			objList[i].bindObject();
-			objList[i].bindShader();
-			camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix", objList[i]);
+		//for (int i = 0; i < sizeof(objList) / sizeof(objList[0]); i++) {
+		//	// bind the current object type and shader, and then set the color. create a camera matrix based on the object
+		//	objList[i].bindObject();
+		//	objList[i].bindShader();
+		//	camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix", objList[i]);
 
-			// vertice or indice based rendering
-			//glDrawArrays(GL_TRIANGLES, 0, 36);
-			glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
+		//	// vertice or indice based rendering
+		//	//glDrawArrays(GL_TRIANGLES, 0, 36);
+		//	glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
 
-			// Uncomment for physics simulations
-			//objList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
-			//objList[i].update(DATA.deltaTime);
-		} 
+		//	// Uncomment for physics simulations
+		//	//objList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
+		//	//objList[i].update(DATA.deltaTime);
+		//} 
+
+		// light recieving object
+		objList[0].bindObject();
+		objList[0].bindShader();
+		camera.Matrix(45.0f, 0.1f, 100.0f, opaqueShader, "camMatrix", objList[0]);
+
+		glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
 
 		// swap buffers and handle all GLFW events
 		glfwSwapBuffers(window);
@@ -133,7 +157,11 @@ int main() {
 	cubeVAO.Delete();
 	cubeVBO.Delete();
 	cubeEBO.Delete();
-	colorShader.Delete();
+	lightCubeVAO.Delete();
+	lightCubeVBO.Delete();
+	lightCubeEBO.Delete();
+	opaqueShader.Delete();
+	projectionShader.Delete();
 
 	// terminate the application
 	glfwDestroyWindow(window);

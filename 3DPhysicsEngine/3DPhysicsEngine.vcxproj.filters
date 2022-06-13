@@ -50,10 +50,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="main.vert">
+    <None Include="projObj.vert">
       <Filter>Source Files\Main</Filter>
     </None>
-    <None Include="main.frag">
+    <None Include="projObj.frag">
+      <Filter>Source Files\Main</Filter>
+    </None>
+    <None Include="opaqObj.frag">
+      <Filter>Source Files\Main</Filter>
+    </None>
+    <None Include="opaqObj.vert">
       <Filter>Source Files\Main</Filter>
     </None>
   </ItemGroup>

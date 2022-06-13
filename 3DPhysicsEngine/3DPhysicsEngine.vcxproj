@@ -31,8 +31,10 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="main.frag" />
-    <None Include="main.vert" />
+    <None Include="opaqObj.frag" />
+    <None Include="opaqObj.vert" />
+    <None Include="projObj.frag" />
+    <None Include="projObj.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
