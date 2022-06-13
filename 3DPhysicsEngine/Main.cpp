@@ -179,8 +179,8 @@ int main() {
 		opaqueShader.setMat4("model", glm::mat4(1.0f));*/
 		
 		// glow cube
-		objList[0].bindObject();
 		objList[0].bindTexture();
+		objList[0].bindObject();
 		float curTime = glfwGetTime();
 		objList[0].position = glm::vec3(0, sin(curTime), cos(curTime));
 		objList[0].update(DATA.deltaTime);
