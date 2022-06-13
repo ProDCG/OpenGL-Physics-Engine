@@ -13,7 +13,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glm::mat4 model = glm::mat4(1.0f);
 
 	//model = glm::translate(model, glm::vec3(0.0f));
-	//model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+	model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 	
 	//if (!obj.isStatic) {
 	//	model = glm::scale(model, glm::vec3(1.0f) * obj.radius * 0.1f);
@@ -48,8 +48,6 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	// exports camera matrix to vertex shader
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
 }
-
-void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Rigidbody obj) {};
 
 void Camera::Inputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {

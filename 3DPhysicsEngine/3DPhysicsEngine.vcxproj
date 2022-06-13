@@ -46,7 +46,6 @@
     <ClInclude Include="Data.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="Plane.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="shaderClass.h" />
     <ClInclude Include="Texture.h" />

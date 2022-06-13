@@ -112,8 +112,5 @@
     <ClInclude Include="TriangularPrism.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Source Files\Main</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
