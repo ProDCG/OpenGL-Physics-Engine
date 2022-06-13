@@ -7,43 +7,42 @@
 class Cube {
 public:
 	// cube vertices
-	GLfloat vertices[192] = {
+	GLfloat vertices[144] = {
 		// front face
-		// coordinates        // normals           // texture coords
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f, // bottom left
-		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f, // top left
-		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f, // bottom right
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f, // top right
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f, // bottom left
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f, // top left
+		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f, // bottom right
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f, // top right
 
 		// right face
-		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, // bottom left
-		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, // top left
-		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f, 0.0f, 1.0f,  0.0f, // bottom right
-		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f, 0.0f, 1.0f,  1.0f, // top right
+		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f, 0.0f, // bottom left
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f, 0.0f, // top left
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f, 0.0f, // bottom right
+		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f, 0.0f, // top right
 
 		// back face
-		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 0.0f,  0.0f, // bottom left
-		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 0.0f,  1.0f, // top left
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 1.0f,  0.0f, // bottom right
-		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 1.0f,  1.0f, // top right
+		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, // bottom left
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, // top left
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, // bottom right
+		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, // top right
 
 		// left face
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, // bottom left
-		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f, 0.0f, 0.0f,  1.0f, // top left
-		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f, 0.0f, 1.0f,  0.0f, // bottom right
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f, 0.0f, 1.0f,  1.0f, // top right
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f, 0.0f, // bottom left
+		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f, 0.0f, // top left
+		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f, 0.0f, // bottom right
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f, 0.0f, // top right
 
 		// bottom face
-		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f, 0.0f,  0.0f, // bottom left
-		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f, 0.0f,  1.0f, // top left
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f, 1.0f,  0.0f, // bottom right
-		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f, 1.0f,  1.0f, // top right
+		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f, // bottom left
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f, // top left
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f, // bottom right
+		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f, // top right
 
 		// top face
-		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f, 0.0f, 0.0f,  0.0f, // bottom left
-		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f, 0.0f, 0.0f,  1.0f, // top left
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f, 0.0f, 1.0f,  0.0f, // bottom right
-		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f, 0.0f, 1.0f,  1.0f, // top right
+		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f, 0.0f, // bottom left
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f, 0.0f, // top left
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f, 0.0f, // bottom right
+		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f, 0.0f, // top right
 	};
 
 	// cube indices

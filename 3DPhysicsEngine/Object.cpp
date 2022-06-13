@@ -8,17 +8,6 @@ Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm
 	Object::color = color;
 	Object::position = position;
 	Object::scale = scale;
-	Object::texture = NULL;
-}
-
-Object::Object(float mass, VAO* objectType, Shader* shader, Texture* texture, glm::vec3 position, glm::vec3 scale) {
-	Object::mass = mass;
-	Object::objectType = objectType;
-	Object::shader = shader;
-	Object::color = glm::vec3(1.0f);
-	Object::position = position;
-	Object::scale = scale;
-	Object::texture = texture;
 }
 
 Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
@@ -28,7 +17,6 @@ Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
 	Object::shader = shader;
 	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
 	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	Object::texture = NULL;
 }
 
 Object::Object(float mass, VAO* objectType, glm::vec3 color) {
@@ -38,7 +26,7 @@ Object::Object(float mass, VAO* objectType, glm::vec3 color) {
 	Object::shader = NULL;
 	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
 	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	Object::texture = NULL;
+
 }
 
 Object::Object(float mass, VAO* objectType) {
@@ -48,7 +36,6 @@ Object::Object(float mass, VAO* objectType) {
 	Object::shader = NULL;
 	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
 	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	Object::texture = NULL;
 }
 
 // physics force adding, with vectors and each individual components
@@ -107,9 +94,4 @@ void Object::bindObject() {
 void Object::bindShader() {
 	Object::shader->Activate();
 	Object::shader->setVec3("objectColor", Object::color);
-}
-
-// bind the texture
-void Object::bindTexture() {
-	Object::texture->Bind();
 }

@@ -25,18 +25,12 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	// perspective
 	projection = glm::perspective(glm::radians(FOVdeg), (float)width / height, nearPlane, farPlane);
 
-	if (shader.vertexName.find("opaqObj.vert") != std::string::npos) {
-		obj.shader->setMat4("model", model);
-		obj.shader->setMat4("view", view);
-		obj.shader->setMat4("projection", projection);
-	}
-	else if (shader.vertexName.find("textObj.vert") != std::string::npos) {
-		glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
-	} else {
-		// exports camera matrix to vertex shader
-		glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
-		//obj.shader->setMat4(uniform, glm::value_ptr(projection * view * model));
-	}
+	// exports camera matrix to vertex shader
+	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
+
+	obj.shader->setMat4("model", model);
+	obj.shader->setMat4("view", view);
+	obj.shader->setMat4("projection", projection);
 }
 
 // manage camera input

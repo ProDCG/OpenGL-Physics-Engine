@@ -12,7 +12,6 @@
 // header imports
 #include "VAO.h"
 #include "Shader.h"
-#include "Texture.h"
 
 // c++ std imports
 #include <vector>
@@ -34,7 +33,6 @@ public:
 	// pointers to shader and object classes for efficiency
 	VAO* objectType;
 	Shader* shader;
-	Texture* texture;
 
 	// color and mass of the object
 	glm::vec3 color;
@@ -42,7 +40,6 @@ public:
 
 	// object constructer overloads
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position, glm::vec3 scale);
-	Object(float mass, VAO* objectType, Shader* shader, Texture* texture, glm::vec3 position, glm::vec3 scale);
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color);
 	Object(float mass, VAO* objectType, glm::vec3 color);
 	Object(float mass, VAO* objectType);
@@ -64,5 +61,4 @@ public:
 	// bind the shader and object type
 	void bindObject();
 	void bindShader();
-	void bindTexture();
 };

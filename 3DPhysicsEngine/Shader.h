@@ -10,7 +10,6 @@
 #include <sstream>
 #include <iostream>
 #include <cerrno>
-#include <string>
 
 // file contents grabber
 std::string get_file_contents(const char* filename);
@@ -20,9 +19,6 @@ class Shader {
 public:
 	// unique id for shader objects
 	GLuint ID;
-
-	std::string vertexName;
-	std::string fragmentName;
 
 	// constructor
 	Shader(const char* vertexFile, const char* fragmentFile);

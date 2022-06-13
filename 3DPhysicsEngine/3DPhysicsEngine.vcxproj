@@ -35,8 +35,6 @@
     <None Include="opaqObj.vert" />
     <None Include="projObj.frag" />
     <None Include="projObj.vert" />
-    <None Include="textObj.frag" />
-    <None Include="textObj.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
