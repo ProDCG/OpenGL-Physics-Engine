@@ -121,7 +121,7 @@ int main() {
 
 	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
 	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	//textLightCubeVAO.LinkAttrib(textLightCubeVBO, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
 
 	textLightCubeVAO.Unbind();
 	textLightCubeVBO.Unbind();
