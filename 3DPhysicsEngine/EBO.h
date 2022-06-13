@@ -1,20 +1,19 @@
-#ifndef EBO_CLASS_H 
-#define EBO_CLASS_H
+#pragma once
 
+// opengl required import
 #include <glad/glad.h>
 
+// EBO class
 class EBO {
 public:
 	// id reference
 	GLuint ID;
 
+	// constructor
 	EBO(GLuint* indices, GLsizeiptr size);
 
+	// bindings and memory management
 	void Bind();
-
 	void Unbind();
-
 	void Delete();
 };
-
-#endif

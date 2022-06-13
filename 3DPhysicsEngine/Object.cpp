@@ -1,5 +1,6 @@
 #include "Object.h"
 
+// object constructor overloads
 Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
 	Object::mass = mass;
 	Object::objectType = objectType;
@@ -21,6 +22,7 @@ Object::Object(float mass, VAO* objectType) {
 	Object::shader = NULL;
 }
 
+// physics force adding, with vectors and each individual components
 void Object::addForce(float x, float y, float z) {
 	Object::netForce += glm::vec3(x, y, z);
 }
@@ -49,28 +51,30 @@ void Object::addForceZ(float magnitude) {
 	Object::netForce += glm::vec3(0.0f, 0.0f, magnitude);
 }
 
+// update the physics in the simulation
 void Object::update(float deltaTime) {
-	/*Object::acceleration = Object::netForce / Object::mass;
-	Object::linearVelocity = Object::linearVelocity + acceleration * deltaTime;
-	Object::position = Object::position + Object::linearVelocity * deltaTime + 0.5f * Object::acceleration * exp2(deltaTime);*/
-
+	// x component
 	Object::acceleration.x = Object::netForce.x / Object::mass;
 	Object::linearVelocity.x = Object::linearVelocity.x + Object::acceleration.x * deltaTime;
 	Object::position.x = Object::position.x + (Object::linearVelocity.x * deltaTime) + (0.5f * Object::acceleration.x * pow(deltaTime, 2));
 
+	// y component
 	Object::acceleration.y = Object::netForce.y / Object::mass;
 	Object::linearVelocity.y = Object::linearVelocity.y + Object::acceleration.y * deltaTime;
 	Object::position.y = Object::position.y + (Object::linearVelocity.y * deltaTime) + (0.5f * Object::acceleration.y * pow(deltaTime, 2));
 
+	// z component
 	Object::acceleration.z = Object::netForce.z / Object::mass;
 	Object::linearVelocity.z = Object::linearVelocity.z + Object::acceleration.z * deltaTime;
 	Object::position.z = Object::position.z + (Object::linearVelocity.z * deltaTime) + (0.5f * Object::acceleration.z * pow(deltaTime, 2));
 }
 
+// bind the objects type
 void Object::bindObject() {
 	Object::objectType->Bind();
 }
 
+// bind the shader
 void Object::bindShader() {
 	Object::shader->Activate();
 	Object::shader->setVec3("color", color);

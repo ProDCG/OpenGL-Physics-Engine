@@ -1,6 +1,6 @@
-#ifndef CAMERA_CLASS_H
-#define CAMERA_CLASS_H
+#pragma once
 
+// opengl required imports
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -9,9 +9,11 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
+// header file imports
 #include "Shader.h"
 #include "Object.h"
 
+// camera class
 class Camera
 {
 public:
@@ -43,5 +45,3 @@ public:
 	// camera inputs
 	void Inputs(GLFWwindow* window);
 };
-
-#endif

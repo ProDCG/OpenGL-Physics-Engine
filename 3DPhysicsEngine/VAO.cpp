@@ -1,10 +1,13 @@
+// haeder imports
 #include "VAO.h"
 
+// constructor
 VAO::VAO(std::vector<GLuint> indices) {
 	VAO::indices = indices;
 	glGenVertexArrays(1, &ID);
 }
 
+// memory cleanup functions + vao initialization setup
 void VAO::LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset) {
 	VBO.Bind();
 	glVertexAttribPointer(layout, numComponents, type, GL_FALSE, stride, offset);

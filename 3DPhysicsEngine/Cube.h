@@ -1,9 +1,12 @@
 #pragma once
 
+// opengl required imports
 #include <GLFW/glfw3.h>
 
+// cube class
 class Cube {
 public:
+	// cube vertices
 	GLfloat vertices[72] = {
 		// front face
 		-0.5f, -0.5f,  0.5f, // bottom left
@@ -42,6 +45,7 @@ public:
 		-0.5f,  0.5f,  0.5f, // top right
 	};
 
+	// cube indices
 	GLuint indices[36] = {
 		// front face
 		0, 1, 3,
