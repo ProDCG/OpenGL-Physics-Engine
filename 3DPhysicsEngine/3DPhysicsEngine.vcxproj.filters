@@ -48,6 +48,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
     <ClCompile Include="Data.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
@@ -86,6 +89,9 @@
       <Filter>Source Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="Data.h">
