@@ -22,7 +22,9 @@
 class Object {
 public:
 	// vectors for physics, holding the properties of each entity
-	glm::vec3 position = glm::vec3(0.0f);
+	glm::vec3 position;
+	glm::vec3 scale;
+
 	glm::vec3 linearVelocity = glm::vec3(0.0f);
 	glm::vec3 angularVelocity = glm::vec3(0.0f);
 	glm::vec3 netForce = glm::vec3(0.0f);
@@ -37,6 +39,7 @@ public:
 	float mass;
 
 	// object constructer overloads
+	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position, glm::vec3 scale);
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color);
 	Object(float mass, VAO* objectType, glm::vec3 color);
 	Object(float mass, VAO* objectType);

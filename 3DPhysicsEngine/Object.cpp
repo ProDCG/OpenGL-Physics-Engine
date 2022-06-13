@@ -1,11 +1,22 @@
 #include "Object.h"
 
 // object constructor overloads
+Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position, glm::vec3 scale) {
+	Object::mass = mass;
+	Object::objectType = objectType;
+	Object::shader = shader;
+	Object::color = color;
+	Object::position = position;
+	Object::scale = scale;
+}
+
 Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
 	Object::mass = mass;
 	Object::objectType = objectType;
 	Object::color = color;
 	Object::shader = shader;
+	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
+	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
 Object::Object(float mass, VAO* objectType, glm::vec3 color) {
@@ -13,6 +24,9 @@ Object::Object(float mass, VAO* objectType, glm::vec3 color) {
 	Object::objectType = objectType;
 	Object::color = color;
 	Object::shader = NULL;
+	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
+	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
+
 }
 
 Object::Object(float mass, VAO* objectType) {
@@ -20,6 +34,8 @@ Object::Object(float mass, VAO* objectType) {
 	Object::objectType = objectType;
 	Object::color = glm::vec3(1.0f);
 	Object::shader = NULL;
+	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
+	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
 // physics force adding, with vectors and each individual components
@@ -77,5 +93,5 @@ void Object::bindObject() {
 // bind the shader
 void Object::bindShader() {
 	Object::shader->Activate();
-	Object::shader->setVec3("color", color);
+	Object::shader->setVec3("objectColor", Object::color);
 }

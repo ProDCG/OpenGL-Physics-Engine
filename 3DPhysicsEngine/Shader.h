@@ -29,6 +29,7 @@ public:
 
 	// functions for interaction with .frag and .vert files
 	void setVec3(const std::string& name, const glm::vec3& value);
+	void setMat4(const std::string& name, const glm::mat4& value);
 private:
 	// error management
 	void compileErrors(unsigned int shader, const char* type);

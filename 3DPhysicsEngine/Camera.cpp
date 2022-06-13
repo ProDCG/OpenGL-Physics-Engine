@@ -17,16 +17,20 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 	glm::mat4 model = glm::mat4(1.0f);
 
 	model = glm::translate(model, obj.position);
-	model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+	model = glm::scale(model, obj.scale);
 
 	// lookAt is being used to create a vector pointing at the correct position
-	view = glm::lookAt(position, position + orientation, up);
+	view = getViewMatrix();
 
 	// perspective
 	projection = glm::perspective(glm::radians(FOVdeg), (float)width / height, nearPlane, farPlane);
 
 	// exports camera matrix to vertex shader
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
+
+	obj.shader->setMat4("model", model);
+	obj.shader->setMat4("view", view);
+	obj.shader->setMat4("projection", projection);
 }
 
 // manage camera input

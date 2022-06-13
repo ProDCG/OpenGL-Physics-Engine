@@ -42,6 +42,10 @@ public:
 	// update camera matrix to the vertex shader
 	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Object obj);
 
+	glm::mat4 getViewMatrix() {
+		return glm::lookAt(position, position + orientation, up);
+	}
+
 	// camera inputs
 	void Inputs(GLFWwindow* window);
 };
