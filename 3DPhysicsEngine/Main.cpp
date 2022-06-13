@@ -148,6 +148,70 @@ GLfloat cube_vert2[] = {
 		-0.5f,  0.5f, -0.5f,
 };
 
+GLfloat cube_vert3[] = {
+	// front face
+	-0.5f, -0.5f,  0.5f, // bottom left
+	-0.5f,  0.5f,  0.5f, // top left
+	 0.5f, -0.5f,  0.5f, // bottom right
+	 0.5f,  0.5f,  0.5f, // top right
+
+	// right face
+	 0.5f, -0.5f,  0.5f, // bottom left
+	 0.5f,  0.5f,  0.5f, // top left
+	 0.5f, -0.5f, -0.5f, // bottom right
+	 0.5f,  0.5f, -0.5f, // top right
+
+	// back face
+	 0.5f, -0.5f, -0.5f, // bottom left
+	 0.5f,  0.5f, -0.5f, // top left
+	-0.5f, -0.5f, -0.5f, // bottom right
+	-0.5f,  0.5f, -0.5f, // top right
+
+	// left face
+	-0.5f, -0.5f, -0.5f, // bottom left
+	-0.5f,  0.5f, -0.5f, // top left
+	-0.5f, -0.5f,  0.5f, // bottom right
+	-0.5f,  0.5f,  0.5f, // top right
+
+	// bottom face
+	 0.5f, -0.5f, -0.5f, // bottom left
+	 0.5f, -0.5f,  0.5f, // top left
+	-0.5f, -0.5f, -0.5f, // bottom right
+	-0.5f, -0.5f,  0.5f, // top right
+
+	// top face
+	 0.5f,  0.5f, -0.5f, // bottom left
+	 0.5f,  0.5f,  0.5f, // top left
+	-0.5f,  0.5f, -0.5f, // bottom right
+	-0.5f,  0.5f,  0.5f, // top right
+};
+
+GLuint cube_indi3[] = {
+	// front face
+	0, 1, 3,
+	0, 2, 3,
+
+	// right face
+	4, 5, 7,
+	4, 6, 7,
+
+	// back face
+	8, 9, 11,
+	8, 10, 11,
+
+	// left face
+	12, 13, 15,
+	12, 14, 15,
+
+	// bottom face
+	16, 17, 19,
+	16, 18, 19,
+
+	// top face
+	20, 21, 23,
+	20, 22, 23,
+};
+
 /*
 (Relative to camera pos)
 -1x is left, 1x is right
@@ -242,12 +306,12 @@ int main() {
 	EBO1.Unbind();
 
 	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
-	VAO VAO2(arrayToVec(cube_indices));
+	VAO VAO2(arrayToVec(cube_indi3));
 	VAO2.Bind();
 
-	VBO VBO2(cube_vert2, sizeof(cube_vert2));
+	VBO VBO2(cube_vert3, sizeof(cube_vert3));
 
-	EBO EBO2(cube_indices, sizeof(cube_indices));
+	EBO EBO2(cube_indi3, sizeof(cube_indi3));
 
 	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	
@@ -329,8 +393,8 @@ int main() {
 			shaderProgram.setVec3("color", glm::vec3(1.0f, 0.0f, 0.0f));
 			// sizeof(rbList[i].objectType->indices.data()) / sizeof(rbList[0])
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-			//glDrawElements(GL_TRIANGLES, sizeof(cube_indices), GL_UNSIGNED_INT, 0);
+			//glDrawArrays(GL_TRIANGLES, 0, 36);
+			glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
 			std::cout << sizeof(cube_indices) << std::endl;
 			//rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 			//rbList[i].update(DATA.deltaTime);
