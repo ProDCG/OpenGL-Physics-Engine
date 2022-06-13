@@ -7,6 +7,11 @@ Rigidbody::Rigidbody(float mass, Texture* textureType, VAO* objectType) {
 	Rigidbody::objectType = objectType;
 }
 
+Rigidbody::Rigidbody(float mass, VAO* objectType) {
+	Rigidbody::mass = mass;
+	Rigidbody::objectType = objectType;
+}
+
 void Rigidbody::addForce(float x, float y, float z) {
 	Rigidbody::netForce += glm::vec3(x, y, z);
 }

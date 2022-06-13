@@ -4,14 +4,9 @@
 out vec4 FragColor;
 
 // Inputs color from Vertex Shader
-in vec3 color;
-// Inputs texture coords from Vertex Shader
-in vec2 texCoord;
-
-// Texture unit
-uniform sampler2D tex0;
+uniform vec3 color;
 
 void main() 
 {
-	FragColor = texture(tex0, texCoord);
+	FragColor = vec4(color, 1.0);
 }

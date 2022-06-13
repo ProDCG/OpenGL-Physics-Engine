@@ -65,43 +65,87 @@ GLfloat vertices3[] = {
 	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 };
 
-GLfloat cube_vertices[] =
+GLfloat cube_vert1[] =
 {
 	// face one (0)
-	-0.5f,  0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-	-0.5f,  1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+	-0.5f,  0.0f, -0.5f,
+	-0.5f,  1.0f, -0.5f,
+	0.5f, 0.0f, -0.5f,
+	0.5f, 1.0f, -0.5f,
 
 	// face two (4)
-	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+	0.5f, 0.0f, -0.5f,
+	0.5f, 1.0f, -0.5f,
+	0.5f, 0.0f, 0.5f,
+	0.5f, 1.0f, 0.5f,
 
 	// face three (8)
-	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+	0.5f, 0.0f, 0.5f,
+	0.5f, 1.0f, 0.5f,
+	-0.5f, 0.0f, 0.5f,
+	-0.5f, 1.0f, 0.5f,
 
 	// face four (12) top
-	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+	-0.5f, 1.0f, -0.5f,
+	0.5f, 1.0f, -0.5f,
+	-0.5f, 1.0f, 0.5f,
+	0.5f, 1.0f, 0.5f
 
 	// face five (16) bottom
-	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+	-0.5f, 0.0f, -0.5f,
+	0.5f, 0.0f, -0.5f,
+	-0.5f, 0.0f, 0.5f,
+	0.5f, 0.0f, 0.5f,
 
 	// face six (20)
-	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+	-0.5f, 0.0f, 0.5f,
+	-0.5f, 1.0f, 0.5f,
+	-0.5f, 0.0f, -0.5f,
+	-0.5f, 1.0f, -0.5f,
+};
+
+GLfloat cube_vert2[] = {
+		-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+
+		-0.5f, -0.5f,  0.5f,
+		 0.5f, -0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,
+
+		-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+
+		-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,
+		 0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f, -0.5f,
+
+		-0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f, -0.5f,
 };
 
 /*
@@ -201,13 +245,11 @@ int main() {
 	VAO VAO2(arrayToVec(cube_indices));
 	VAO2.Bind();
 
-	VBO VBO2(cube_vertices, sizeof(cube_vertices));
+	VBO VBO2(cube_vert2, sizeof(cube_vert2));
 
 	EBO EBO2(cube_indices, sizeof(cube_indices));
 
-	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-	VAO2.LinkAttrib(VBO2, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	VAO2.LinkAttrib(VBO2, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 	
 	VAO2.Unbind();
 	VBO2.Unbind();
@@ -237,7 +279,7 @@ int main() {
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
+	/*std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
 	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
 	std::string batmanPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\batman.png";
 
@@ -246,10 +288,10 @@ int main() {
 	Texture brickTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	brickTex.texUnit(shaderProgram, "tex0", 0);
 	Texture batmanTex((batmanPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	batmanTex.texUnit(shaderProgram, "tex0", 0);
+	batmanTex.texUnit(shaderProgram, "tex0", 0);*/
 
 	Rigidbody rbList[] = {
-		Rigidbody(1.0f, &faceTex, &VAO2)
+		Rigidbody(1.0f, &VAO2)
 	};
 
 	float rotation = 0.0f;
@@ -270,7 +312,7 @@ int main() {
 		// Clean the back buffer and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
-		shaderProgram.Activate();
+		
 
 		// Handles camera inputs
 		camera.Inputs(window);
@@ -283,12 +325,15 @@ int main() {
 		for (int i = 0; i < sizeof(rbList) / sizeof(rbList[0]); i++) {
 			//rbList[i].textureType->Bind();
 			rbList[i].objectType->Bind();  
+			shaderProgram.Activate();
+			shaderProgram.setVec3("color", glm::vec3(1.0f, 0.0f, 0.0f));
 			// sizeof(rbList[i].objectType->indices.data()) / sizeof(rbList[0])
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
-			glDrawElements(GL_TRIANGLES, sizeof(cube_indices), GL_UNSIGNED_INT, 0);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+			//glDrawElements(GL_TRIANGLES, sizeof(cube_indices), GL_UNSIGNED_INT, 0);
 			std::cout << sizeof(cube_indices) << std::endl;
-			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
-			rbList[i].update(DATA.deltaTime);
+			//rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
+			//rbList[i].update(DATA.deltaTime);
 		} 
 			
 		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
@@ -366,7 +411,7 @@ int main() {
 	VAO2.Delete();
 	VBO2.Delete();
 	EBO2.Delete();
-	faceTex.Delete();
+	//faceTex.Delete();
 	//brickTex.Delete();
 	shaderProgram.Delete();
 	glfwDestroyWindow(window);

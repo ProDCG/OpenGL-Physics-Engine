@@ -32,6 +32,8 @@ public:
 
 	Rigidbody(float mass, Texture* textureType, VAO* objType);
 
+	Rigidbody(float mass, VAO* objType);
+
 	void addForce(float x, float y, float z);
 
 	void addForce(glm::vec3 force);
