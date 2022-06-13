@@ -42,70 +42,6 @@ float rotational_multiplier = 15.0f;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-GLfloat cube_vert3[] = {
-	// front face
-	-0.5f, -0.5f,  0.5f, // bottom left
-	-0.5f,  0.5f,  0.5f, // top left
-	 0.5f, -0.5f,  0.5f, // bottom right
-	 0.5f,  0.5f,  0.5f, // top right
-
-	// right face
-	 0.5f, -0.5f,  0.5f, // bottom left
-	 0.5f,  0.5f,  0.5f, // top left
-	 0.5f, -0.5f, -0.5f, // bottom right
-	 0.5f,  0.5f, -0.5f, // top right
-
-	// back face
-	 0.5f, -0.5f, -0.5f, // bottom left
-	 0.5f,  0.5f, -0.5f, // top left
-	-0.5f, -0.5f, -0.5f, // bottom right
-	-0.5f,  0.5f, -0.5f, // top right
-
-	// left face
-	-0.5f, -0.5f, -0.5f, // bottom left
-	-0.5f,  0.5f, -0.5f, // top left
-	-0.5f, -0.5f,  0.5f, // bottom right
-	-0.5f,  0.5f,  0.5f, // top right
-
-	// bottom face
-	 0.5f, -0.5f, -0.5f, // bottom left
-	 0.5f, -0.5f,  0.5f, // top left
-	-0.5f, -0.5f, -0.5f, // bottom right
-	-0.5f, -0.5f,  0.5f, // top right
-
-	// top face
-	 0.5f,  0.5f, -0.5f, // bottom left
-	 0.5f,  0.5f,  0.5f, // top left
-	-0.5f,  0.5f, -0.5f, // bottom right
-	-0.5f,  0.5f,  0.5f, // top right
-};
-
-GLuint cube_indi3[] = {
-	// front face
-	0, 1, 3,
-	0, 2, 3,
-
-	// right face
-	4, 5, 7,
-	4, 6, 7,
-
-	// back face
-	8, 9, 11,
-	8, 10, 11,
-
-	// left face
-	12, 13, 15,
-	12, 14, 15,
-
-	// bottom face
-	16, 17, 19,
-	16, 18, 19,
-
-	// top face
-	20, 21, 23,
-	20, 22, 23,
-};
-
 int main() {
 	Engine ENGINE;
 
@@ -137,19 +73,17 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
-	VAO VAO2(arrayToVec(cube_indi3));
-	VAO2.Bind();
-	
-	VBO VBO2(cube_vert3, sizeof(cube_vert3));
+	VAO cubeVAO(arrayToVec(CUBE.indices));
+	cubeVAO.Bind();
 
-	EBO EBO2(cube_indi3, sizeof(cube_indi3));
+	VBO cubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
+	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
-	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-	
-	VAO2.Unbind();
-	VBO2.Unbind();
-	EBO2.Unbind();
+	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+
+	cubeVAO.Unbind();
+	cubeVBO.Unbind();
+	cubeEBO.Unbind();
 
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 	/*std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
@@ -164,7 +98,7 @@ int main() {
 	batmanTex.texUnit(shaderProgram, "tex0", 0);*/
 
 	Rigidbody rbList[] = {
-		Rigidbody(1.0f, &VAO2)
+		Rigidbody(1.0f, &cubeVAO)
 	};
 
 	float rotation = 0.0f;
@@ -279,9 +213,9 @@ int main() {
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 	}
 
-	VAO2.Delete();
-	VBO2.Delete();
-	EBO2.Delete();
+	cubeVAO.Delete();
+	cubeVBO.Delete();
+	cubeEBO.Delete();
 	//faceTex.Delete();
 	//brickTex.Delete();
 	shaderProgram.Delete();

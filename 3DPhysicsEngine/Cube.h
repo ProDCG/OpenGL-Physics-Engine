@@ -4,7 +4,7 @@
 
 class Cube {
 public:
-	const GLfloat vertices[72] = {
+	GLfloat vertices[72] = {
 		// front face
 		-0.5f, -0.5f,  0.5f, // bottom left
 		-0.5f,  0.5f,  0.5f, // top left
@@ -42,7 +42,7 @@ public:
 		-0.5f,  0.5f,  0.5f, // top right
 	};
 
-	const GLuint cube_indi3[36] = {
+	GLuint indices[36] = {
 		// front face
 		0, 1, 3,
 		0, 2, 3,
