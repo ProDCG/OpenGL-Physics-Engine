@@ -138,7 +138,7 @@ int main() {
 	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
 	VAO VAO2(arrayToVec(cube_indi3));
 	VAO2.Bind();
-
+	
 	VBO VBO2(cube_vert3, sizeof(cube_vert3));
 
 	EBO EBO2(cube_indi3, sizeof(cube_indi3));

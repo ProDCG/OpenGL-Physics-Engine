@@ -1,6 +1,6 @@
-#include "Data.h"
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
+#include "Data.h"
 
 void Data::updateTime() {
 	GLfloat currentFrame = glfwGetTime();
