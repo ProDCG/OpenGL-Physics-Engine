@@ -72,13 +72,13 @@ int main() {
 	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\opaqObj.frag";
 	Shader opaqueShader(vertexFileAddress, fragmentFileAddress);
 
-	vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\projObj.vert";
-	fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\projObj.frag";
-	Shader projectionShader(vertexFileAddress, fragmentFileAddress);
+	const char* vertexFileAddress2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\projObj.vert";
+	const char* fragmentFileAddress2 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\projObj.frag";
+	Shader projectionShader(vertexFileAddress2, fragmentFileAddress2);
 
-	vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\textObj.vert";
-	fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\textObj.frag";
-	Shader textureShader(vertexFileAddress, fragmentFileAddress);
+	const char* vertexFileAddress3 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\textObj.vert";
+	const char* fragmentFileAddress3 = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\textObj.frag";
+	Shader textureShader(vertexFileAddress3, fragmentFileAddress3);
 
 	// textures
 	std::string redstoneLampPath = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\RedstoneLamp.png";
@@ -120,6 +120,7 @@ int main() {
 	EBO textLightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
 	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
 	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
 	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
 
@@ -179,8 +180,10 @@ int main() {
 		opaqueShader.setMat4("model", glm::mat4(1.0f));*/
 		
 		// glow cube
-		textureShader.Activate();
+		glActiveTexture(GL_TEXTURE0);
 		objList[0].bindTexture();
+		textureShader.Activate();
+		//objList[0].bindTexture();
 		objList[0].bindObject();
 		float curTime = glfwGetTime();
 		objList[0].position = glm::vec3(0, sin(curTime), cos(curTime));
