@@ -21,6 +21,9 @@ std::string get_file_contents(const char* filename) {
 // constructor
 Shader::Shader(const char* vertexFile, const char* fragmentFile) {
 
+	Shader::vertexName += vertexFile;
+	Shader::fragmentName += fragmentFile;
+
 	// gets the file contents of .frag and .vert files, converts to a .c string
 	std::string vertexCode = get_file_contents(vertexFile);
 	std::string fragmentCode = get_file_contents(fragmentFile);

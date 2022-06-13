@@ -76,6 +76,15 @@ int main() {
 	fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\projObj.frag";
 	Shader projectionShader(vertexFileAddress, fragmentFileAddress);
 
+	vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\textObj.vert";
+	fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\textObj.frag";
+	Shader textureShader(vertexFileAddress, fragmentFileAddress);
+
+	// textures
+	std::string redstoneLampPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\RedstoneLamp.png";
+	Texture redstoneLampTexture((redstoneLampPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	redstoneLampTexture.texUnit(textureShader, "tex0", 0);
+
 	// opaque cube
 	VAO cubeVAO(arrayToVec(CUBE.indices));
 	cubeVAO.Bind();
@@ -83,7 +92,7 @@ int main() {
 	VBO cubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
 	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
-	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 
 	cubeVAO.Unbind();
 	cubeVBO.Unbind();
@@ -96,16 +105,31 @@ int main() {
 	VBO lightCubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
 	EBO lightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
-	lightCubeVAO.LinkAttrib(lightCubeVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
-	lightCubeVAO.LinkAttrib(lightCubeVBO, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	lightCubeVAO.LinkAttrib(lightCubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	lightCubeVAO.LinkAttrib(lightCubeVBO, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 
 	lightCubeVAO.Unbind();
 	lightCubeVBO.Unbind();
 	lightCubeEBO.Unbind();
 
+	// textured light cube
+	VAO textLightCubeVAO(arrayToVec(CUBE.indices));
+	textLightCubeVAO.Bind();
+	
+	VBO textLightCubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
+	EBO textLightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
+
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+	textLightCubeVAO.Unbind();
+	textLightCubeVBO.Unbind();
+	textLightCubeEBO.Unbind();
+
 	// object array
 	Object objList[] = {
-		Object(1.0f, &cubeVAO, &projectionShader, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(0.2f, 0.2f, 0.2f)),
+		Object(1.0f, &cubeVAO, &textureShader, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.2f, 0.2f, 0.2f)),
 		Object(1.0f, &lightCubeVAO, &opaqueShader, glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
 	};
 
@@ -157,17 +181,19 @@ int main() {
 		// glow cube
 		objList[0].bindObject();
 		objList[0].bindShader();
-		
+		objList[0].bindTexture();
+		float curTime = glfwGetTime();
+		objList[0].position = glm::vec3(0, sin(curTime), cos(curTime));
 		objList[0].update(DATA.deltaTime);
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, projectionShader, "camMatrix", objList[0]);
 		glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
 
-		// opaque cube
+		// opaque cube purple
 		objList[1].bindObject();
 		objList[1].bindShader();
-		objList[1].shader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-		objList[1].shader->setVec3("lightPos", glm::vec3(1.2f, 1.0f, 2.0f));
+		objList[1].shader->setVec3("lightColor", glm::vec3(1.0f, 0.0f, 1.0f));
+		objList[1].shader->setVec3("lightPos", objList[0].position);
 		objList[1].shader->setVec3("viewPos", camera.position);
 
 		objList[1].update(DATA.deltaTime);
@@ -187,6 +213,9 @@ int main() {
 	lightCubeVAO.Delete();
 	lightCubeVBO.Delete();
 	lightCubeEBO.Delete();
+	textLightCubeVAO.Delete();
+	textLightCubeVBO.Delete();
+	textLightCubeEBO.Delete();
 	opaqueShader.Delete();
 	projectionShader.Delete();
 

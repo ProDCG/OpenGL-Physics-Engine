@@ -44,7 +44,8 @@ void Texture::texUnit(Shader& shader, const char* uniform, GLuint unit) {
 
 // memory cleanup and bind functons
 void Texture::Bind() {
-	glBindTexture(type, ID);
+	std::cout << '\0';
+	/*glBindTexture(type, ID);*/
 }
 
 void Texture::Unbind() {

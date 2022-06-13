@@ -62,6 +62,12 @@
     <None Include="opaqObj.vert">
       <Filter>Source Files\Main</Filter>
     </None>
+    <None Include="textObj.vert">
+      <Filter>Source Files\Main</Filter>
+    </None>
+    <None Include="textObj.frag">
+      <Filter>Source Files\Main</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EBO.h">
