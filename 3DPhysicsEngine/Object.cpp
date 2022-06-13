@@ -11,7 +11,7 @@ Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm
 	Object::texture = NULL;
 }
 
-Object::Object(float mass, VAO* objectType, Texture* texture, glm::vec3 position, glm::vec3 scale) {
+Object::Object(float mass, VAO* objectType, Shader* shader, Texture* texture, glm::vec3 position, glm::vec3 scale) {
 	Object::mass = mass;
 	Object::objectType = objectType;
 	Object::shader = shader;
@@ -19,7 +19,6 @@ Object::Object(float mass, VAO* objectType, Texture* texture, glm::vec3 position
 	Object::position = position;
 	Object::scale = scale;
 	Object::texture = texture;
-	Object::shader = NULL;
 }
 
 Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {

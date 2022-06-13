@@ -180,6 +180,7 @@ int main() {
 		
 		// glow cube
 		objList[0].bindObject();
+		objList[0].bindShader();
 		objList[0].bindTexture();
 		float curTime = glfwGetTime();
 		objList[0].position = glm::vec3(0, sin(curTime), cos(curTime));
