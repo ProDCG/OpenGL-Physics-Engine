@@ -92,7 +92,7 @@ int main() {
 	VBO cubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
 	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
-	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 
 	cubeVAO.Unbind();
 	cubeVBO.Unbind();
@@ -105,8 +105,8 @@ int main() {
 	VBO lightCubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
 	EBO lightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
-	lightCubeVAO.LinkAttrib(lightCubeVBO, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-	lightCubeVAO.LinkAttrib(lightCubeVBO, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	lightCubeVAO.LinkAttrib(lightCubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	lightCubeVAO.LinkAttrib(lightCubeVBO, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 
 	lightCubeVAO.Unbind();
 	lightCubeVBO.Unbind();
@@ -119,9 +119,9 @@ int main() {
 	VBO textLightCubeVBO(CUBE.vertices, sizeof(CUBE.vertices));
 	EBO textLightCubeEBO(CUBE.indices, sizeof(CUBE.indices));
 
-	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	textLightCubeVAO.LinkAttrib(textLightCubeVBO, 2, 3, GL_FLOAT, 8 * sizeof(float), (void*)(8 * sizeof(float)));
 
 	textLightCubeVAO.Unbind();
 	textLightCubeVBO.Unbind();
@@ -181,6 +181,7 @@ int main() {
 		// glow cube
 		objList[0].bindObject();
 		objList[0].bindTexture();
+		objList[0].bindShader();
 		float curTime = glfwGetTime();
 		objList[0].position = glm::vec3(0, sin(curTime), cos(curTime));
 		objList[0].update(DATA.deltaTime);
