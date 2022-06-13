@@ -31,7 +31,6 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 		obj.shader->setMat4("projection", projection);
 	}
 	else {
-		std::cout << "This is a test debug line to see if the program got to this position." << '\n';
 		glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view * model));
 	}
 }
