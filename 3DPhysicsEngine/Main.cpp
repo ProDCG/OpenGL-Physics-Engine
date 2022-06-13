@@ -13,6 +13,7 @@ namespace fs = std::filesystem;
 #include <glm/gtc/type_ptr.hpp>
 #include <stdint.h>
 
+#include "Cube.h"
 #include "Texture.h"
 #include "Shader.h"
 #include "VAO.h"
@@ -31,6 +32,7 @@ int32_t randomVal(int32_t min, int32_t max);
 std::vector<GLuint>	arrayToVec(GLuint arr[]);
 
 Data DATA;
+Cube CUBE;
 
 const unsigned int width = 1920;
 const unsigned int height = 1080;
