@@ -81,7 +81,7 @@ int main() {
 	Shader textureShader(vertexFileAddress, fragmentFileAddress);
 
 	// textures
-	std::string redstoneLampPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\RedstoneLamp.PNG";
+	std::string redstoneLampPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\RedstoneLamp.png";
 	Texture redstoneLampTexture((redstoneLampPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	redstoneLampTexture.texUnit(textureShader, "tex0", 0);
 
@@ -179,7 +179,6 @@ int main() {
 		opaqueShader.setMat4("model", glm::mat4(1.0f));*/
 		
 		// glow cube
-		textureShader.Activate();
 		objList[0].bindTexture();
 		objList[0].bindObject();
 		float curTime = glfwGetTime();
