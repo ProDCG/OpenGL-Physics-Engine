@@ -232,8 +232,8 @@ int main() {
 	*/
 	VAO cubeVAO;
 	cubeVAO.Bind();
-	VBO cubeVBO(CUBE.vertices4, sizeof(CUBE.vertices4));
-	EBO cubeEBO(CUBE.indices2, sizeof(CUBE.indices2));
+	VBO cubeVBO(CUBE.vertices3, sizeof(CUBE.vertices3));
+	EBO cubeEBO(CUBE.indices, sizeof(CUBE.indices));
 	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	cubeVAO.Unbind();
 	cubeVBO.Unbind();
@@ -324,8 +324,8 @@ int main() {
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix");
 		cubeVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(CUBE.indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
-		std::cout << (sizeof(CUBE.indices2) / sizeof(int)) << '\n';
+		glDrawElements(GL_TRIANGLES, sizeof(CUBE.indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		std::cout << (sizeof(CUBE.indices) / sizeof(int)) << '\n';
 		//glDrawElements(GL_TRIANGLES, sizeof(CUBE.indices), GL_UNSIGNED_INT, 0);
 		//glDrawArrays(GL_TRIANGLES, 0, 9);
 		// Updates and exports the camera matrix to the Vertex Shader
