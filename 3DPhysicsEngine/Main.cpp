@@ -249,7 +249,7 @@ int main() {
 	batmanTex.texUnit(shaderProgram, "tex0", 0);
 
 	Rigidbody rbList[] = {
-		Rigidbody(1.0f, &faceTex, &VAO1)
+		Rigidbody(1.0f, &faceTex, &VAO2)
 	};
 
 	float rotation = 0.0f;
@@ -281,7 +281,7 @@ int main() {
 		}*/
 
 		for (int i = 0; i < sizeof(rbList) / sizeof(rbList[0]); i++) {
-			rbList[i].textureType->Bind();
+			//rbList[i].textureType->Bind();
 			rbList[i].objectType->Bind();  
 			// sizeof(rbList[i].objectType->indices.data()) / sizeof(rbList[0])
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
