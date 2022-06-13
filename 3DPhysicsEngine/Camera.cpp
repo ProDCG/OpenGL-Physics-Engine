@@ -7,12 +7,12 @@ Camera::Camera(int width, int height, glm::vec3 position) {
 	Camera::position = position;
 }
 
-void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform) {
+void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Rigidbody obj) {
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::mat4(1.0f);
 	glm::mat4 model = glm::mat4(1.0f);
 
-	model = glm::translate(model, glm::vec3(0.0f));
+	model = glm::translate(model, obj.position);
 	model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 	
 	//if (!obj.isStatic) {
