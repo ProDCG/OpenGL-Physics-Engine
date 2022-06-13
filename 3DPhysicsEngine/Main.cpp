@@ -22,7 +22,6 @@ namespace fs = std::filesystem;
 #include "VBO.h"
 #include "EBO.h"
 #include "Camera.h"
-#include "Object.h"
 #include "Data.h"
 #include "Engine.h"
 #include "DeleteWrapper.h"
