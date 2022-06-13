@@ -10,6 +10,7 @@
 #include <glm/gtx/vector_angle.hpp>
 
 #include "VAO.h"
+#include "Shader.h"
 
 #include <vector>
 #include <string>
@@ -24,11 +25,14 @@ public:
 	glm::vec3 acceleration = glm::vec3(0.0f);
 
 	VAO* objectType;
+	Shader* shader;
 
 	glm::vec3 color;
 	float mass;
 
+	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color);
 	Object(float mass, VAO* objectType, glm::vec3 color);
+	Object(float mass, VAO* objectType);
 
 	void addForce(float x, float y, float z);
 
@@ -45,6 +49,10 @@ public:
 	void addForceZ(float magnitude);
 
 	void update(float deltaTime);
+
+	void bindObject();
+
+	void bindShader();
 
 private:
 };

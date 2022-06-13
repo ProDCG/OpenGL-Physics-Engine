@@ -23,7 +23,7 @@ namespace fs = std::filesystem;
 #include "Data.h"
 #include "Engine.h"
 #include "DeleteWrapper.h"
-#include "Rigidbody.h"
+#include "Object.h"
 
 void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
@@ -71,7 +71,7 @@ int main() {
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
 	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
 	/*Shader shaderProgram("main.vert", "main.frag");*/
-	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
+	Shader colorShader(vertexFileAddress, fragmentFileAddress);
 
 	VAO cubeVAO(arrayToVec(CUBE.indices));
 	cubeVAO.Bind();
@@ -97,8 +97,8 @@ int main() {
 	Texture batmanTex((batmanPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	batmanTex.texUnit(shaderProgram, "tex0", 0);*/
 
-	Rigidbody rbList[] = {
-		Rigidbody(1.0f, &cubeVAO)
+	Object objList[] = {
+		Object(1.0f, &cubeVAO, &colorShader, glm::vec3(1.0f, 0.0f, 0.0f)),
 	};
 
 	float rotation = 0.0f;
@@ -129,20 +129,19 @@ int main() {
 			switch()
 		}*/
 
-		for (int i = 0; i < sizeof(rbList) / sizeof(rbList[0]); i++) {
-			//rbList[i].textureType->Bind();
-			rbList[i].objectType->Bind();  
-			shaderProgram.Activate();
-			shaderProgram.setVec3("color", glm::vec3(1.0f, 0.0f, 0.0f));
-			// sizeof(rbList[i].objectType->indices.data()) / sizeof(rbList[0])
-			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
+		for (int i = 0; i < sizeof(objList) / sizeof(objList[0]); i++) {
+			//objList[i].textureType->Bind();
+			objList[i].bindObject();
+			objList[i].bindShader();
+			// sizeof(objList[i].objectType->indices.data()) / sizeof(objList[0])
+			camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix", objList[i]);
 			//glDrawArrays(GL_TRIANGLES, 0, 36);
 			glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
-			//rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
-			//rbList[i].update(DATA.deltaTime);
+			//objList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
+			//objList[i].update(DATA.deltaTime);
 		} 
 			
-		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
+		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", objList[0]);
 
 		/*faceTex.Bind();
 		VAO2.Bind();
@@ -218,7 +217,7 @@ int main() {
 	cubeEBO.Delete();
 	//faceTex.Delete();
 	//brickTex.Delete();
-	shaderProgram.Delete();
+	colorShader.Delete();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;

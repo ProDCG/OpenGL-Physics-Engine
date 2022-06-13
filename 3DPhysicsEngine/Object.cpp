@@ -1,9 +1,24 @@
 #include "Object.h"
 
+Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
+	Object::mass = mass;
+	Object::objectType = objectType;
+	Object::color = color;
+	Object::shader = shader;
+}
+
 Object::Object(float mass, VAO* objectType, glm::vec3 color) {
 	Object::mass = mass;
 	Object::objectType = objectType;
 	Object::color = color;
+	Object::shader = NULL;
+}
+
+Object::Object(float mass, VAO* objectType) {
+	Object::mass = mass;
+	Object::objectType = objectType;
+	Object::color = glm::vec3(1.0f);
+	Object::shader = NULL;
 }
 
 void Object::addForce(float x, float y, float z) {
@@ -50,4 +65,13 @@ void Object::update(float deltaTime) {
 	Object::acceleration.z = Object::netForce.z / Object::mass;
 	Object::linearVelocity.z = Object::linearVelocity.z + Object::acceleration.z * deltaTime;
 	Object::position.z = Object::position.z + (Object::linearVelocity.z * deltaTime) + (0.5f * Object::acceleration.z * pow(deltaTime, 2));
+}
+
+void Object::bindObject() {
+	Object::objectType->Bind();
+}
+
+void Object::bindShader() {
+	Object::shader->Activate();
+	Object::shader->setVec3("color", color);
 }

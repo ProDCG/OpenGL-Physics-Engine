@@ -25,7 +25,6 @@
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -44,7 +43,6 @@
     <ClInclude Include="Data.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
