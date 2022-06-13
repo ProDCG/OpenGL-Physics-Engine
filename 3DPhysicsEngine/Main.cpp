@@ -40,113 +40,6 @@ float rotational_multiplier = 15.0f;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-GLfloat tri_prism_vertices[] =
-{ //     COORDINATES     /        COLORS      /   TexCoord  //
-	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
-	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.0f, 1.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
-};
-
-GLfloat plane_vertices[] = {
-	0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-	1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-	0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-};
-
-GLfloat vertices3[] = {
-	-3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,    0.0f, 0.0f,
-	-3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 3.0f, -3.0f, -3.0f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	 3.0f, -3.0f,  3.0f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
-};
-
-GLfloat cube_vert1[] =
-{
-	// face one (0)
-	-0.5f,  0.0f, -0.5f,
-	-0.5f,  1.0f, -0.5f,
-	0.5f, 0.0f, -0.5f,
-	0.5f, 1.0f, -0.5f,
-
-	// face two (4)
-	0.5f, 0.0f, -0.5f,
-	0.5f, 1.0f, -0.5f,
-	0.5f, 0.0f, 0.5f,
-	0.5f, 1.0f, 0.5f,
-
-	// face three (8)
-	0.5f, 0.0f, 0.5f,
-	0.5f, 1.0f, 0.5f,
-	-0.5f, 0.0f, 0.5f,
-	-0.5f, 1.0f, 0.5f,
-
-	// face four (12) top
-	-0.5f, 1.0f, -0.5f,
-	0.5f, 1.0f, -0.5f,
-	-0.5f, 1.0f, 0.5f,
-	0.5f, 1.0f, 0.5f
-
-	// face five (16) bottom
-	-0.5f, 0.0f, -0.5f,
-	0.5f, 0.0f, -0.5f,
-	-0.5f, 0.0f, 0.5f,
-	0.5f, 0.0f, 0.5f,
-
-	// face six (20)
-	-0.5f, 0.0f, 0.5f,
-	-0.5f, 1.0f, 0.5f,
-	-0.5f, 0.0f, -0.5f,
-	-0.5f, 1.0f, -0.5f,
-};
-
-GLfloat cube_vert2[] = {
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-};
-
 GLfloat cube_vert3[] = {
 	// front face
 	-0.5f, -0.5f,  0.5f, // bottom left
@@ -211,52 +104,6 @@ GLuint cube_indi3[] = {
 	20, 22, 23,
 };
 
-/*
-(Relative to camera pos)
--1x is left, 1x is right
--1x is down, 1x is up
--1x is forward, 1x is backward
-*/
-
-GLuint indices3[] = {
-	0, 1, 7
-};
-
-GLuint cube_indices[] = {
-	0, 2, 3,
-	0, 1, 3,
-
-	4, 6, 7,
-	4, 5, 7,
-
-	8, 10, 11,
-	8, 9, 11,
-
-	12, 13, 14,
-	13, 14, 15,
-
-	16, 17, 18,
-	17, 18, 19,
-
-	20, 22, 23,
-	20, 21, 23
-};
-
-GLuint tri_prism_indices[] =
-{
-	0, 1, 2,
-	0, 2, 3,
-	0, 1, 4,
-	1, 2, 4,
-	2, 3, 4,
-	3, 0, 4
-};
-
-GLuint plane_indices[] = {
-	0, 1, 2,
-	1, 2, 3
-};
-
 int main() {
 	Engine ENGINE;
 
@@ -288,22 +135,6 @@ int main() {
 	/*Shader shaderProgram("main.vert", "main.frag");*/
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
 
-	//std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
-	VAO VAO1(arrayToVec(tri_prism_indices));
-	VAO1.Bind();
-
-	VBO VBO1(tri_prism_vertices, sizeof(tri_prism_vertices));
-	
-	EBO EBO1(tri_prism_indices, sizeof(tri_prism_indices));
-
-	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-
-	VAO1.Unbind();
-	VBO1.Unbind();
-	EBO1.Unbind();
-
 	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
 	VAO VAO2(arrayToVec(cube_indi3));
 	VAO2.Bind();
@@ -317,22 +148,6 @@ int main() {
 	VAO2.Unbind();
 	VBO2.Unbind();
 	EBO2.Unbind();
-
-	//indices = std::vector<GLuint>(std::begin(plane_indices), std::end(plane_indices));
-	VAO VAO3(arrayToVec(plane_indices));
-	VAO3.Bind();
-
-	VBO VBO3(plane_vertices, sizeof(plane_vertices));
-
-	EBO EBO3(plane_indices, sizeof(plane_indices));
-
-	VAO3.LinkAttrib(VBO3, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-	VAO3.LinkAttrib(VBO3, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	VAO3.LinkAttrib(VBO3, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-
-	VAO3.Unbind();
-	VBO3.Unbind();
-	EBO3.Unbind();
 
 	/*VAO VAO2;
 	VAO2.Bind();
@@ -394,7 +209,6 @@ int main() {
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
 			//glDrawArrays(GL_TRIANGLES, 0, 36);
 			glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
-			std::cout << sizeof(cube_indices) << std::endl;
 			//rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 			//rbList[i].update(DATA.deltaTime);
 		} 
@@ -470,7 +284,6 @@ int main() {
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 	}
 
-	EBO1.Delete();
 	VAO2.Delete();
 	VBO2.Delete();
 	EBO2.Delete();
