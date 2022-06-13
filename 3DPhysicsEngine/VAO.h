@@ -16,6 +16,8 @@ public:
 
 	VAO();
 
+	VAO(std::vector<GLuint> indices);
+
 	void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
 
 	void Bind();

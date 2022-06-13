@@ -13,6 +13,7 @@ namespace fs = std::filesystem;
 #include <glm/gtc/type_ptr.hpp>
 #include <stdint.h>
 
+#include "Plane.h"
 #include "Cube.h"
 #include "TriangularPrism.h"
 #include "Texture.h"
@@ -31,7 +32,7 @@ void input_processor(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int32_t width, int32_t height);
 int32_t map_vals(int32_t initialVal, int32_t oldMin, int32_t oldMax, int32_t newMin, int32_t newMax);
 int32_t randomVal(int32_t min, int32_t max);
-//std::vector<GLuint>	arrayToVec(GLuint arr[]);
+std::vector<GLuint>	arrayToVec(GLuint arr[]);
 
 Data DATA;
 
@@ -67,44 +68,44 @@ const unsigned int height = 1080;
 //	 0.0f, 10.0f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
 //};
 //
-//GLfloat cube_vertices[] =
-//{
-//	// face one (0)
-//	-0.5f,  0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	-0.5f,  1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face two (4)
-//	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face three (8)
-//	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face four (12) top
-//	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face five (16) bottom
-//	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//
-//	// face six (20)
-//	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
-//	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
-//	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
-//	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
-//};
+GLfloat cube_vertices[] =
+{
+	// face one (0)
+	-0.5f,  0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	-0.5f,  1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face two (4)
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face three (8)
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face four (12) top
+	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face five (16) bottom
+	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+
+	// face six (20)
+	-0.5f, 0.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 0.0f,
+	-0.5f, 1.0f, 0.5f, 0.83f, 0.70f, 0.44f, 0.0f, 1.0f,
+	-0.5f, 0.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 0.0f,
+	-0.5f, 1.0f, -0.5f, 0.83f, 0.70f, 0.44f, 1.0f, 1.0f,
+};
 //
 ///*
 //(Relative to camera pos)
@@ -117,25 +118,25 @@ const unsigned int height = 1080;
 //	0, 1, 7
 //};
 //
-//GLuint cube_indices[] = {
-//	0, 2, 3,
-//	0, 1, 3,
-//
-//	4, 6, 7,
-//	4, 5, 7,
-//
-//	8, 10, 11,
-//	8, 9, 11,
-//
-//	12, 13, 14,
-//	13, 14, 15,
-//
-//	16, 17, 18,
-//	17, 18, 19,
-//
-//	20, 22, 23,
-//	20, 21, 23
-//};
+GLuint cube_indices[] = {
+	0, 2, 3,
+	0, 1, 3,
+
+	4, 6, 7,
+	4, 5, 7,
+
+	8, 10, 11,
+	8, 9, 11,
+
+	12, 13, 14,
+	13, 14, 15,
+
+	16, 17, 18,
+	17, 18, 19,
+
+	20, 22, 23,
+	20, 21, 23
+};
 //
 //GLuint tri_prism_indices[] =
 //{
@@ -152,16 +153,19 @@ const unsigned int height = 1080;
 //	1, 2, 3
 //};
 
-GLfloat vertices3[] = {
-		-0.5f, -0.5f, 0.5f,
-		0.5f, -0.5f, 0.5f,
-		0.5f, 0.5f, 0.5f,
+GLfloat vertices[] = {
+	 0.5f,  0.5f,  0.0f,
+	 0.5f, -0.5f,  0.0f,
+	-0.5f, -0.5f,  0.0f,
+	-0.5f,  0.5f,  0.0f
 };
 
-GLuint indices[] = {
-	0, 1, 2
+unsigned int indices[] = {
+	0, 1, 3,
+	1, 2, 3
 };
 
+Plane PLANE;
 Cube CUBE;
 TriangularPrism TRI_PRISM;
 
@@ -179,7 +183,7 @@ int main() {
 
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
+		glfwTerminate(); 
 		return -1;
 	}
 
@@ -191,9 +195,9 @@ int main() {
 	glViewport(0, 0, width, height);
 	glfwSwapInterval(1);
 
-	const char* vertexFileAddress = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\colorShader.vert";
+	/*const char* vertexFileAddress = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\colorShader.vert";
 	const char* fragmentFileAddress = "C:\\Users\\Mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\colorShader.frag";
-	Shader colorShader(vertexFileAddress, fragmentFileAddress);
+	Shader colorShader(vertexFileAddress, fragmentFileAddress);*/
 
 	/*VAO cubeVAO;
 	VBO cubeVBO(CUBE.vertices3, sizeof(CUBE.vertices3));
@@ -202,12 +206,13 @@ int main() {
 	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	cubeVAO.Unbind();*/
 
-	/*
+	
 	const char* vertexFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.vert";
-	const char* fhhragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
-	/*Shader shaderProgram("main.vert", "main.frag");
+	const char* fragmentFileAddress = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectFiles\\3DPhysicsEngine\\3DPhysicsEngine\\main.frag";
+	//Shader shaderProgram("main.vert", "main.frag");
 	Shader shaderProgram(vertexFileAddress, fragmentFileAddress);
-
+	
+	/*
 	//std::vector<GLuint> indices = std::vector<GLuint>(std::begin(tri_prism_indices), std::end(tri_prism_indices));
 	VAO VAO1(arrayToVec(tri_prism_indices));
 	VAO1.Bind();
@@ -236,7 +241,7 @@ int main() {
 	// CUBE VERTEX OBJECTS
 	VAO cubeVAO;
 	cubeVAO.Bind();
-	VBO cubeVBO(CUBE.vertices4, sizeof(CUBE.vertices4));
+	VBO cubeVBO(CUBE.vertices5, sizeof(CUBE.vertices5));
 	EBO cubeEBO(CUBE.indices2, sizeof(CUBE.indices2));
 	cubeVAO.LinkAttrib(cubeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	cubeVAO.Unbind();
@@ -253,7 +258,25 @@ int main() {
 	triPrismVBO.Unbind();
 	triPrismEBO.Unbind();
 
-	/*
+	// TEST
+	VAO testVAO;
+	testVAO.Bind();
+	VBO testVBO(vertices, sizeof(vertices));
+	EBO testEBO(indices, sizeof(indices));
+	testVAO.LinkAttrib(testVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	testVAO.Unbind();
+	testVBO.Unbind();
+	testEBO.Unbind();
+
+	// PLANE
+	VAO planeVAO;
+	planeVAO.Bind();
+	VBO planeVBO(PLANE.vertices, sizeof(PLANE.vertices));
+	EBO planeEBO(PLANE.indices, sizeof(PLANE.indices));
+	planeVAO.LinkAttrib(planeVBO, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	planeVAO.Unbind();
+	planeVBO.Unbind();
+	planeEBO.Unbind();
 
 	//indices = std::vector<GLuint>(std::begin(cube_indices), std::end(cube_indices));
 	VAO VAO2(arrayToVec(cube_indices));
@@ -272,6 +295,7 @@ int main() {
 	EBO2.Unbind();
 
 	//indices = std::vector<GLuint>(std::begin(plane_indices), std::end(plane_indices));
+	/*
 	VAO VAO3(arrayToVec(plane_indices));
 	VAO3.Bind();
 
@@ -286,6 +310,7 @@ int main() {
 	VAO3.Unbind();
 	VBO3.Unbind();
 	EBO3.Unbind();
+	
 
 	VAO VAO2;
 	VAO2.Bind();
@@ -293,22 +318,23 @@ int main() {
 	VBO VBO2(vertices3, sizeof(vertices3));
 
 	// GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
-
+	*/
 	//std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 	std::string awesomeFacePath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\awesomeface.png";
 	std::string brickPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\brick.png";
 	std::string batmanPath = "C:\\Users\\mason\\OneDrive\\School\\High School\\2021-2022\\Adv Progamming Topics\\SemesterProject\\ProjectBuildFiles\\Textures\\batman.png";
-
+	
 	Texture faceTex((awesomeFacePath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	faceTex.texUnit(shaderProgram, "tex0", 0);
 	Texture brickTex((brickPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	brickTex.texUnit(shaderProgram, "tex0", 0);
 	Texture batmanTex((batmanPath).c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	batmanTex.texUnit(shaderProgram, "tex0", 0);
-
+	
 	Rigidbody rbList[] = {
-		Rigidbody(1.0f, &faceTex, &VAO1)
+		Rigidbody(1.0f, &faceTex, &VAO2)
 	};
+	/*
 
 	float rotation = 0.0f;
 	double prevTime = glfwGetTime();
@@ -333,13 +359,13 @@ int main() {
 
 		// Handles camera inputs
 		camera.Inputs(window);
+		/*planeVAO.Bind();
+		
+		camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix");
 		colorShader.Activate();
 		colorShader.setVec3("objectColor", glm::vec3(1.0f, 0.0f, 0.0f));
-
-		camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix");
-		cubeVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(CUBE.indices2) / sizeof(int), GL_UNSIGNED_INT, 0);
-		std::cout << (sizeof(CUBE.indices2) / sizeof(int)) << '\n';
+		glDrawElements(GL_TRIANGLES, sizeof(PLANE.indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		std::cout << (sizeof(PLANE.indices) / sizeof(int)) << '\n';*/
 		//glDrawElements(GL_TRIANGLES, sizeof(CUBE.indices), GL_UNSIGNED_INT, 0);
 		//glDrawArrays(GL_TRIANGLES, 0, 9);
 		// Updates and exports the camera matrix to the Vertex Shader
@@ -348,7 +374,7 @@ int main() {
 			switch()
 		}*/
 
-		/*
+		
 		for (int i = 0; i < sizeof(rbList) / sizeof(rbList[0]); i++) {
 			rbList[i].textureType->Bind();
 			rbList[i].objectType->Bind();  
@@ -358,7 +384,7 @@ int main() {
 			std::cout << sizeof(cube_indices) << std::endl;
 			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
 			rbList[i].update(DATA.deltaTime);
-		} */
+		}
 			
 		//camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[0]);
 
@@ -446,6 +472,12 @@ int main() {
 	triPrismVAO.Delete();
 	triPrismVBO.Delete();
 	triPrismEBO.Delete();
+	testVAO.Delete();
+	testVBO.Delete();
+	testEBO.Delete();
+	planeVAO.Delete();
+	planeVBO.Delete();
+	planeEBO.Delete();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
@@ -483,10 +515,10 @@ int32_t randomVal(int32_t min, int32_t max) {
 	return map_vals(std::rand(), 0, RAND_MAX, min, max);
 }
 
-/*td::vector<GLuint>	arrayToVec(GLuint arr[]) {
+std::vector<GLuint>	arrayToVec(GLuint arr[]) {
 	std::vector<GLuint> newVec;
 	for (int i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++) {
 		newVec.push_back(arr[i]);
 	}
 	return newVec;
-}*/
+}

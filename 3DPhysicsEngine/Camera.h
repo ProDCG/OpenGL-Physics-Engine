@@ -40,6 +40,8 @@ public:
 	// update camera matrix to the vertex shader
 	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform);
 
+	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform, Rigidbody obj);
+
 	// camera inputs
 	void Inputs(GLFWwindow* window);
 };
