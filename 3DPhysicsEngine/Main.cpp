@@ -154,10 +154,12 @@ int main() {
 		opaqueShader.setMat4("view", camera.getViewMatrix());
 		opaqueShader.setMat4("model", glm::mat4(1.0f));*/
 		
+		float time = glfwGetTime();
+		
 		// glow cube
 		objList[0].bindObject();
 		objList[0].bindShader();
-		
+		objList[0].position = glm::vec3(cos(time), sin(time), sin(time));
 		objList[0].update(DATA.deltaTime);
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, projectionShader, "camMatrix", objList[0]);
@@ -167,9 +169,10 @@ int main() {
 		objList[1].bindObject();
 		objList[1].bindShader();
 		objList[1].shader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-		objList[1].shader->setVec3("lightPos", glm::vec3(1.2f, 1.0f, 2.0f));
+		objList[1].shader->setVec3("lightPos", objList[0].position);
 		objList[1].shader->setVec3("viewPos", camera.position);
 
+		
 		objList[1].update(DATA.deltaTime);
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, opaqueShader, "camMatrix", objList[1]);

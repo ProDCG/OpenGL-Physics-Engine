@@ -24,6 +24,7 @@ public:
 	// vectors for physics, holding the properties of each entity
 	glm::vec3 position;
 	glm::vec3 scale;
+	glm::vec3 rotation;
 
 	glm::vec3 linearVelocity = glm::vec3(0.0f);
 	glm::vec3 angularVelocity = glm::vec3(0.0f);

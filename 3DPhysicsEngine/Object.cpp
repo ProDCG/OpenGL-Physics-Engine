@@ -8,6 +8,7 @@ Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm
 	Object::color = color;
 	Object::position = position;
 	Object::scale = scale;
+	Object::rotation = glm::vec3(0.0f);
 }
 
 Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
@@ -17,6 +18,7 @@ Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
 	Object::shader = shader;
 	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
 	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	Object::rotation = glm::vec3(0.0f);
 }
 
 Object::Object(float mass, VAO* objectType, glm::vec3 color) {
@@ -26,7 +28,7 @@ Object::Object(float mass, VAO* objectType, glm::vec3 color) {
 	Object::shader = NULL;
 	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
 	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
-
+	Object::rotation = glm::vec3(0.0f);
 }
 
 Object::Object(float mass, VAO* objectType) {
@@ -36,6 +38,7 @@ Object::Object(float mass, VAO* objectType) {
 	Object::shader = NULL;
 	Object::position = glm::vec3(0.0f, 0.0f, 0.0f);
 	Object::scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	Object::rotation = glm::vec3(0.0f);
 }
 
 // physics force adding, with vectors and each individual components

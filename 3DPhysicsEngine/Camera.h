@@ -31,7 +31,7 @@ public:
 	int height;
 
 	// speed of the camera + sensitivity
-	float speed = 0.005f;
+	float speed = 0.01f;
 	float sensitivity = 300.0f;
 
 	float dt = 0.0f;
