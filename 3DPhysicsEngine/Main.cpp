@@ -17,6 +17,7 @@ namespace fs = std::filesystem;
 
 // header file imports
 #include "Cube.h"
+#include "Sphere.h"
 #include "Texture.h"
 #include "Shader.h"
 #include "VAO.h"
@@ -37,6 +38,7 @@ std::vector<GLuint>	arrayToVec(GLuint arr[]);
 // object declaration for global variable usage (deltaTime, object vertices, etc)
 Data DATA;
 Cube CUBE;
+Sphere SPHERE;
 
 // window resolution
 const unsigned int width = 1920;
@@ -103,10 +105,18 @@ int main() {
 	lightCubeVBO.Unbind();
 	lightCubeEBO.Unbind();
 
+	// light sphere
+	VAO opaqueSphereVAO(SPHERE.indices);
+	opaqueSphereVAO.Bind();
+
+	VBO opaqueSphereVBO(SPHERE.vertices.data(), sizeof(SPHERE.vertices.data()));
+	EBO opaqueSphereEBO(SPHERE.indices.data(), sizeof(SPHERE.indices.data()));
+
 	// object array
 	Object objList[] = {
 		Object(1.0f, &cubeVAO, &projectionShader, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(0.2f, 0.2f, 0.2f)),
 		Object(1.0f, &lightCubeVAO, &opaqueShader, glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
+		Object(1.0f, &opaqueSphereVAO, &projectionShader, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f))
 	};
 
 	// camera initialization
@@ -126,33 +136,6 @@ int main() {
 		
 		// handle camera inputs
 		camera.Inputs(window);
-
-		//for (int i = 0; i < sizeof(objList) / sizeof(objList[0]); i++) {
-		//	// bind the current object type and shader, and then set the color. create a camera matrix based on the object
-		//	objList[i].bindObject();
-		//	objList[i].bindShader();
-		//	camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix", objList[i]);
-
-		//	// vertice or indice based rendering
-		//	//glDrawArrays(GL_TRIANGLES, 0, 36);
-		//	glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
-
-		//	// Uncomment for physics simulations
-		//	//objList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
-		//	//objList[i].update(DATA.deltaTime);
-		//} 
-
-		// light recieving object
-		/*opaqueShader.Activate();
-		opaqueShader.setVec3("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
-		opaqueShader.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-		opaqueShader.setVec3("lightPos", glm::vec3(1.2f, 1.0f, 2.0f));
-		opaqueShader.setVec3("viewPos", camera.position);
-
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)camera.width / (float)camera.height, 0.1f, 100.0f);
-		opaqueShader.setMat4("projection", projection);
-		opaqueShader.setMat4("view", camera.getViewMatrix());
-		opaqueShader.setMat4("model", glm::mat4(1.0f));*/
 		
 		float time = glfwGetTime();
 		
@@ -166,18 +149,19 @@ int main() {
 		glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
 
 		// opaque cube
-		objList[1].bindObject();
+		/*objList[1].bindObject();
 		objList[1].bindShader();
 		objList[1].shader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 		objList[1].shader->setVec3("lightPos", objList[0].position);
 		objList[1].shader->setVec3("viewPos", camera.position);
-
 		
 		objList[1].update(DATA.deltaTime);
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, opaqueShader, "camMatrix", objList[1]);
-		glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);
-
+		glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);*/
+		
+		// sphere
+		glDrawElements(GL_TRIANGLES, SPHERE.indices.size(), GL_UNSIGNED_INT, SPHERE.indices.data());
 		// swap buffers and handle all GLFW events
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -190,6 +174,7 @@ int main() {
 	lightCubeVAO.Delete();
 	lightCubeVBO.Delete();
 	lightCubeEBO.Delete();
+
 	opaqueShader.Delete();
 	projectionShader.Delete();
 

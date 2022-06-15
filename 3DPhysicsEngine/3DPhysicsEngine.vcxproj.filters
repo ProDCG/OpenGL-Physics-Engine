@@ -97,5 +97,8 @@
     <ClInclude Include="Cube.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

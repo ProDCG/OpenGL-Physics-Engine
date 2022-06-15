@@ -11,6 +11,16 @@ Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm
 	Object::rotation = glm::vec3(0.0f);
 }
 
+Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position) {
+	Object::mass = mass;
+	Object::objectType = objectType;
+	Object::shader = shader;
+	Object::color = color;
+	Object::position = position;
+	Object::scale = glm::vec3(0.0f);
+	Object::rotation = glm::vec3(0.0f);
+}
+
 Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
 	Object::mass = mass;
 	Object::objectType = objectType;

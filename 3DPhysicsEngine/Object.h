@@ -41,6 +41,7 @@ public:
 
 	// object constructer overloads
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position, glm::vec3 scale);
+	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position);
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color);
 	Object(float mass, VAO* objectType, glm::vec3 color);
 	Object(float mass, VAO* objectType);
