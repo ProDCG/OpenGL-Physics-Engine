@@ -3,34 +3,42 @@
 #include <GLFW/glfw3.h>
 
 #include <vector>
+#include<iostream>
+
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
 
 class Sphere {
-	
 public:
-    float radius = 5;
-    int sectors = 6;
-    int stacks = 6;
+    GLfloat vertices2[2109];
+    GLuint indices2[3627];
 
-    int sectorCount = 6;
-    int stackCount = 6;
+    float radius = 1.0f;
+    int sectorCount = 36;
+    int stackCount = 18;
 
-    std::vector<GLfloat> vertices;
-    std::vector<GLfloat> normals;
-    std::vector<GLuint> indices;
-    std::vector<GLuint> lineIndices;
+    double PI = 2 * asin(1.0);
 
-	Sphere() {
-		const float PI = acos(-1);
+    std::vector<float> vertices;
+    std::vector<float> normals;
+    std::vector<float> texCoords;
+    std::vector<unsigned int> indices;
+    std::vector<unsigned int> lineIndices;
 
-		float x, y, z, xy;
-		float nx, ny, nz, lengthInv = 1.0f / radius;
+    std::vector<float> interleavedVertices;
+    int interleavedStride;
 
-		float sectorStep = 2 * PI / sectorCount;
-		float stackStep = PI / stackCount;
-		float sectorAngle, stackAngle;
+	Sphere() : interleavedStride(32) {
+        const float PI = acos(-1);
+
+        float x, y, z, xy;                              // vertex position
+        float nx, ny, nz, lengthInv = 1.0f / radius;    // normal
+        float s, t;                                     // texCoord
+
+        float sectorStep = 2 * PI / sectorCount;
+        float stackStep = PI / stackCount;
+        float sectorAngle, stackAngle;
 
         for (int i = 0; i <= stackCount; ++i)
         {
@@ -58,6 +66,12 @@ public:
                 normals.push_back(nx);
                 normals.push_back(ny);
                 normals.push_back(nz);
+
+                // vertex tex coord between [0, 1]
+                s = (float)j / sectorCount;
+                t = (float)i / stackCount;
+                texCoords.push_back(s);
+                texCoords.push_back(t);
             }
         }
 
@@ -93,6 +107,14 @@ public:
                     lineIndices.push_back(k1 + 1);
                 }
             }
+        }
+
+        for (int i = 0; i < 2109; i++) {
+            vertices2[i] = vertices.at(i);
+        }
+
+        for (int i = 0; i < 3627; i++) {
+            indices2[i] = indices.at(i);
         }
 	}
 };

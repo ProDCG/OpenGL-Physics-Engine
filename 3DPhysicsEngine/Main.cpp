@@ -12,6 +12,7 @@
 #include <cstring>
 #include <string>
 #include <stdint.h>
+#include <iomanip>
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -45,6 +46,14 @@ const unsigned int width = 1920;
 const unsigned int height = 1080;
 
 int main() {
+	for (GLuint vertices : SPHERE.vertices) {
+		std::cout << vertices << '\n';
+	}
+
+	for (int i = 0; i < SPHERE.vertices.size(); i++) {
+		std::cout << SPHERE.vertices.at(i) << '\n';
+	}
+
 	// OS-based initializations
 	glfwInit();
 
@@ -106,17 +115,24 @@ int main() {
 	lightCubeEBO.Unbind();
 
 	// light sphere
-	VAO opaqueSphereVAO(SPHERE.indices);
-	opaqueSphereVAO.Bind();
+	VAO lightSphereVAO(arrayToVec(SPHERE.indices2));
+	lightSphereVAO.Bind();
 
-	VBO opaqueSphereVBO(SPHERE.vertices.data(), sizeof(SPHERE.vertices.data()));
-	EBO opaqueSphereEBO(SPHERE.indices.data(), sizeof(SPHERE.indices.data()));
+	VBO lightSphereVBO(SPHERE.vertices2, sizeof(SPHERE.vertices2));
+	EBO lightSphereEBO(SPHERE.indices2, sizeof(SPHERE.indices2));
+
+	lightSphereVAO.LinkAttrib(lightSphereVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+	lightSphereVAO.LinkAttrib(lightSphereVBO, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+	lightSphereVAO.Unbind();
+	lightSphereVBO.Unbind();
+	lightSphereEBO.Unbind();
 
 	// object array
 	Object objList[] = {
 		Object(1.0f, &cubeVAO, &projectionShader, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(0.2f, 0.2f, 0.2f)),
 		Object(1.0f, &lightCubeVAO, &opaqueShader, glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
-		Object(1.0f, &opaqueSphereVAO, &projectionShader, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f))
+		Object(1.0f, &lightSphereVAO, &projectionShader, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f))
 	};
 
 	// camera initialization
@@ -161,7 +177,23 @@ int main() {
 		glDrawElements(GL_TRIANGLES, 100, GL_UNSIGNED_INT, 0);*/
 		
 		// sphere
-		glDrawElements(GL_TRIANGLES, SPHERE.indices.size(), GL_UNSIGNED_INT, SPHERE.indices.data());
+		objList[2].bindObject();
+		objList[2].bindShader();
+		
+		objList[2].update(DATA.deltaTime);
+
+		camera.Matrix(45.0f, 0.1f, 100.0f, projectionShader, "camMatrix", objList[2]);
+		glDrawElements(GL_TRIANGLES, 3627, GL_UNSIGNED_INT, 0);
+		// sphere
+		/*objList[2].bindObject();
+		objList[2].bindShader();
+
+		objList[2].update(DATA.deltaTime);
+
+		camera.Matrix(45.0f, 0.1f, 100.0f, projectionShader, "camMatrix", objList[2]);
+		glDrawElements(GL_TRIANGLES, SPHERE.indices.size(), GL_UNSIGNED_INT, 0);*/
+		//glDrawElements(GL_TRIANGLES, (unsigned int)SPHERE.indices.size(), GL_UNSIGNED_INT, SPHERE.indices.data());
+
 		// swap buffers and handle all GLFW events
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -201,6 +233,14 @@ int32_t randomVal(int32_t min, int32_t max) {
 // simple conversion
 std::vector<GLuint>	arrayToVec(GLuint arr[]) {
 	std::vector<GLuint> newVec;
+	for (int i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++) {
+		newVec.push_back(arr[i]);
+	}
+	return newVec;
+}
+
+std::vector<GLfloat> arrayToVec(GLfloat arr[]) {
+	std::vector<GLfloat> newVec;
 	for (int i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++) {
 		newVec.push_back(arr[i]);
 	}
