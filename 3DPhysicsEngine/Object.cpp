@@ -1,11 +1,31 @@
 #include "Object.h"
 
+Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, bool isStatic) {
+	Object::mass = mass;
+	Object::objectType = objectType;
+	Object::shader = shader;
+	Object::color = color;
+	Object::position = position;
+	Object::scale = scale;
+	Object::rotation = rotation;
+	Object::isStatic = isStatic;
+}
+
+Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, bool isStatic) {
+	Object::mass = mass;
+	Object::objectType = objectType;
+	Object::shader = shader;
+	Object::color = color;
+	Object::isStatic = isStatic;
+}
+
 // object constructor overloads
 Object::Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color) {
 	Object::mass = mass;
 	Object::objectType = objectType;
 	Object::color = color;
 	Object::shader = shader;
+	Object::isStatic = false;
 }
 
 Object::Object(float mass, VAO* objectType, glm::vec3 color) {
@@ -13,6 +33,7 @@ Object::Object(float mass, VAO* objectType, glm::vec3 color) {
 	Object::objectType = objectType;
 	Object::color = color;
 	Object::shader = NULL;
+	Object::isStatic = false;
 }
 
 Object::Object(float mass, VAO* objectType) {
@@ -20,6 +41,7 @@ Object::Object(float mass, VAO* objectType) {
 	Object::objectType = objectType;
 	Object::color = glm::vec3(1.0f);
 	Object::shader = NULL;
+	Object::isStatic = false;
 }
 
 // physics force adding, with vectors and each individual components

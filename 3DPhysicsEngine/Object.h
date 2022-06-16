@@ -36,7 +36,14 @@ public:
 	glm::vec3 color;
 	float mass;
 
+	// is the object non-moving	
+	bool isStatic;
+	glm::vec3 scale;
+	glm::vec3 rotation;
+
 	// object constructer overloads
+	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, bool isStatic);
+	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, bool isStatic);
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color);
 	Object(float mass, VAO* objectType, glm::vec3 color);
 	Object(float mass, VAO* objectType);

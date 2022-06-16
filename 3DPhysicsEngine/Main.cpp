@@ -87,7 +87,7 @@ int main() {
 
 	// object array
 	Object objList[] = {
-		Object(1.0f, &cubeVAO, &colorShader, glm::vec3(1.0f, 0.0f, 0.0f)),
+		Object(1.0f, &cubeVAO, &colorShader, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(0.0f, 0.0f, 0.0f), false),
 	};
 
 	// camera initialization
@@ -113,6 +113,8 @@ int main() {
 			// bind the current object type and shader, and then set the color. create a camera matrix based on the object
 			objList[i].bindObject();
 			objList[i].bindShader();
+
+
 			camera.Matrix(45.0f, 0.1f, 100.0f, colorShader, "camMatrix", objList[i]);
 
 			// vertice or indice based rendering
