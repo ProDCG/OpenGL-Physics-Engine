@@ -51,6 +51,16 @@ Object::Object(float mass, VAO* objectType) {
 	Object::rotation = glm::vec3(0.0f);
 }
 
+Object::Object(glm::vec3 position, glm::vec3 scale) {
+	Object::mass = 0.0f;
+	Object::objectType = NULL;
+	Object::color = glm::vec3(0.0f);
+	Object::shader = NULL;
+	Object::position = position;
+	Object::scale = scale;
+	Object::rotation = glm::vec3(0.0f);
+}
+
 // physics force adding, with vectors and each individual components
 void Object::addForce(float x, float y, float z) {
 	Object::netForce += glm::vec3(x, y, z);

@@ -11,6 +11,7 @@ public:
 
 	// constructor
 	EBO(GLuint* indices, GLsizeiptr size);
+	EBO(const GLuint* indices, GLsizeiptr size);
 
 	// bindings and memory management
 	void Bind();

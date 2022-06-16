@@ -48,6 +48,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="projObj.vert">
@@ -100,5 +103,13 @@
     <ClInclude Include="Sphere.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CustomPoints.txt">
+      <Filter>Source Files\Main</Filter>
+    </Text>
+    <Text Include="CustomPoints2.txt">
+      <Filter>Source Files\Main</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -20,6 +20,7 @@ public:
 
 	// constructor
 	VAO(std::vector<GLuint> indices);
+	VAO();
 
 	// VAO override-style functions
 	void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);

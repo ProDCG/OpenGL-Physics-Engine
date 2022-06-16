@@ -1,120 +1,100 @@
 #pragma once
+///////////////////////////////////////////////////////////////////////////////
+// Sphere.h
+// ========
+// Sphere for OpenGL with (radius, sectors, stacks)
+// The min number of sectors is 3 and The min number of stacks are 2.
+//
+//  AUTHOR: Song Ho Ahn (song.ahn@gmail.com)
+// CREATED: 2017-11-01
+// UPDATED: 2020-05-20
+///////////////////////////////////////////////////////////////////////////////
 
-#include <GLFW/glfw3.h>
+#ifndef GEOMETRY_SPHERE_H
+#define GEOMETRY_SPHERE_H
 
 #include <vector>
-#include<iostream>
 
-#include <glm/gtc/matrix_inverse.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
-
-class Sphere {
+class Sphere
+{
 public:
-    GLfloat vertices2[2109];
-    GLuint indices2[3627];
+    // ctor/dtor
+    Sphere(float radius = 1.0f, int sectorCount = 36, int stackCount = 18, bool smooth = true);
+    ~Sphere() {}
 
-    float radius = 1.0f;
-    int sectorCount = 36;
-    int stackCount = 18;
+    // getters/setters
+    float getRadius() const { return radius; }
+    int getSectorCount() const { return sectorCount; }
+    int getStackCount() const { return stackCount; }
+    void set(float radius, int sectorCount, int stackCount, bool smooth = true);
+    void setRadius(float radius);
+    void setSectorCount(int sectorCount);
+    void setStackCount(int stackCount);
+    void setSmooth(bool smooth);
 
-    double PI = 2 * asin(1.0);
+    // for vertex data
+    unsigned int getVertexCount() const { return (unsigned int)vertices.size() / 3; }
+    unsigned int getNormalCount() const { return (unsigned int)normals.size() / 3; }
+    unsigned int getTexCoordCount() const { return (unsigned int)texCoords.size() / 2; }
+    unsigned int getIndexCount() const { return (unsigned int)indices.size(); }
+    unsigned int getLineIndexCount() const { return (unsigned int)lineIndices.size(); }
+    unsigned int getTriangleCount() const { return getIndexCount() / 3; }
+    unsigned int getVertexSize() const { return (unsigned int)vertices.size() * sizeof(float); }
+    unsigned int getNormalSize() const { return (unsigned int)normals.size() * sizeof(float); }
+    unsigned int getTexCoordSize() const { return (unsigned int)texCoords.size() * sizeof(float); }
+    unsigned int getIndexSize() const { return (unsigned int)indices.size() * sizeof(unsigned int); }
+    unsigned int getLineIndexSize() const { return (unsigned int)lineIndices.size() * sizeof(unsigned int); }
+    const float* getVertices() const { return vertices.data(); }
+    const float* getNormals() const { return normals.data(); }
+    const float* getTexCoords() const { return texCoords.data(); }
+    const unsigned int* getIndices() const { return indices.data(); }
+    const unsigned int* getLineIndices() const { return lineIndices.data(); }
 
+    // for interleaved vertices: V/N/T
+    unsigned int getInterleavedVertexCount() const { return getVertexCount(); }    // # of vertices
+    unsigned int getInterleavedVertexSize() const { return (unsigned int)interleavedVertices.size() * sizeof(float); }    // # of bytes
+    int getInterleavedStride() const { return interleavedStride; }   // should be 32 bytes
+    const float* getInterleavedVertices() const { return interleavedVertices.data(); }
+
+    // draw in VertexArray mode
+    void draw() const;                                  // draw surface
+    void drawLines(const float lineColor[4]) const;     // draw lines only
+    void drawWithLines(const float lineColor[4]) const; // draw surface and lines
+
+    // debug
+    void printSelf() const;
+
+protected:
+
+private:
+    // member functions
+    void buildVerticesSmooth();
+    void buildVerticesFlat();
+    void buildInterleavedVertices();
+    void clearArrays();
+    void addVertex(float x, float y, float z);
+    void addNormal(float x, float y, float z);
+    void addTexCoord(float s, float t);
+    void addIndices(unsigned int i1, unsigned int i2, unsigned int i3);
+    std::vector<float> computeFaceNormal(float x1, float y1, float z1,
+        float x2, float y2, float z2,
+        float x3, float y3, float z3);
+
+    // memeber vars
+    float radius;
+    int sectorCount;                        // longitude, # of slices
+    int stackCount;                         // latitude, # of stacks
+    bool smooth;
     std::vector<float> vertices;
     std::vector<float> normals;
     std::vector<float> texCoords;
     std::vector<unsigned int> indices;
     std::vector<unsigned int> lineIndices;
 
+    // interleaved
     std::vector<float> interleavedVertices;
-    int interleavedStride;
+    int interleavedStride;                  // # of bytes to hop to the next vertex (should be 32 bytes)
 
-	Sphere() : interleavedStride(32) {
-        const float PI = acos(-1);
-
-        float x, y, z, xy;                              // vertex position
-        float nx, ny, nz, lengthInv = 1.0f / radius;    // normal
-        float s, t;                                     // texCoord
-
-        float sectorStep = 2 * PI / sectorCount;
-        float stackStep = PI / stackCount;
-        float sectorAngle, stackAngle;
-
-        for (int i = 0; i <= stackCount; ++i)
-        {
-            stackAngle = PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
-            xy = radius * cosf(stackAngle);             // r * cos(u)
-            z = radius * sinf(stackAngle);              // r * sin(u)
-
-            // add (sectorCount+1) vertices per stack
-            // the first and last vertices have same position and normal, but different tex coords
-            for (int j = 0; j <= sectorCount; ++j)
-            {
-                sectorAngle = j * sectorStep;           // starting from 0 to 2pi
-
-                // vertex position
-                x = xy * cosf(sectorAngle);             // r * cos(u) * cos(v)
-                y = xy * sinf(sectorAngle);             // r * cos(u) * sin(v)
-                vertices.push_back(x);
-                vertices.push_back(y);
-                vertices.push_back(z);
-
-                // normalized vertex normal
-                nx = x * lengthInv;
-                ny = y * lengthInv;
-                nz = z * lengthInv;
-                normals.push_back(nx);
-                normals.push_back(ny);
-                normals.push_back(nz);
-
-                // vertex tex coord between [0, 1]
-                s = (float)j / sectorCount;
-                t = (float)i / stackCount;
-                texCoords.push_back(s);
-                texCoords.push_back(t);
-            }
-        }
-
-        unsigned int k1, k2;
-        for (int i = 0; i < stackCount; ++i)
-        {
-            k1 = i * (sectorCount + 1);     // beginning of current stack
-            k2 = k1 + sectorCount + 1;      // beginning of next stack
-
-            for (int j = 0; j < sectorCount; ++j, ++k1, ++k2)
-            {
-                // 2 triangles per sector excluding 1st and last stacks
-                if (i != 0)
-                {
-                    indices.push_back(k1);
-                    indices.push_back(k2);
-                    indices.push_back(k1 + 1);
-                }
-
-                if (i != (stackCount - 1))
-                {
-                    indices.push_back(k1 + 1);
-                    indices.push_back(k2);
-                    indices.push_back(k2 + 1);
-                }
-
-                // vertical lines for all stacks
-                lineIndices.push_back(k1);
-                lineIndices.push_back(k2);
-                if (i != 0)  // horizontal lines except 1st stack
-                {
-                    lineIndices.push_back(k1);
-                    lineIndices.push_back(k1 + 1);
-                }
-            }
-        }
-
-        for (int i = 0; i < 2109; i++) {
-            vertices2[i] = vertices.at(i);
-        }
-
-        for (int i = 0; i < 3627; i++) {
-            indices2[i] = indices.at(i);
-        }
-	}
 };
+
+#endif

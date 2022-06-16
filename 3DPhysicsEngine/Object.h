@@ -44,6 +44,7 @@ public:
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color, glm::vec3 position);
 	Object(float mass, VAO* objectType, Shader* shader, glm::vec3 color);
 	Object(float mass, VAO* objectType, glm::vec3 color);
+	Object(glm::vec3 position, glm::vec3 scale);
 	Object(float mass, VAO* objectType);
 
 	// physics force adding, with vectors and each individual component

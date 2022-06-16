@@ -7,6 +7,10 @@ VAO::VAO(std::vector<GLuint> indices) {
 	glGenVertexArrays(1, &ID);
 }
 
+VAO::VAO() {
+	glGenVertexArrays(1, &ID);
+}
+
 // memory cleanup functions + vao initialization setup
 void VAO::LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset) {
 	VBO.Bind();

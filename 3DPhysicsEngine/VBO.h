@@ -12,6 +12,7 @@ public:
 
 	// constructor and override-style functions
 	VBO(GLfloat* vertices, GLsizeiptr size);
+	VBO(const GLfloat* vertices, GLsizeiptr size);
 
 	void Bind();
 	void Unbind();
