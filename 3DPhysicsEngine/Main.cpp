@@ -165,7 +165,7 @@ int main() {
 		objList[1].shader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 		objList[1].shader->setVec3("lightPos", objList[0].position);
 		objList[1].shader->setVec3("viewPos", camera.position);
-		objList[1].setForce(glm::vec3(0.0f, -1.0f, 0.0f));
+		//objList[1].setForce(glm::vec3(0.0f, -1.0f, 0.0f));
 		
 		objList[1].update(DATA.deltaTime);
 
