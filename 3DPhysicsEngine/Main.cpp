@@ -128,7 +128,6 @@ int main() {
 		Object(1.0f, &cubeVAO, &projectionShader, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.2f, 1.0f, 2.0f), glm::vec3(0.2f, 0.2f, 0.2f)),
 		Object(1.0f, &lightCubeVAO, &opaqueShader, glm::vec3(1.0f, 0.5f, 0.31f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
 		//Object(1.0f, &sphereVAO, &opaqueShader, glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f)),
-		Object(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
 	};
 
 	// camera initialization
@@ -166,6 +165,7 @@ int main() {
 		objList[1].shader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 		objList[1].shader->setVec3("lightPos", objList[0].position);
 		objList[1].shader->setVec3("viewPos", camera.position);
+		objList[1].setForce(glm::vec3(0.0f, -1.0f, 0.0f));
 		
 		objList[1].update(DATA.deltaTime);
 
@@ -179,11 +179,11 @@ int main() {
 
 		camera.Matrix(45.0f, 0.1f, 100.0f, projectionShader, "camMatrix", objList[2]);
 		glDrawElements(GL_TRIANGLES, sphere.getIndexCount(), GL_UNSIGNED_INT, 0);*/
-		sphereVBO.Bind();
-		opaqueShader.Activate();
-		
-		camera.Matrix(45.0f, 0.1f, 100.0f, projectionShader, "camMatrix", objList[2]);
-		glDrawElements(GL_TRIANGLES, sphere.getIndexCount(), GL_UNSIGNED_INT, 0);
+		//sphereVBO.Bind();
+		//opaqueShader.Activate();
+		//
+		//camera.Matrix(45.0f, 0.1f, 100.0f, projectionShader, "camMatrix", objList[2]);
+		//glDrawElements(GL_TRIANGLES, sphere.getIndexCount(), GL_UNSIGNED_INT, 0);
 
 		// swap buffers and handle all GLFW events
 		glfwSwapBuffers(window);
