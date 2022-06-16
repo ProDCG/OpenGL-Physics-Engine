@@ -287,7 +287,7 @@ int main() {
 			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix", rbList[i]);
 			glDrawElements(GL_TRIANGLES, sizeof(cube_indices), GL_UNSIGNED_INT, 0);
 			std::cout << sizeof(cube_indices) << std::endl;
-			rbList[i].setForce(glm::vec3(0.5f, -2.0f, 1.0f));
+			rbList[i].setForce(glm::vec3(0.5f, -1.0f, 1.0f));
 			rbList[i].update(DATA.deltaTime);
 		} 
 			
